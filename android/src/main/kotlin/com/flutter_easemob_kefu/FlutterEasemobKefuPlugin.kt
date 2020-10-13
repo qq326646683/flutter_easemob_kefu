@@ -1,6 +1,10 @@
 package com.flutter_easemob_kefu
 
+import android.content.Intent
 import androidx.annotation.NonNull;
+import com.hyphenate.chat.ChatClient
+import com.hyphenate.helpdesk.easeui.UIProvider
+import com.hyphenate.helpdesk.easeui.util.IntentBuilder
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -8,46 +12,56 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
+import javax.security.auth.callback.Callback
 
-/** FlutterEasemobKefuPlugin */
-public class FlutterEasemobKefuPlugin: FlutterPlugin, MethodCallHandler {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
-  private lateinit var channel : MethodChannel
+public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
 
-  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "flutter_easemob_kefu")
-    channel.setMethodCallHandler(this);
-  }
+    private lateinit var channel: MethodChannel
 
-  // This static function is optional and equivalent to onAttachedToEngine. It supports the old
-  // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
-  // plugin registration via this function while apps migrate to use the new Android APIs
-  // post-flutter-1.12 via https://flutter.dev/go/android-project-migration.
-  //
-  // It is encouraged to share logic between onAttachedToEngine and registerWith to keep
-  // them functionally equivalent. Only one of onAttachedToEngine or registerWith will be called
-  // depending on the user's project. onAttachedToEngine or registerWith must both be defined
-  // in the same class.
-  companion object {
-    @JvmStatic
-    fun registerWith(registrar: Registrar) {
-      val channel = MethodChannel(registrar.messenger(), "flutter_easemob_kefu")
-      channel.setMethodCallHandler(FlutterEasemobKefuPlugin())
+
+    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "flutter_easemob_kefu")
+        channel.setMethodCallHandler(this)
+        PluginContext.context = flutterPluginBinding.applicationContext
     }
-  }
 
-  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method == "getPlatformVersion") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else {
-      result.notImplemented()
+    companion object {
+        @JvmStatic
+        fun registerWith(registrar: Registrar) {
+            val channel = MethodChannel(registrar.messenger(), "flutter_easemob_kefu")
+            val flutterEasemobKefuPlugin = FlutterEasemobKefuPlugin()
+            channel.setMethodCallHandler(flutterEasemobKefuPlugin)
+        }
     }
-  }
 
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-    channel.setMethodCallHandler(null)
-  }
+    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+        when (call.method) {
+            "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
+            "init" -> initKefu(call.argument<String>("appKey"), call.argument<String>("tenantId"))
+            "register" -> ChatClient.getInstance().register(call.argument<String>("username"), call.argument<String>("password"), null)
+            "login" -> ChatClient.getInstance().login(call.argument<String>("username"), call.argument<String>("password"), null)
+            "isLogin" -> result.success(ChatClient.getInstance().isLoggedInBefore)
+            "logout" -> ChatClient.getInstance().logout(true, null)
+            "jumpToPage" -> {
+                val intent: Intent = IntentBuilder(PluginContext.context).setServiceIMNumber(call.argument<String>("appKey")).build().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                PluginContext.context?.startActivity(intent)
+            }
+            else -> result.notImplemented()
+        }
+    }
+
+    private fun initKefu(appKey: String?, tenantId: String?) {
+        print("PluginContext.context")
+        print(PluginContext.context)
+        PluginContext.context?.let {
+            ChatClient.getInstance().init(it, ChatClient.Options().setAppkey(appKey).setTenantId(tenantId))
+            // Kefu EaseUI的初始化
+            UIProvider.getInstance().init(it)
+        }
+
+    }
+
+    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+        channel.setMethodCallHandler(null)
+    }
 }

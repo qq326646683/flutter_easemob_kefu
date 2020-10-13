@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_easemob_kefu/flutter_easemob_kefu.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,26 +21,26 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
+    initPermission();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await FlutterEasemobKefu.platformVersion;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
       _platformVersion = platformVersion;
     });
+  }
+
+  initPermission() {
+    Permission.storage.request();
   }
 
   @override
@@ -49,8 +50,37 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Column(
+          children: <Widget>[
+            Text('Running on: $_platformVersion\n'),
+            RaisedButton(
+              onPressed: () {
+                FlutterEasemobKefu.init("1439201009092337#kefuchannelapp86399", "86399");
+              },
+              child: Text('初始化'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                FlutterEasemobKefu.register("nell", "123456");
+              },
+              child: Text('注册'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                FlutterEasemobKefu.login("nell", "123456");
+              },
+              child: Text('登录'),
+            ),
+            RaisedButton(
+              onPressed: () async {
+                bool isLogin = await FlutterEasemobKefu.isLogin;
+                if (isLogin) {
+                  FlutterEasemobKefu.jumpToPage("1439201009092337#kefuchannelapp86399");
+                }
+              },
+              child: Text('去会话'),
+            ),
+          ],
         ),
       ),
     );
