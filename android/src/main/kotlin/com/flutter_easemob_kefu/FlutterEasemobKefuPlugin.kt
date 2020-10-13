@@ -25,15 +25,6 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
         PluginContext.context = flutterPluginBinding.applicationContext
     }
 
-    companion object {
-        @JvmStatic
-        fun registerWith(registrar: Registrar) {
-            val channel = MethodChannel(registrar.messenger(), "flutter_easemob_kefu")
-            val flutterEasemobKefuPlugin = FlutterEasemobKefuPlugin()
-            channel.setMethodCallHandler(flutterEasemobKefuPlugin)
-        }
-    }
-
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
             "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
@@ -43,7 +34,7 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
             "isLogin" -> result.success(ChatClient.getInstance().isLoggedInBefore)
             "logout" -> ChatClient.getInstance().logout(true, null)
             "jumpToPage" -> {
-                val intent: Intent = IntentBuilder(PluginContext.context).setServiceIMNumber(call.argument<String>("appKey")).build().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                val intent: Intent = IntentBuilder(PluginContext.context).setServiceIMNumber(call.argument<String>("imNumber")).build().setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 PluginContext.context?.startActivity(intent)
             }
             else -> result.notImplemented()
@@ -51,8 +42,6 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun initKefu(appKey: String?, tenantId: String?) {
-        print("PluginContext.context")
-        print(PluginContext.context)
         PluginContext.context?.let {
             ChatClient.getInstance().init(it, ChatClient.Options().setAppkey(appKey).setTenantId(tenantId))
             // Kefu EaseUI的初始化

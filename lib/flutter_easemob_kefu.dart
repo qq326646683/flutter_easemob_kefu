@@ -45,9 +45,9 @@ class FlutterEasemobKefu {
   }
 
   /// 会话页面
-  static void jumpToPage(String appKey) {
+  static void jumpToPage(String imNumber) {
     _channel.invokeMapMethod("jumpToPage", <String, dynamic>{
-      "appKey": appKey,
+      "imNumber": imNumber,
     });
   }
 }

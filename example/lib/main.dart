@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
               onPressed: () async {
                 bool isLogin = await FlutterEasemobKefu.isLogin;
                 if (isLogin) {
-                  FlutterEasemobKefu.jumpToPage("1439201009092337#kefuchannelapp86399");
+                  FlutterEasemobKefu.jumpToPage("kefuchannelimid_316626");
                 }
               },
               child: Text('去会话'),
