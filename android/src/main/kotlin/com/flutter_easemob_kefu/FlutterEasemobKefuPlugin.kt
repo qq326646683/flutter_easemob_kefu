@@ -1,12 +1,14 @@
 package com.flutter_easemob_kefu
 
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import androidx.annotation.NonNull
 import com.hyphenate.chat.ChatClient
+import com.hyphenate.helpdesk.Error
 import com.hyphenate.helpdesk.callback.Callback
 import com.hyphenate.helpdesk.easeui.UIProvider
 import com.hyphenate.helpdesk.easeui.util.IntentBuilder
-import com.hyphenate.helpdesk.Error
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -18,6 +20,7 @@ import java.util.*
 public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
 
     private lateinit var channel: MethodChannel
+    private val uiThreadHandler: Handler = Handler(Looper.getMainLooper())
 
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
@@ -56,13 +59,13 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
             override fun onSuccess() {
                 val reply: MutableMap<String, Any> = HashMap()
                 reply["isSuccess"] = true
-                result.success(reply)
+                backDataToFlutter(result, reply)
             }
 
             override fun onError(code: Int, error: String?) {
                 val reply: MutableMap<String, Any> = HashMap()
                 reply["isSuccess"] = code == Error.USER_ALREADY_EXIST
-                result.success(reply)
+                backDataToFlutter(result, reply)
             }
 
             override fun onProgress(progress: Int, status: String?) {
@@ -76,13 +79,13 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
             override fun onSuccess() {
                 val reply: MutableMap<String, Any> = HashMap()
                 reply["isSuccess"] = true
-                result.success(reply)
+                backDataToFlutter(result, reply)
             }
 
             override fun onError(code: Int, error: String?) {
                 val reply: MutableMap<String, Any> = HashMap()
                 reply["isSuccess"] = false
-                result.success(reply)
+                backDataToFlutter(result, reply)
             }
 
             override fun onProgress(progress: Int, status: String?) {
@@ -96,13 +99,13 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
             override fun onSuccess() {
                 val reply: MutableMap<String, Any> = HashMap()
                 reply["isSuccess"] = true
-                result.success(reply)
+                backDataToFlutter(result, reply)
             }
 
             override fun onError(code: Int, error: String?) {
                 val reply: MutableMap<String, Any> = HashMap()
                 reply["isSuccess"] = false
-                result.success(reply)
+                backDataToFlutter(result, reply)
             }
 
             override fun onProgress(progress: Int, status: String?) {
@@ -112,7 +115,9 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun backDataToFlutter(@NonNull result: Result, data: Any) {
-        result.success(data)
+        uiThreadHandler.post {
+            result.success(data)
+        }
     }
 
 
