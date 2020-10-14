@@ -57,15 +57,11 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
     private fun register(@NonNull username: String, @NonNull password: String, @NonNull result: Result) {
         ChatClient.getInstance().register(username, password, object : Callback {
             override fun onSuccess() {
-                val reply: MutableMap<String, Any> = HashMap()
-                reply["isSuccess"] = true
-                backDataToFlutter(result, reply)
+                backDataToFlutter(result, true)
             }
 
             override fun onError(code: Int, error: String?) {
-                val reply: MutableMap<String, Any> = HashMap()
-                reply["isSuccess"] = code == Error.USER_ALREADY_EXIST
-                backDataToFlutter(result, reply)
+                backDataToFlutter(result, code == Error.USER_ALREADY_EXIST)
             }
 
             override fun onProgress(progress: Int, status: String?) {
@@ -77,15 +73,11 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
     private fun login(@NonNull username: String, @NonNull password: String, @NonNull result: Result) {
         ChatClient.getInstance().login(username, password, object : Callback {
             override fun onSuccess() {
-                val reply: MutableMap<String, Any> = HashMap()
-                reply["isSuccess"] = true
-                backDataToFlutter(result, reply)
+                backDataToFlutter(result, true)
             }
 
             override fun onError(code: Int, error: String?) {
-                val reply: MutableMap<String, Any> = HashMap()
-                reply["isSuccess"] = false
-                backDataToFlutter(result, reply)
+                backDataToFlutter(result, false)
             }
 
             override fun onProgress(progress: Int, status: String?) {
@@ -97,15 +89,11 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
     private fun logout(@NonNull result: Result) {
         ChatClient.getInstance().logout(true, object : Callback {
             override fun onSuccess() {
-                val reply: MutableMap<String, Any> = HashMap()
-                reply["isSuccess"] = true
-                backDataToFlutter(result, reply)
+                backDataToFlutter(result, true)
             }
 
             override fun onError(code: Int, error: String?) {
-                val reply: MutableMap<String, Any> = HashMap()
-                reply["isSuccess"] = false
-                backDataToFlutter(result, reply)
+                backDataToFlutter(result, false)
             }
 
             override fun onProgress(progress: Int, status: String?) {
