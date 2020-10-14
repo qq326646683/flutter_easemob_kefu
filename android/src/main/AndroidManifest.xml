@@ -93,7 +93,7 @@
         </receiver>
         <provider
             android:name="com.hyphenate.helpdesk.easeui.util.EaseFileProvider"
-            android:authorities="${applicationId}.ease"
+            android:authorities="${applicationId}.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
