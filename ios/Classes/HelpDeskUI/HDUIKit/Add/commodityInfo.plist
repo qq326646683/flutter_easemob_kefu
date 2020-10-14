@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>em_example1_text</string>
+		<key>money</key>
+		<string>¥8000</string>
+		<key>novemberSales</key>
+		<string>em_example1_text_description</string>
+		<key>originalPrice</key>
+		<string>¥12000</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>em_example3_text</string>
+		<key>money</key>
+		<string>¥5400</string>
+		<key>novemberSales</key>
+		<string>em_example3_text_description</string>
+		<key>originalPrice</key>
+		<string>¥6000</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>em_example2_text</string>
+		<key>money</key>
+		<string>¥15800</string>
+		<key>novemberSales</key>
+		<string>em_example2_text_description</string>
+		<key>originalPrice</key>
+		<string>¥160000</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>em_example4_text</string>
+		<key>money</key>
+		<string>¥160000</string>
+		<key>novemberSales</key>
+		<string>em_example4_text_description</string>
+		<key>originalPrice</key>
+		<string>¥165000</string>
+	</dict>
+</array>
+</plist>
