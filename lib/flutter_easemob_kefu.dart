@@ -19,19 +19,21 @@ class FlutterEasemobKefu {
   }
 
   /// 注册
-  static void register(String username, String password) {
-    _channel.invokeMapMethod("register", <String, dynamic>{
+  static Future<bool> register(String username, String password) async {
+    Map<String, dynamic> map = await _channel.invokeMapMethod("register", <String, dynamic>{
       "username": username,
       "password": password,
     });
+    return map["isSuccess"];
   }
 
   /// 登录
-  static void login(String username, String password) {
-    _channel.invokeMapMethod("login", <String, dynamic>{
+  static Future<bool> login(String username, String password) async {
+    Map<String, dynamic> map = await _channel.invokeMapMethod("login", <String, dynamic>{
       "username": username,
       "password": password,
     });
+    return map["isSuccess"];
   }
 
   /// 是否登录
@@ -40,8 +42,9 @@ class FlutterEasemobKefu {
   }
 
   /// 注销登录
-  static void logout() {
-    _channel.invokeMethod("logout");
+  static Future<bool> logout() async {
+    Map<String, dynamic> map = await _channel.invokeMethod("logout");
+    return map["isSuccess"];
   }
 
   /// 会话页面
