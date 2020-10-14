@@ -8,6 +8,7 @@
 
 #import "HDBubbleView+Transform.h"
 #import "Masonry.h"
+#import "HelpDeskUI.h"
 
 @implementation HDBubbleView (Transform)
 
@@ -51,12 +52,12 @@
 }
 
 - (void)transfransBubbleViewPressed:(UITapGestureRecognizer *)aTap {
-//    [[self nextResponder] routerEventWithName:HRouterEventTransformURLTapEventName
-//                                     userInfo:@{@"url":self.transTitle.text}];
+    [[self nextResponder] routerEventWithName:HRouterEventTransformURLTapEventName
+                                     userInfo:@{@"url":self.transTitle.text}];
 }
 
 - (void)transformAction:(UIButton *)sender {
-//    [[self nextResponder] routerEventWithName:HRouterEventTapTransform userInfo:nil];
+    [[self nextResponder] routerEventWithName:HRouterEventTapTransform userInfo:nil];
 }
 
 - (void)updateTransformMargin:(UIEdgeInsets)margin {

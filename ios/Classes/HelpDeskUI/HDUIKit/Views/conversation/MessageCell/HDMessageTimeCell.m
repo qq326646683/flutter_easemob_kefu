@@ -11,7 +11,7 @@
  */
 
 #import "HDMessageTimeCell.h"
-#import "Masonry.h"
+#import "HelpDeskUI.h"
 
 CGFloat const HDMessageTimeCellPadding = 5;
 

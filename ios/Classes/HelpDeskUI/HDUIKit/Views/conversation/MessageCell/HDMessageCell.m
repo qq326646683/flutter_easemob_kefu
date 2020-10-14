@@ -29,7 +29,6 @@
 #import "HDEmotionEscape.h"
 #import "HDLocalDefine.h"
 #import "NSString+HDValid.h"
-#import "HelpDeskUI.h"
 
 #define kImageWidth 40
 #define kImageHeight 70
@@ -94,10 +93,8 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     cell.rightBubbleMargin = UIEdgeInsetsMake(8, 10, 8, 15);
     cell.bubbleMargin = UIEdgeInsetsMake(8, 0, 8, 0);
     
-    cell.messageTextFont = [UIFont systemFontOfSize:14];
-    cell.messageTextColor = [UIColor whiteColor];
-    cell.sendMessageTextColor = [UIColor whiteColor];
-    cell.receiveMessageTextColor = [UIColor blackColor];
+    cell.messageTextFont = [UIFont systemFontOfSize:15];
+    cell.messageTextColor = [UIColor blackColor];
     
     cell.messageLocationFont = [UIFont systemFontOfSize:10];
     cell.messageLocationColor = [UIColor whiteColor];
@@ -201,7 +198,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                         if (model.isSender) {
                             [_bubbleView setupTextBubbleView];
                             _bubbleView.textLabel.font = _messageTextFont;
-                            _bubbleView.textLabel.textColor = _receiveMessageTextColor;
+                            _bubbleView.textLabel.textColor = _messageTextColor;
                         } else {
                             [_bubbleView setupRobotMenuBubbleView];
                         }
@@ -227,7 +224,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                     default:
                         [_bubbleView setupTextBubbleView];
                         _bubbleView.textLabel.font = _messageTextFont;
-                        _bubbleView.textLabel.textColor = _receiveMessageTextColor;
+                        _bubbleView.textLabel.textColor = _messageTextColor;
                         break;
                 }
             }

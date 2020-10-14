@@ -89,10 +89,6 @@ typedef enum{
 
 @property (nonatomic) UIColor *messageTextColor UI_APPEARANCE_SELECTOR; //default [UIColor blackColor];
 
-@property (nonatomic) UIColor *sendMessageTextColor;
-
-@property (nonatomic) UIColor *receiveMessageTextColor;
-
 @property (nonatomic) UIFont *messageLocationFont UI_APPEARANCE_SELECTOR; //default [UIFont systemFontOfSize:12];
 
 @property (nonatomic) UIColor *messageLocationColor UI_APPEARANCE_SELECTOR; //default [UIColor whiteColor];

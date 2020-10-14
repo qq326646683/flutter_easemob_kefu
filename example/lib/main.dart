@@ -97,6 +97,7 @@ class _MyAppState extends State<MyApp> {
             RaisedButton(
               onPressed: () async {
                 bool isLogin = await FlutterEasemobKefu.isLogin;
+                print(isLogin);
                 if (isLogin) {
                   FlutterEasemobKefu.jumpToPage("kefuchannelimid_316626");
                 }

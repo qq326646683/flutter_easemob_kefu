@@ -43,11 +43,11 @@
         _bubbleView.imageView.image = image;
     }
     
-//    if (model.avatarURLPath) {
-//        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
-//    } else {
-//        self.avatarView.image = model.avatarImage;
-//    }
+    if (model.avatarURLPath) {
+        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
+    } else {
+        self.avatarView.image = model.avatarImage;
+    }
 }
 
 - (void)setCustomBubbleView:(id<HDIMessageModel>)model

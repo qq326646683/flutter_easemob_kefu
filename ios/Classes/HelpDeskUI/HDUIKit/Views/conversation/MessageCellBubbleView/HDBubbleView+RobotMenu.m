@@ -8,6 +8,8 @@
 
 #import "HDBubbleView+RobotMenu.h"
 #import "Masonry.h"
+#import <HelpDesk/HelpDesk.h>
+#import "HelpDeskUI.h"
 
 
 @implementation HDBubbleView (RobotMenu)
@@ -87,7 +89,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    [self routerEventWithName:HRouterEventTapMenu userInfo:@{@"clickItem":self.options[indexPath.row]}];
+    [self routerEventWithName:HRouterEventTapMenu userInfo:@{@"clickItem":self.options[indexPath.row]}];
     /*
     if ([self isItems]) {
         HDMenuItem *item = self.options[indexPath.row];
@@ -198,7 +200,7 @@
     _menuLabel.frame = frame;
 }
 - (void)setWidth:(CGFloat)width {
-    _menuLabel.frame = CGRectMake(_menuLabel.frame.origin.x, _menuLabel.frame.origin.y, width, _menuLabel.frame.size.height);
+    _menuLabel.width = width;
     [_menuLabel sizeToFit];
 }
 

@@ -14,7 +14,6 @@
 #import "HDSDKHelper.h"
 
 #import "HDConvertToCommonEmoticonsHelper.h"
-#import <HelpDeskLite/HelpDeskLite.h>
 
 //@interface EMChatImageOptions : NSObject<IChatImageOptions>
 //

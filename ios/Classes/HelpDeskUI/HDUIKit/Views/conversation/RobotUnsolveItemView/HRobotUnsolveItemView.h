@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <HelpDeskLite/HelpDeskLite.h>
+#import "HelpDeskUI.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -16,9 +16,11 @@ A new Flutter plugin.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
+  s.dependency 'HelpDesk', '= 1.0.1'
+  s.dependency 'Hyphenate', '= 3.7.1'
   s.resources = 'Frameworks/resource/HelpDeskUIResource.bundle'
-  s.vendored_frameworks = 'Frameworks/HelpDeskLite.framework','Frameworks/HyphenateLite.framework'
-  s.platform = :ios, '8.0'
+  
+  s.platform = :ios, '9.0'
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
 end

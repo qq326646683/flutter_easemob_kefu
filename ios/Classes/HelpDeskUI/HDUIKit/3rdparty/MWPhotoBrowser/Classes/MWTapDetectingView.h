@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 @protocol MWTapDetectingViewDelegate;
 
-@interface MWTapDetectingView : UIView{}
+@interface MWTapDetectingView : UIView {}
 
 @property (nonatomic, weak) id <MWTapDetectingViewDelegate> tapDelegate;
 

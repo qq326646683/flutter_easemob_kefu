@@ -7,7 +7,7 @@
 //
 
 #import "HRobotUnsolveItemView.h"
-#import <HelpDeskLite/HelpDeskLite.h>
+#import "HelpDeskUI.h"
 
 #define SubmitBtnWidth 80
 #define SubmitBtnHeight 40

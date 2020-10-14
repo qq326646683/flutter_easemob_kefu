@@ -11,9 +11,8 @@
  */
 
 #import "HDRefreshTableViewController.h"
-
-#import "MJRefresh.h"
 #import "HelpDeskUI.h"
+#import "MJRefresh.h"
 
 @interface HDRefreshTableViewController ()
 

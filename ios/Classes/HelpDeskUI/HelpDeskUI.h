@@ -27,7 +27,7 @@
 #import "HDEmotionEscape.h"
 #import "HDEmotionManager.h"
 #import "HDSDKHelper.h"
-//#import "HDCDDeviceManager.h"
+#import "HDCDDeviceManager.h"
 #import "HDConvertToCommonEmoticonsHelper.h"
 
 #import "NSDate+Category.h"

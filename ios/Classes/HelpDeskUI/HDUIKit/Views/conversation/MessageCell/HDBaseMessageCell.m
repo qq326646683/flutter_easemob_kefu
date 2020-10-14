@@ -14,7 +14,6 @@
 #import "UIImageView+HDWebCache.h"
 #import "HDBubbleView+Transform.h"
 #import "HDBubbleView+Evaluate.h"
-#import "Masonry.h"
 #import "HelpDeskUI.h"
 
 @interface HDBaseMessageCell()
@@ -127,7 +126,7 @@
             CGFloat margin = [HDMessageCell appearance].leftBubbleMargin.left + [HDMessageCell appearance].leftBubbleMargin.right;
             
             [self.bubbleView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.equalTo(@(retSize.width + margin));
+                make.width.equalTo(retSize.width + margin);
             }];
         }
             break;
@@ -171,7 +170,7 @@
         make.top.equalTo(self.contentView.mas_top).offset(HDMessageCellPadding);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-HDMessageCellPadding);
         make.centerX.equalTo(self.contentView.mas_centerX).offset(0);
-        make.width.equalTo(@(kScreenWidth - 20));
+        make.width.equalTo(kScreenWidth - 20);
     }];
 }
 
@@ -180,18 +179,18 @@
     [self.avatarView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(HDMessageCellPadding);
         make.right.equalTo(self.contentView.mas_right).offset(-HDMessageCellPadding);
-        make.width.equalTo(@0);
-        make.height.equalTo(@0);
+        make.width.equalTo(self.avatarSize);
+        make.height.equalTo(self.avatarView.mas_width);
     }];
 
     [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(0);
-        make.right.equalTo(@0).offset(-HDMessageCellPadding);
-        make.height.equalTo(@(self.messageNameHeight));
+        make.right.equalTo(self.avatarView.mas_left).offset(-HDMessageCellPadding);
+        make.height.equalTo(self.messageNameHeight);
     }];
     
     [self.bubbleView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@0).offset(-HDMessageCellPadding);
+        make.right.equalTo(self.avatarView.mas_left).offset(-HDMessageCellPadding);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(0);
     }];
     
@@ -213,17 +212,17 @@
     [self.avatarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(HDMessageCellPadding);
         make.left.equalTo(self.contentView.mas_left).offset(HDMessageCellPadding);
-        make.width.equalTo(@0);
-        make.height.equalTo(@0);
+        make.width.equalTo(self.avatarSize);
+        make.height.equalTo(self.avatarView.mas_width);
     }];
     
     [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(0);
-        make.left.equalTo(@0).offset(HDMessageCellPadding);
-        make.height.equalTo(@(self.messageNameHeight));
+        make.left.equalTo(self.avatarView.mas_right).offset(HDMessageCellPadding);
+        make.height.equalTo(self.messageNameHeight);
     }];
     [self.bubbleView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@0).offset(HDMessageCellPadding);
+        make.left.equalTo(self.avatarView.mas_right).offset(HDMessageCellPadding);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(0);
     }];
 }
@@ -234,7 +233,7 @@
 {
     if (self.avatarView) {
         [self.avatarView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@(self.avatarSize));
+            make.width.equalTo(self.avatarSize);
         }];
     }
 }
@@ -243,7 +242,7 @@
 {
     if (_nameLabel) {
         [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@0);
+            make.height.equalTo(self.messageNameHeight);
         }];
     }
 }
@@ -254,11 +253,11 @@
 {
     [super setModel:model];
     
-//    if (model.avatarURLPath) {
-//        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
-//    } else {
-//        self.avatarView.image = model.avatarImage;
-//    }
+    if (model.avatarURLPath) {
+        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
+    } else {
+        self.avatarView.image = model.avatarImage;
+    }
 
     _nameLabel.text = model.nickname;
     

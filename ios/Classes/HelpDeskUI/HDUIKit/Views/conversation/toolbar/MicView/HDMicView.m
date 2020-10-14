@@ -11,7 +11,7 @@
  */
 
 #import "HDMicView.h"
-//#import "HDCDDeviceManager.h"
+#import "HDCDDeviceManager.h"
 #import "HDLocalDefine.h"
 #define kCoverTag 32320
 @interface HDMicView ()
@@ -143,15 +143,15 @@
 }
 
 -(void)setVoiceImage {
-//    _recordAnimationView.image = [UIImage imageNamed:[_voiceMessageAnimationImages objectAtIndex:0]];
-//    double voiceSound = 0;
-//    voiceSound = [[HDCDDeviceManager sharedInstance] hdPeekRecorderVoiceMeter];
-//    int index = voiceSound*[_voiceMessageAnimationImages count];
-//    if (index >= [_voiceMessageAnimationImages count]) {
-//        _recordAnimationView.image = [UIImage imageNamed:[_voiceMessageAnimationImages lastObject]];
-//    } else {
-//        _recordAnimationView.image = [UIImage imageNamed:[_voiceMessageAnimationImages objectAtIndex:index]];
-//    }
+    _recordAnimationView.image = [UIImage imageNamed:[_voiceMessageAnimationImages objectAtIndex:0]];
+    double voiceSound = 0;
+    voiceSound = [[HDCDDeviceManager sharedInstance] hdPeekRecorderVoiceMeter];
+    int index = voiceSound*[_voiceMessageAnimationImages count];
+    if (index >= [_voiceMessageAnimationImages count]) {
+        _recordAnimationView.image = [UIImage imageNamed:[_voiceMessageAnimationImages lastObject]];
+    } else {
+        _recordAnimationView.image = [UIImage imageNamed:[_voiceMessageAnimationImages objectAtIndex:index]];
+    }
 }
 
 @end

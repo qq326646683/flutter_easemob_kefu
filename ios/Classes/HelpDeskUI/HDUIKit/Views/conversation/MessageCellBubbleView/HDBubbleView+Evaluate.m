@@ -8,6 +8,8 @@
 
 #import "HDBubbleView+Evaluate.h"
 #import "Masonry.h"
+#import <UIKit/UIKit.h>
+#import "UIResponder+HRouter.h"
 
 @implementation HDBubbleView (Evaluate)
 
@@ -49,7 +51,7 @@
 }
 
 - (void)evaluateAction:(UIButton *)sender {
-//    [[self nextResponder] routerEventWithName:HRouterEventTapEvaluate userInfo:nil];
+    [[self nextResponder] routerEventWithName:HRouterEventTapEvaluate userInfo:nil];
 }
 
 - (void)updateEvaluateMargin:(UIEdgeInsets)margin {

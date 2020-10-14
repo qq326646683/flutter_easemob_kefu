@@ -20,8 +20,8 @@
 #import "HDMessageTimeCell.h"
 #import "HDChatToolbar.h"
 #import "HDLocationViewController.h"
-//#import "HDCDDeviceManager+Media.h"
-//#import "HDCDDeviceManager+ProximitySensor.h"
+#import "HDCDDeviceManager+Media.h"
+#import "HDCDDeviceManager+ProximitySensor.h"
 #import "UIViewController+HDHUD.h"
 #import "HDSDKHelper.h"
 #import "SatisfactionViewController.h"
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, HDemoSaleType){
 
 @end
 
-@interface HDMessageViewController : HDRefreshTableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, HDChatToolbarDelegate, HDChatBarMoreViewDelegate, EMLocationViewDelegate, HDMessageCellDelegate, SatisfactionDelegate, HDRecordViewDelegate>
+@interface HDMessageViewController : HDRefreshTableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, HDCDDeviceManagerDelegate, HDChatToolbarDelegate, HDChatBarMoreViewDelegate, EMLocationViewDelegate, HDMessageCellDelegate, SatisfactionDelegate, HDRecordViewDelegate>
 
 @property (nonatomic, assign) id<HDMessageViewControllerDelegate> delegate;
 

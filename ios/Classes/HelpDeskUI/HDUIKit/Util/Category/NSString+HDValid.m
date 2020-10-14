@@ -11,7 +11,6 @@
  */
 
 #import "NSString+HDValid.h"
-#import <UIKit/UIKit.h>
 
 @implementation NSString (HDValid)
 

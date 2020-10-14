@@ -12,7 +12,7 @@
 
 #import "HDMessageReadManager.h"
 #import "UIImageView+HDWebCache.h"
-//#import "HDCDDeviceManager.h"
+#import "HDCDDeviceManager.h"
 
 #define IMAGE_MAX_SIZE_5k 5120*2880
 
@@ -165,7 +165,7 @@ static HDMessageReadManager *detailInstance = nil;
             messageModel.isMediaPlaying = NO;
             self.audioMessageModel = nil;
             currentAudioModel = nil;
-//            [[HDCDDeviceManager sharedInstance] stopPlaying];
+            [[HDCDDeviceManager sharedInstance] stopPlaying];
         }
         else {
             messageModel.isMediaPlaying = YES;

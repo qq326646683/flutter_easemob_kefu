@@ -1,6 +1,5 @@
 #import "FlutterEasemobKefuPlugin.h"
-#import <HelpDeskLite/HelpDeskLite.h>
-#import <HyphenateLite/HyphenateLite.h>
+#import <HDSDKHelper.h>
 #import "HelpDeskUI.h"
 
 @implementation FlutterEasemobKefuPlugin
@@ -16,15 +15,15 @@
   if ([@"init" isEqualToString:call.method]) {
       [self init:call result:result];
   } else if ([@"register" isEqualToString:call.method]) {
-      [self registerUser:call];
+      [self registerUser:call result:result];
   } else if ([@"login" isEqualToString:call.method]) {
-      [self loginUser:call];
+      [self loginUser:call result:result];
   } else if ([@"isLogin" isEqualToString:call.method]) {
-      [self checkLogin];
+      [self checkLogin:result];
   } else if ([@"logout" isEqualToString:call.method]) {
-      [self loginOut];
+      [self loginOut:result];
   } else if ([@"jumpToPage" isEqualToString:call.method]) {
-      [self jumpToChat:call];
+      [self jumpToChat:call result:result];
   }
 }
 
@@ -40,34 +39,33 @@
     if (initError) { // 初始化错误
         
     }
-    NSLog(@"initerror=%@",initError);
 }
 
-- (void)registerUser:(FlutterMethodCall *)call {
+- (void)registerUser:(FlutterMethodCall *)call result:(FlutterResult)result {
     NSDictionary *arguments = call.arguments;
     HDError *error = [[HDClient sharedClient] registerWithUsername:arguments[@"username"] password:arguments[@"password"]];
-    NSLog(@"resisterError=%@", error);
+    if(error.code == HDErrorUserAlreadyExist || !error){
+        result([NSNumber numberWithBool:YES]);
+    }else{
+        result([NSNumber numberWithBool:NO]);
+    }
 }
 
-- (void)loginUser:(FlutterMethodCall *)call {
+- (void)loginUser:(FlutterMethodCall *)call result:(FlutterResult)result {
     NSDictionary *arguments = call.arguments;
-    NSLog(@"name=%@---pwd=%@",arguments[@"username"],arguments[@"password"]);
     HDClient *client = [HDClient sharedClient];
-    NSLog(@"1111111");
     if (client.isLoggedInBefore != YES) {
-        NSLog(@"22222222");
         HDError *error = [client loginWithUsername:arguments[@"username"] password:arguments[@"password"]];
-        NSLog(@"这里是登录的error%@",error.errorDescription);
         if (!error) { //登录成功
+            result([NSNumber numberWithBool:YES]);
         } else { //登录失败
-            return;
+            result([NSNumber numberWithBool:YES]);
         }
     }
 
 }
 
-- (void)jumpToChat:(FlutterMethodCall *)call{
-    NSLog(@"这里是跳转聊天");
+- (void)jumpToChat:(FlutterMethodCall *)call result:(FlutterResult)result{
     NSDictionary *arguments = call.arguments;
     // 进入会话页面
     HDMessageViewController *chatVC = [[HDMessageViewController alloc] initWithConversationChatter:arguments[@"imNumber"]]; // 获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
@@ -77,19 +75,22 @@
     [viewController presentViewController:NAV animated:YES completion:nil];
 }
 
-- (void)checkLogin{
+- (void)checkLogin:(FlutterResult)result{
     if([HDClient sharedClient].isLoggedInBefore) {
          //已经登录
+        result([NSNumber numberWithBool:YES]);
     }else{
-         //未登录
+        result([NSNumber numberWithBool:NO]);
     }
 }
 
-- (void)loginOut{
+- (void)loginOut:(FlutterResult)result{
     //参数为是否解绑推送的devicetoken
     HDError *error = [[HDClient sharedClient] logout:YES];
     if (error) { //登出出错
+        result([NSNumber numberWithBool:NO]);
     } else {//登出成功
+        result([NSNumber numberWithBool:YES]);
     }
 }
 

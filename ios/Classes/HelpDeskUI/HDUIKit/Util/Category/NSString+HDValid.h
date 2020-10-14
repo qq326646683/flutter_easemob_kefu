@@ -11,7 +11,6 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
 
 @interface NSString (HDValid)
 
@@ -20,5 +19,4 @@
 + (CGRect)rectOfString:(NSString *)string fontSize:(CGFloat)fontSize size:(CGSize)size;
 
 - (NSArray*)getURLs;
-
 @end

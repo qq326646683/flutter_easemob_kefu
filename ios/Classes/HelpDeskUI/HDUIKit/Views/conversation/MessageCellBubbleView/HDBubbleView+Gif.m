@@ -40,7 +40,7 @@
     
     [self _setupGifBubbleConstraints];
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@kBigExpressionHW);
+        make.width.equalTo(@(kBigExpressionHW));
     }];
 }
 

@@ -33,7 +33,6 @@
 #import "UIViewController+HDHUD.h"
 #import "UIViewController+AlertController.h"
 #import "HRobotUnsolveItemView.h"
-#import "HelpDeskUI.h"
 
 typedef enum : NSUInteger {
     HDRequestRecord,
@@ -106,7 +105,7 @@ typedef enum : NSUInteger {
     //Initialization
     CGFloat chatbarHeight = [HDChatToolbar defaultHeight];
     
-    self.chatToolbar = [[HDChatToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - chatbarHeight - iPhoneXBottomHeight, self.view.frame.size.width, chatbarHeight)];
+    self.chatToolbar = [[HDChatToolbar alloc] initWithFrame:CGRectMake(0, self.view.height - chatbarHeight - iPhoneXBottomHeight, self.view.width, chatbarHeight)];
     self.chatToolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
     //Initializa the gesture recognizer
@@ -117,13 +116,12 @@ typedef enum : NSUInteger {
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 0.5;
-    self.tableView.backgroundColor = RGBACOLOR(247, 250, 255, 1);
     [self.tableView addGestureRecognizer:lpgr];
     
     _messageQueue = dispatch_queue_create("com.helpdesk.message.queue", NULL);
     
     //Register the delegate
-//    [HDCDDeviceManager sharedInstance].delegate = self;
+    [HDCDDeviceManager sharedInstance].delegate = self;
     
     [self setLeftBarBtnItem];
 
@@ -145,10 +143,11 @@ typedef enum : NSUInteger {
 
 - (void)setupCell {
     
-    [[HDBaseMessageCell appearance] setSendBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_bg"] stretchableImageWithLeftCapWidth:5 topCapHeight:0]];
+    [[HDBaseMessageCell appearance] setSendBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_bg"] stretchableImageWithLeftCapWidth:5 topCapHeight:35]];
     [[HDBaseMessageCell appearance] setRecvBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_bg"] stretchableImageWithLeftCapWidth:35 topCapHeight:35]];
     [[HDBaseMessageCell appearance] setSendMessageVoiceAnimationImages:@[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_full"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_000"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_001"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_002"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_003"]]];
     [[HDBaseMessageCell appearance] setRecvMessageVoiceAnimationImages:@[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing_full"],[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing000"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing001"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing002"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing003"]]];
+    
     [[HDBaseMessageCell appearance] setAvatarSize:40.f];
     [[HDBaseMessageCell appearance] setAvatarCornerRadius:20.f];
     [[HDChatBarMoreView appearance] setMoreViewBackgroundColor:[UIColor colorWithRed:240 / 255.0 green:242 / 255.0 blue:247 / 255.0 alpha:1.0]];
@@ -179,7 +178,7 @@ typedef enum : NSUInteger {
 }
 
 - (void)backItemClicked {
-//    [[HDCDDeviceManager sharedInstance] disableProximitySensor];
+    [[HDCDDeviceManager sharedInstance] disableProximitySensor];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[HDClient sharedClient].chatManager removeDelegate:self];
     [self.navigationController popViewControllerAnimated:YES];
@@ -259,8 +258,8 @@ typedef enum : NSUInteger {
 
 - (void)dealloc
 {
-//    [[HDCDDeviceManager sharedInstance] stopPlaying];
-//    [HDCDDeviceManager sharedInstance].delegate = nil;
+    [[HDCDDeviceManager sharedInstance] stopPlaying];
+    [HDCDDeviceManager sharedInstance].delegate = nil;
     
     if (_imagePicker){
         [_imagePicker dismissViewControllerAnimated:NO completion:nil];
@@ -395,9 +394,9 @@ typedef enum : NSUInteger {
 - (void)_stopAudioPlayingWithChangeCategory:(BOOL)isChange
 {
     //停止音频播放及播放动画
-//    [[HDCDDeviceManager sharedInstance] stopPlaying];
-//    [[HDCDDeviceManager sharedInstance] disableProximitySensor];
-//    [HDCDDeviceManager sharedInstance].delegate = self;
+    [[HDCDDeviceManager sharedInstance] stopPlaying];
+    [[HDCDDeviceManager sharedInstance] disableProximitySensor];
+    [HDCDDeviceManager sharedInstance].delegate = self;
     
         HDMessageModel *playingModel = [[HDMessageReadManager defaultManager] stopMessageAudioModel];
         NSIndexPath *indexPath = nil;
@@ -418,44 +417,44 @@ typedef enum : NSUInteger {
 - (NSURL *)_convert2Mp4:(NSURL *)movUrl
 {
     NSURL *mp4Url = nil;
-//    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:movUrl options:nil];
-//    NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
-//
-//    if ([compatiblePresets containsObject:AVAssetExportPresetHighestQuality]) {
-//        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]initWithAsset:avAsset
-//                                                                              presetName:AVAssetExportPresetHighestQuality];
-//        NSString *mp4Path = [NSString stringWithFormat:@"%@/%d%d.mp4", [HDCDDeviceManager dataPath], (int)[[NSDate date] timeIntervalSince1970], arc4random() % 100000];
-//        mp4Url = [NSURL fileURLWithPath:mp4Path];
-//        exportSession.outputURL = mp4Url;
-//        exportSession.shouldOptimizeForNetworkUse = YES;
-//        exportSession.outputFileType = AVFileTypeMPEG4;
-//        dispatch_semaphore_t wait = dispatch_semaphore_create(0l);
-//        [exportSession exportAsynchronouslyWithCompletionHandler:^{
-//            switch ([exportSession status]) {
-//                case AVAssetExportSessionStatusFailed: {
-//                    NSLog(@"failed, error:%@.", exportSession.error);
-//                } break;
-//                case AVAssetExportSessionStatusCancelled: {
-//                    NSLog(@"cancelled.");
-//                } break;
-//                case AVAssetExportSessionStatusCompleted: {
-//                    NSLog(@"completed.");
-//                } break;
-//                default: {
-//                    NSLog(@"others.");
-//                } break;
-//            }
-//            dispatch_semaphore_signal(wait);
-//        }];
-//        long timeout = dispatch_semaphore_wait(wait, DISPATCH_TIME_FOREVER);
-//        if (timeout) {
-//            NSLog(@"timeout.");
-//        }
-//        if (wait) {
-//            //dispatch_release(wait);
-//            wait = nil;
-//        }
-//    }
+    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:movUrl options:nil];
+    NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
+    
+    if ([compatiblePresets containsObject:AVAssetExportPresetHighestQuality]) {
+        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]initWithAsset:avAsset
+                                                                              presetName:AVAssetExportPresetHighestQuality];
+        NSString *mp4Path = [NSString stringWithFormat:@"%@/%d%d.mp4", [HDCDDeviceManager dataPath], (int)[[NSDate date] timeIntervalSince1970], arc4random() % 100000];
+        mp4Url = [NSURL fileURLWithPath:mp4Path];
+        exportSession.outputURL = mp4Url;
+        exportSession.shouldOptimizeForNetworkUse = YES;
+        exportSession.outputFileType = AVFileTypeMPEG4;
+        dispatch_semaphore_t wait = dispatch_semaphore_create(0l);
+        [exportSession exportAsynchronouslyWithCompletionHandler:^{
+            switch ([exportSession status]) {
+                case AVAssetExportSessionStatusFailed: {
+                    NSLog(@"failed, error:%@.", exportSession.error);
+                } break;
+                case AVAssetExportSessionStatusCancelled: {
+                    NSLog(@"cancelled.");
+                } break;
+                case AVAssetExportSessionStatusCompleted: {
+                    NSLog(@"completed.");
+                } break;
+                default: {
+                    NSLog(@"others.");
+                } break;
+            }
+            dispatch_semaphore_signal(wait);
+        }];
+        long timeout = dispatch_semaphore_wait(wait, DISPATCH_TIME_FOREVER);
+        if (timeout) {
+            NSLog(@"timeout.");
+        }
+        if (wait) {
+            //dispatch_release(wait);
+            wait = nil;
+        }
+    }
     
     return mp4Url;
 }
@@ -661,14 +660,14 @@ typedef enum : NSUInteger {
         
         if (isPrepare) {
             __weak HDMessageViewController *weakSelf = self;
-//            [[HDCDDeviceManager sharedInstance] enableProximitySensor];
-//            [[HDCDDeviceManager sharedInstance] asyncPlayingWithPath:model.fileLocalPath completion:^(NSError *error) {
-//                [[HDMessageReadManager defaultManager] stopMessageAudioModel];
-//                hd_dispatch_main_async_safe(^(){
-//                    [weakSelf.tableView reloadData];
-//                    [[HDCDDeviceManager sharedInstance] disableProximitySensor];
-//                });
-//            }];
+            [[HDCDDeviceManager sharedInstance] enableProximitySensor];
+            [[HDCDDeviceManager sharedInstance] asyncPlayingWithPath:model.fileLocalPath completion:^(NSError *error) {
+                [[HDMessageReadManager defaultManager] stopMessageAudioModel];
+                hd_dispatch_main_async_safe(^(){
+                    [weakSelf.tableView reloadData];
+                    [[HDCDDeviceManager sharedInstance] disableProximitySensor];
+                });
+            }];
         }
     }
 }
@@ -1200,12 +1199,12 @@ typedef enum : NSUInteger {
                 int x = arc4random() % 100000;
                 NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
                 NSString *fileName = [NSString stringWithFormat:@"%d%d",(int)time,x];
-//                [[HDCDDeviceManager sharedInstance] asyncStartRecordingWithFileName:fileName completion:^(NSError *error)
-//                 {
-//                     if (error) {
-//                         NSLog(@"%@",NSEaseLocalizedString(@"message.startRecordFail", @"failure to start recording"));
-//                     }
-//                 }];
+                [[HDCDDeviceManager sharedInstance] asyncStartRecordingWithFileName:fileName completion:^(NSError *error)
+                 {
+                     if (error) {
+                         NSLog(@"%@",NSEaseLocalizedString(@"message.startRecordFail", @"failure to start recording"));
+                     }
+                 }];
             }
                 break;
             case HDCanNotRecord:
@@ -1224,7 +1223,7 @@ typedef enum : NSUInteger {
 - (void)didHDCancelRecordingVoiceAction:(UIView *)micView
 {
     _isRecording = NO;
-//    [[HDCDDeviceManager sharedInstance] cancelCurrentRecording];
+    [[HDCDDeviceManager sharedInstance] cancelCurrentRecording];
     if ([self.delegate respondsToSelector:@selector(messageViewController:didSelectRecordView:withEvenType:)]) {
         [self.delegate messageViewController:self didSelectRecordView:micView withEvenType:HDRecordViewTypeTouchUpOutside];
     } else {
@@ -1248,11 +1247,11 @@ typedef enum : NSUInteger {
         
     }
     __weak typeof(self) weakSelf = self;
-//    [[HDCDDeviceManager sharedInstance] asyncStopRecordingWithCompletion:^(NSString *recordPath, NSInteger aDuration, NSError *error) {
-//        if (!error) {
-//            [weakSelf sendVoiceMessageWithLocalPath:recordPath duration:(int)aDuration];
-//        }
-//    }];
+    [[HDCDDeviceManager sharedInstance] asyncStopRecordingWithCompletion:^(NSString *recordPath, NSInteger aDuration, NSError *error) {
+        if (!error) {
+            [weakSelf sendVoiceMessageWithLocalPath:recordPath duration:(int)aDuration];
+        }
+    }];
 }
 
 // 当一次触摸从控件窗口内部拖动到外部时的代理方法
@@ -1479,7 +1478,7 @@ typedef enum : NSUInteger {
         [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     } else {
         [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
-//        [[HDCDDeviceManager sharedInstance] disableProximitySensor];
+        [[HDCDDeviceManager sharedInstance] disableProximitySensor];
     }
     [audioSession setActive:YES error:nil];
 }

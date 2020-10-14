@@ -11,7 +11,6 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 #define EASEUI_EMOTION_DEFAULT_EXT @"em_emotion"
 

@@ -13,7 +13,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import <HelpDeskLite/HelpDeskLite.h>
+#import <HelpDesk/HelpDesk.h>
 
 //#import "EMSDK.h"
 

@@ -12,6 +12,7 @@
 #import <CoreText/CoreText.h>
 #import "HDBubbleView+Text.h"
 #import "Masonry.h"
+#import "UIResponder+HRouter.h"
 
 @implementation HDBubbleView (Text)
 
@@ -49,8 +50,8 @@
     CGPoint point = [tap locationInView:self.textLabel];
     CFIndex charIndex = [self characterIndexAtPoint:point];
     
-//    [self routerEventWithName:HRouterEventTextURLTapEventName userInfo:@{@"charIndex":[NSNumber numberWithUnsignedLong:charIndex]
-//                                                                         }];
+    [self routerEventWithName:HRouterEventTextURLTapEventName userInfo:@{@"charIndex":[NSNumber numberWithUnsignedLong:charIndex]
+                                                                         }];
 }
 
 - (CFIndex)characterIndexAtPoint:(CGPoint)point

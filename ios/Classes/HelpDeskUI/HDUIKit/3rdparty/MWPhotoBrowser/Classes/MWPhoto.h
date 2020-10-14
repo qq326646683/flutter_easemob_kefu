@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "MWPhotoProtocol.h"
-#import <UIKit/UIKit.h>
 
 // This class models a photo/image and it's caption
 // If you want to handle photos, caching, decompression

@@ -8,7 +8,6 @@
 
 #import "HDRecordView.h"
 #import "HelpDeskUI.h"
-
 #define RecordViewHeight 140
 #define RecordButtonHeight 56
 #define PinRecord NSLocalizedString(@"message.toolBar.record.touch", @"hold down to talk")

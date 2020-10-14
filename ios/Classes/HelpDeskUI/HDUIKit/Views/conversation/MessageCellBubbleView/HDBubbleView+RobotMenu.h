@@ -7,11 +7,10 @@
 //
 
 #import "HDBubbleView.h"
-#import <HelpDeskLite/HelpDeskLite.h>
-
+#import "HelpDeskUI.h"
 @interface HDBubbleView (RobotMenu) <UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, assign) HDMenuInfo *menuInfo;
+@property (nonatomic, strong) HDMenuInfo *menuInfo;
 
 - (void)setupRobotMenuBubbleView;
 
@@ -24,7 +23,7 @@
 
 @interface MenuCell : UITableViewCell
 
-@property (nonatomic,assign) HDMenuItem *item;
+@property (nonatomic,strong) HDMenuItem *item;
 
 @property (nonatomic,strong) NSString *menu;
 @property (nonatomic,assign) CGFloat width;
