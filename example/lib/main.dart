@@ -14,8 +14,16 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
+enum KefuState {
+  Default,
+  Inited,
+  Registered,
+  Logined,
+}
+
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  KefuState state = KefuState.Default;
 
   @override
   void initState() {
@@ -53,21 +61,36 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: <Widget>[
             Text('Running on: $_platformVersion\n'),
+            Text('当前状态: $state\n'),
             RaisedButton(
-              onPressed: () {
+              onPressed: () async {
                 FlutterEasemobKefu.init("1439201009092337#kefuchannelapp86399", "86399");
+                setState(() {
+                  state = KefuState.Inited;
+                });
               },
               child: Text('初始化'),
             ),
             RaisedButton(
-              onPressed: () {
-                FlutterEasemobKefu.register("nell", "123456");
+              onPressed: () async {
+                bool isSuccess = await FlutterEasemobKefu.register("nell", "123456");
+                if (isSuccess) {
+                  setState(() {
+                    state = KefuState.Registered;
+                  });
+                }
+
               },
               child: Text('注册'),
             ),
             RaisedButton(
-              onPressed: () {
-                FlutterEasemobKefu.login("nell", "123456");
+              onPressed: () async {
+                bool isSuccess = await FlutterEasemobKefu.login("nell", "123456");
+                if (isSuccess) {
+                  setState(() {
+                    state = KefuState.Logined;
+                  });
+                }
               },
               child: Text('登录'),
             ),
@@ -79,7 +102,7 @@ class _MyAppState extends State<MyApp> {
                 }
               },
               child: Text('去会话'),
-            ),
+            )
           ],
         ),
       ),
