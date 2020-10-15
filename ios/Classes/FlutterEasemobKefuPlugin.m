@@ -69,12 +69,35 @@
     NSDictionary *arguments = call.arguments;
     // 进入会话页面
     HDMessageViewController *chatVC = [[HDMessageViewController alloc] initWithConversationChatter:arguments[@"imNumber"]]; // 获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
-    UIViewController *viewController =
-        [UIApplication sharedApplication].delegate.window.rootViewController;
     UINavigationController *NAV = [[UINavigationController alloc] initWithRootViewController:chatVC];
-    [viewController presentViewController:NAV animated:YES completion:nil];
-}
+     UIWindow * window = [UIApplication sharedApplication].keyWindow;
 
+    window.rootViewController = NAV;
+}
+ 
+- (UIViewController *)visibleViewController {
+    UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+    return [self getVisibleViewControllerFrom:rootViewController];
+}
+ 
+- (UIViewController *) getVisibleViewControllerFrom:(UIViewController *) vc {
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        return [self getVisibleViewControllerFrom:[((UINavigationController *) vc) visibleViewController]];
+    } else if ([vc isKindOfClass:[UITabBarController class]]) {
+        return [self getVisibleViewControllerFrom:[((UITabBarController *) vc) selectedViewController]];
+    } else {
+        if (vc.presentedViewController) {
+            return [self getVisibleViewControllerFrom:vc.presentedViewController];
+        } else {
+            return vc;
+        }
+    }
+ 
+}
+ 
+- (UINavigationController *)visibleNavigationController {
+    return [[self visibleViewController] navigationController];
+}
 - (void)checkLogin:(FlutterResult)result{
     if([HDClient sharedClient].isLoggedInBefore) {
          //已经登录
