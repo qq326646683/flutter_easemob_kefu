@@ -212,8 +212,8 @@
     [self.avatarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(HDMessageCellPadding);
         make.left.equalTo(self.contentView.mas_left).offset(HDMessageCellPadding);
-        make.width.equalTo(self.avatarSize);
-        make.height.equalTo(self.avatarView.mas_width);
+        make.width.equalTo(@0);
+        make.height.equalTo(@0);
     }];
     
     [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -233,7 +233,7 @@
 {
     if (self.avatarView) {
         [self.avatarView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(self.avatarSize);
+            make.width.equalTo(@0);
         }];
     }
 }

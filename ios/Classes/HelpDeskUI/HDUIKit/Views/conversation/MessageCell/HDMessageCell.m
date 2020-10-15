@@ -157,7 +157,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     if ([HDMessageHelper getMessageExtType:model.message] != HDExtArticleMsg) {
         _avatarView = [[UIImageView alloc] init];
         _avatarView.translatesAutoresizingMaskIntoConstraints = NO;
-        _avatarView.backgroundColor = [UIColor yellowColor];
+        _avatarView.backgroundColor = [UIColor clearColor];
         _avatarView.clipsToBounds = YES;
         _avatarView.userInteractionEnabled = YES;
         [self.contentView addSubview:_avatarView];

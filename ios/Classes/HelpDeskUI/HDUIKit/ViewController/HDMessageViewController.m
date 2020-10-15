@@ -91,6 +91,8 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = RGBACOLOR(247, 250, 255, 1);
+    self.navigationController.navigationBar.backgroundColor = RGBACOLOR(247, 250, 255, 1);
     // Do any additional setup after loading the view.
     
     if (_conversation.officialAccount.name) {
@@ -268,15 +270,18 @@ typedef enum : NSUInteger {
     NSLog(@"dealloc :%s",__func__);
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
+//-(void)viewWillDisappear:(BOOL)animated{
+//    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+//    [super viewWillDisappear:animated];
+//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:nil];
+//}
+//
+//-(void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+//}
 
 #pragma mark - getter
 
