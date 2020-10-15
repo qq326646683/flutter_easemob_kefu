@@ -11,7 +11,7 @@
  */
 
 #import "HDBaseMessageCell.h"
-#import "UIImageView+HDWebCache.h"
+#import "UIImageView+HighlightedWebCache.h"
 #import "HDBubbleView+Transform.h"
 #import "HDBubbleView+Evaluate.h"
 #import "HelpDeskUI.h"
@@ -254,7 +254,8 @@
     [super setModel:model];
     
     if (model.avatarURLPath) {
-        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
+        [self.avatarView sd_setImageWithURL:[NSURL URLWithString:model.avatarURLPath]  placeholderImage:model.avatarImage];
+//        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
     } else {
         self.avatarView.image = model.avatarImage;
     }

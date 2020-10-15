@@ -224,7 +224,8 @@
     _model = model;
     _titleLabel.text = model.title;
     _timeLabel.text = model.createTime;
-    [_imageView hdSD_setImageWithURL:[NSURL URLWithString:_model.imageUrl] placeholderImage:nil];
+    [_imageView sd_setImageWithURL:[NSURL URLWithString:_model.imageUrl] placeholderImage:nil];
+//    [_imageView hdSD_setImageWithURL:[NSURL URLWithString:_model.imageUrl] placeholderImage:nil];
     _profile.text = _model.digest;
 }
 
@@ -281,11 +282,12 @@
     _model = model;
     if (_model.type == HDCellTypeTitle) {
         _titleLabel.textColor = [UIColor whiteColor];
-        [_imageView hdSD_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
+//        [_imageView hdSD_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
+        [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
     }
     if (_model.type == HDCellTypeSub) {
-        
-        [_imageView hdSD_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
+        [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
+//        [_imageView hdSD_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:nil];
     }
     _titleLabel.text = model.title;
 }

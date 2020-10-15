@@ -25,7 +25,8 @@
 #import "HDBubbleView+Form.h"
 #import "HDBubbleView+Article.h"
 #import "HDBubbleView+Gif.h"
-#import "UIImageView+HDWebCache.h"
+//#import "UIImageView+HDWebCache.h"
+#import "UIImageView+WebCache.h"
 #import "HDEmotionEscape.h"
 #import "HDLocalDefine.h"
 #import "NSString+HDValid.h"
@@ -312,18 +313,18 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     [self.bubbleView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-HDMessageCellPadding);
         if (self.bubbleMaxWidth > 0) {
-            make.width.lessThanOrEqualTo(self.bubbleMaxWidth);
+            make.width.lessThanOrEqualTo(@(self.bubbleMaxWidth));
         }
     }];
 
     [self.statusButton mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.statusSize);
+        make.width.equalTo(@(self.statusSize));
         make.height.equalTo(self.statusButton.mas_width);
         make.centerY.equalTo(self.contentView.mas_centerY).offset(0);
     }];
     
     [self.activity mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.activitySize);
+        make.width.equalTo(@(self.activitySize));
         make.width.equalTo(self.activity.mas_height);
         make.centerY.equalTo(self.contentView.mas_centerY).offset(0);
     }];
@@ -342,7 +343,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
 {
     if (_hasRead) {
         [_hasRead mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(40);
+            make.width.equalTo(@40);
         }];
     }
 }
@@ -351,7 +352,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
 {
     if (_statusButton) {
         [self.statusButton mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(self.statusSize);
+            make.width.equalTo(@(self.statusSize));
         }];
     }
 }
@@ -360,7 +361,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
 {
     if (_activity) {
         [self.activity mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(self.activitySize);
+            make.width.equalTo(@(self.activitySize));
         }];
     }
 }
@@ -369,7 +370,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
 {
     [self.bubbleView mas_updateConstraints:^(MASConstraintMaker *make) {
         if (self.bubbleMaxWidth > 0) {
-            make.width.lessThanOrEqualTo(self.bubbleMaxWidth);
+            make.width.lessThanOrEqualTo(@(self.bubbleMaxWidth));
         }
     }];
 }
@@ -422,7 +423,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                     {
                         NSDictionary * itemDic = [[model.message.ext objectForKey:@"msgtype"] objectForKey:@"order"];
                         NSString *url = [itemDic objectForKey:@"img_url"];
-                        [_bubbleView.orderImageView hdSD_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"imageDownloadFail.png"]];
+                        [_bubbleView.orderImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"imageDownloadFail.png"]];
                         _bubbleView.orderTitleLabel.text = [itemDic objectForKey:@"title"];
                         _bubbleView.orderNoLabel.text = [itemDic objectForKey:@"order_title"];
                         _bubbleView.orderDescLabel.text = [itemDic objectForKey:@"desc"];
@@ -439,7 +440,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                             _bubbleView.cusImageView.image = [UIImage imageNamed:@"imageDownloadFail.png"];
                         }
                         NSString *url = [itemDic objectForKey:@"img_url"];
-                        [_bubbleView.cusImageView hdSD_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"imageDownloadFail.png"]];
+                        [_bubbleView.cusImageView sd_setImageWithURL:[NSURL URLWithString:url]  placeholderImage:[UIImage imageNamed:@"imageDownloadFail.png"]];
                         _bubbleView.trackTitleLabel.text = [itemDic objectForKey:@"title"];
                         _bubbleView.cusDescLabel.text = [itemDic objectForKey:@"desc"];
                         _bubbleView.cusPriceLabel.text = [itemDic objectForKey:@"price"];
@@ -523,7 +524,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                         if (emojiDic) {
                             emojiUrl = [emojiDic objectForKey:@"url"];
                         }
-                        [_bubbleView.imageView hdSD_setImageWithURL:[NSURL URLWithString:emojiUrl] placeholderImage:[UIImage imageNamed:_model.failImageName]];
+                        [_bubbleView.imageView sd_setImageWithURL:[NSURL URLWithString:emojiUrl] placeholderImage:[UIImage imageNamed:_model.failImageName]];
                         break;
                     }
                     default:
@@ -543,7 +544,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                 if (!image) {
                     image = _model.image;
                     if (!image) {
-                        [_bubbleView.imageView hdSD_setImageWithURL:[NSURL URLWithString:_model.fileURLPath] placeholderImage:[UIImage imageNamed:_model.failImageName]];
+                        [_bubbleView.imageView sd_setImageWithURL:[NSURL URLWithString:_model.fileURLPath] placeholderImage:[UIImage imageNamed:_model.failImageName]];
                     } else {
                         _bubbleView.imageView.image = image;
                     }

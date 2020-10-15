@@ -115,8 +115,10 @@ static const char MJRefreshReloadDataBlockKey = '\0';
 }
 
 - (void)executeReloadDataBlock
-{
-    !self.mj_reloadDataBlock ? : self.mj_reloadDataBlock(self.mj_totalDataCount);
+{  
+    if(self.mj_reloadDataBlock != nil){
+        self.mj_reloadDataBlock(self.mj_totalDataCount);
+    }
 }
 @end
 

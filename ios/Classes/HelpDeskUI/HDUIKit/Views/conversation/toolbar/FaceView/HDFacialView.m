@@ -15,7 +15,8 @@
 #import "HDEmoji.h"
 #import "HDFaceView.h"
 #import "HDEmotionManager.h"
-#import "UIButton+HDWebCache.h"
+//#import "UIButton+HDWebCache.h"
+#import "UIButton+WebCache.h"
 
 
 @interface EmojiButton :UIButton
@@ -66,8 +67,8 @@
                                               0.0,
                                               20,
                                               0)];
-    [self hdSD_setImageWithURL:url forState:stateType placeholderImage:placeholder];
-    
+//    [self hdSD_setImageWithURL:url forState:stateType placeholderImage:placeholder];
+    [self sd_setImageWithURL:url forState:stateType placeholderImage:placeholder];
     [self.titleLabel setContentMode:UIViewContentModeCenter];
     [self.titleLabel setBackgroundColor:[UIColor clearColor]];
     [self.titleLabel setFont:[UIFont systemFontOfSize:10]];

@@ -22,7 +22,7 @@
 #import "HDEmoji.h"
 #import "HDEmotionEscape.h"
 #import "HDCustomMessageCell.h"
-#import "UIImage+HDGIF.h"
+#import "UIImage+GIF.h"
 #import "HDLocalDefine.h"
 #import "HDSDKHelper.h"
 #import "HDBubbleView+Transform.h"
@@ -860,7 +860,7 @@ typedef enum : NSUInteger {
                 if (_dataSource && [_dataSource respondsToSelector:@selector(emotionURLFormessageViewController:messageModel:)]) {
                     HDEmotion *emotion = [_dataSource emotionURLFormessageViewController:self messageModel:model];
                     if (emotion) {
-                        model.image = [UIImage hdSD_animatedGIFNamed:emotion.emotionOriginal];
+                        model.image = [UIImage sd_animatedGIFNamed:emotion.emotionOriginal];
                         model.fileURLPath = emotion.emotionOriginalURL;
                     }
                 }

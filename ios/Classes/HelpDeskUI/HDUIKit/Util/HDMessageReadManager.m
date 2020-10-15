@@ -11,7 +11,8 @@
  */
 
 #import "HDMessageReadManager.h"
-#import "UIImageView+HDWebCache.h"
+//#import "UIImageView+HDWebCache.h"
+#import "UIImageView+WebCache.h"
 #import "HDCDDeviceManager.h"
 
 #define IMAGE_MAX_SIZE_5k 5120*2880

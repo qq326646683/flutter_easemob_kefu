@@ -26,6 +26,8 @@
 		6C1C646D253457690090F302 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C646C253457690090F302 /* AddressBook.framework */; };
 		6C1C646F253457720090F302 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C646E253457720090F302 /* CFNetwork.framework */; };
 		6C1C647125345AF90090F302 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C647025345AF80090F302 /* CoreGraphics.framework */; };
+		6C1C6D8F2537FFC60090F302 /* hdlibopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C6D8E2537FFC60090F302 /* hdlibopencore-amrnb.a */; };
+		6C1C6D912537FFDF0090F302 /* hdlibopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C6D902537FFDF0090F302 /* hdlibopencore-amrwb.a */; };
 		978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */; };
 		97C146F31CF9000F007C117D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C146F21CF9000F007C117D /* main.m */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
@@ -68,6 +70,8 @@
 		6C1C646C253457690090F302 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		6C1C646E253457720090F302 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		6C1C647025345AF80090F302 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6C1C6D8E2537FFC60090F302 /* hdlibopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "hdlibopencore-amrnb.a"; path = "../../ios/Classes/HelpDeskUI/HDUIKit/3rdparty/DeviceHelper/HDVoiceConvert/opencore-amrnb/hdlibopencore-amrnb.a"; sourceTree = "<group>"; };
+		6C1C6D902537FFDF0090F302 /* hdlibopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "hdlibopencore-amrwb.a"; path = "../../ios/Classes/HelpDeskUI/HDUIKit/3rdparty/DeviceHelper/HDVoiceConvert/opencore-amrwb/hdlibopencore-amrwb.a"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		7AFFD8ED1D35381100E5BB4D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C1C6D912537FFDF0090F302 /* hdlibopencore-amrwb.a in Frameworks */,
+				6C1C6D8F2537FFC60090F302 /* hdlibopencore-amrnb.a in Frameworks */,
 				6C1C647125345AF90090F302 /* CoreGraphics.framework in Frameworks */,
 				6C1C646F253457720090F302 /* CFNetwork.framework in Frameworks */,
 				6C1C646D253457690090F302 /* AddressBook.framework in Frameworks */,
@@ -114,6 +120,8 @@
 		295D420F18F9F860CCBA970C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C1C6D902537FFDF0090F302 /* hdlibopencore-amrwb.a */,
+				6C1C6D8E2537FFC60090F302 /* hdlibopencore-amrnb.a */,
 				6C1C647025345AF80090F302 /* CoreGraphics.framework */,
 				6C1C646E253457720090F302 /* CFNetwork.framework */,
 				6C1C646C253457690090F302 /* AddressBook.framework */,
