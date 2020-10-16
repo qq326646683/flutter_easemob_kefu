@@ -152,7 +152,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     
     _bubbleView = [[HDBubbleView alloc] initWithMargin:edge isSender:model.isSender];
     _bubbleView.translatesAutoresizingMaskIntoConstraints = NO;
-    _bubbleView.backgroundColor = [UIColor clearColor];
+//    _bubbleView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:_bubbleView];
     if ([HDMessageHelper getMessageExtType:model.message] != HDExtArticleMsg) {
         _avatarView = [[UIImageView alloc] init];
@@ -280,6 +280,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     
     UITapGestureRecognizer *tapRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarViewTapAction:)];
     [_avatarView addGestureRecognizer:tapRecognizer2];
+    NSLog(@"这里是HDMessageCell的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -335,6 +336,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
         make.centerY.equalTo(self.contentView.mas_centerY).offset(0);
         make.height.equalTo(self.statusButton.mas_width).offset(0);
     }];
+    NSLog(@"这里是666666的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 #pragma mark - Update Constraint
@@ -373,6 +375,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
             make.width.lessThanOrEqualTo(@(self.bubbleMaxWidth));
         }
     }];
+    NSLog(@"这里是777777的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 #pragma mark - setter

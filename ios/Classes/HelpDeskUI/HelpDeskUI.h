@@ -64,6 +64,8 @@
 #define kWeakSelf __weak __typeof__(self) weakSelf = self;
 #define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
+#define THEMECOLOR RGBACOLOR(245,250,255,1)
+
 #define kHDScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kHDScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
