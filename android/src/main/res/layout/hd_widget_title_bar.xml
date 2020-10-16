@@ -3,13 +3,13 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_top_bar"
-    android:background="@color/top_bar_normal_bg"
+    android:background="@color/title_bg_color"
     android:gravity="center_vertical" >
 
     <RelativeLayout
         android:id="@+id/left_layout"
         android:layout_width="@dimen/title_back_btn_layout_width"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/title_back_btn_layout_width"
         android:background="@drawable/hd_common_tab_bg"
         android:clickable="true" >
 
@@ -22,20 +22,24 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_cutom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/left_layout"
+        android:layout_below="@id/left_layout"
+        android:layout_marginLeft="30dp"
         android:layout_centerVertical="true"
         android:textColor="@color/main_text_color"
-        android:textSize="@dimen/title_text_size" />
+        android:textSize="@dimen/title_text_size"
+        android:text="Customer Support"
+        />
 
     <RelativeLayout
         android:id="@+id/right_layout"
         android:layout_width="@dimen/title_icon_btn_layout_width"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:background="@drawable/hd_common_tab_bg" >
+        android:background="@drawable/hd_common_tab_bg"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/right_image"

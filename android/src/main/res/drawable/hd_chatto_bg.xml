@@ -9,6 +9,6 @@
         android:startColor="#F7683F"
         android:endColor="#CE5431"
         />
-    <padding android:left="10dp" android:right="10dp"/>
+    <padding android:left="10dp" android:right="10dp" android:top="8dp" android:bottom="8dp"/>
     <corners android:radius="16dp"/>
 </shape>

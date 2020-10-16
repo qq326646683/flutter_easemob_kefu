@@ -56,7 +56,7 @@ public class TitleBar extends RelativeLayout {
         if(attrs != null){
             TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.EaseTitleBar);
             String title = ta.getString(R.styleable.EaseTitleBar_titleBarTitle);
-            titleView.setText(title);
+//            titleView.setText(title);
 
             Drawable leftDrawable = ta.getDrawable(R.styleable.EaseTitleBar_titleBarLeftImage);
             if (null != leftDrawable) {
@@ -101,7 +101,7 @@ public class TitleBar extends RelativeLayout {
     }
 
     public void setTitle(String title){
-        titleView.setText(title);
+//        titleView.setText(title);
     }
 
     public void setBackgroundColor(int color){

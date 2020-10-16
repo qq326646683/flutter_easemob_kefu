@@ -62,7 +62,6 @@
             android:layout_marginRight="@dimen/margin_chat_activity"
             android:background="@drawable/hd_chatto_bg"
             >
-
             <TextView
                 android:id="@+id/tv_chatcontent"
                 android:layout_width="wrap_content"
@@ -70,13 +69,10 @@
                 android:autoLink="web"
                 android:layout_centerInParent="true"
                 android:gravity="center|left"
-                android:paddingRight="6dp"
-                android:paddingLeft="1dp"
-                android:minHeight="38dp"
                 android:lineSpacingExtra="2dp"
-                android:textColor="#000000"
+                android:textColor="#ffffff"
                 android:maxWidth="225.0dip"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
