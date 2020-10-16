@@ -181,8 +181,8 @@ typedef enum : NSUInteger {
     [[HDCDDeviceManager sharedInstance] disableProximitySensor];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[HDClient sharedClient].chatManager removeDelegate:self];
-    [self.navigationController popViewControllerAnimated:YES];
     [self backItemDidClicked];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)backItemDidClicked {
@@ -581,7 +581,7 @@ typedef enum : NSUInteger {
                     
                     if (image)
                     {
-                        [[HDMessageReadManager defaultManager] showBrowserWithImages:@[image]];
+                        [[HDMessageReadManager defaultManager] showBrowserWithImages:@[image] controller:self];
                     }
                     else
                     {
@@ -601,7 +601,7 @@ typedef enum : NSUInteger {
                         //                                weakSelf.isScrollToBottom = NO;
                         if (image)
                         {
-                            [[HDMessageReadManager defaultManager] showBrowserWithImages:@[image]];
+                            [[HDMessageReadManager defaultManager] showBrowserWithImages:@[image] controller:self];
                         }
                         else
                         {
