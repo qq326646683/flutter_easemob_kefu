@@ -39,6 +39,10 @@
     if (initError) { // 初始化错误
         
     }
+        //添加自定义小表情
+    #pragma mark smallpngface
+        [[HDEmotionEscape sharedInstance] setEaseEmotionEscapePattern:@"\\[[^\\[\\]]{1,3}\\]"];
+        [[HDEmotionEscape sharedInstance] setEaseEmotionEscapeDictionary:[HDConvertToCommonEmoticonsHelper emotionsDictionary]];
 }
 
 - (void)registerUser:(FlutterMethodCall *)call result:(FlutterResult)result {
