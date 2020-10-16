@@ -75,6 +75,7 @@
             _bubbleView.backgroundImageView.layer.masksToBounds = YES;
             _bubbleView.backgroundImageView.layer.cornerRadius = 5;
             _bubbleView.backgroundImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            NSLog(@"这里是HDBaseMessageCell1111的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
             break;
         }
         case HDExtBigExpressionMsg: {
@@ -128,6 +129,14 @@
             [self.bubbleView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.width.equalTo(retSize.width + margin);
             }];
+            CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+            gradientLayer.colors = @[(__bridge id)RGBACOLOR(247, 104, 23, 1).CGColor, (__bridge id)RGBACOLOR(206, 84, 49, 1).CGColor];
+            gradientLayer.startPoint = CGPointMake(0, 0);
+            gradientLayer.endPoint = CGPointMake(1.0, 0);
+            gradientLayer.frame = _bubbleView.frame;
+            [_bubbleView.layer addSublayer:gradientLayer];
+            
+            NSLog(@"这里是HDBaseMessageCell3333的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
         }
             break;
         case EMMessageBodyTypeLocation:
@@ -172,6 +181,7 @@
         make.centerX.equalTo(self.contentView.mas_centerX).offset(0);
         make.width.equalTo(kScreenWidth - 20);
     }];
+    NSLog(@"这里是444444的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 - (void)configureSendLayoutConstraints
@@ -205,6 +215,7 @@
     [self.hasRead mas_updateConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bubbleView.mas_left).offset(-HDMessageCellPadding);
     }];
+    NSLog(@"这里是HDBaseMessageCell的_bubbleView222222的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 - (void)configureRecvLayoutConstraints
@@ -225,6 +236,7 @@
         make.left.equalTo(self.avatarView.mas_right).offset(HDMessageCellPadding);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(0);
     }];
+    NSLog(@"这里是555555的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 #pragma mark - Update Constraint

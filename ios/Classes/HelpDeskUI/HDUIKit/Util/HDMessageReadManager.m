@@ -117,7 +117,7 @@ static HDMessageReadManager *detailInstance = nil;
 
 #pragma mark - public
 
-- (void)showBrowserWithImages:(NSArray *)imageArray
+- (void)showBrowserWithImages:(NSArray *)imageArray controller:(HDMessageViewController *)ctl
 {
     if (imageArray && [imageArray count] > 0) {
         NSMutableArray *photoArray = [NSMutableArray array];
@@ -144,10 +144,7 @@ static HDMessageReadManager *detailInstance = nil;
         
         self.photos = photoArray;
     }
-    
-    UIViewController *rootController = [self.keyWindow rootViewController];
-    rootController.modalPresentationStyle = UIModalPresentationFullScreen;
-    [rootController presentViewController:self.photoNavigationController animated:YES completion:nil];
+    [ctl presentViewController:self.photoNavigationController animated:YES completion:nil];
 }
 
 - (BOOL)prepareMessageAudioModel:(HDMessageModel *)messageModel

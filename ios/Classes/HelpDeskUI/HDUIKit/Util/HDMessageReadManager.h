@@ -14,6 +14,7 @@
 
 #import "MWPhotoBrowser.h"
 #import "HDMessageModel.h"
+#import "HDMessageViewController.h"
 
 typedef void (^FinishBlock)(BOOL success);
 typedef void (^PlayBlock)(BOOL playing, HDMessageModel *messageModel);
@@ -29,7 +30,7 @@ typedef void (^PlayBlock)(BOOL playing, HDMessageModel *messageModel);
 + (id)defaultManager;
 
 //default
-- (void)showBrowserWithImages:(NSArray *)imageArray;
+- (void)showBrowserWithImages:(NSArray *)imageArray controller:(HDMessageViewController *)ctl;
 
 - (BOOL)prepareMessageAudioModel:(HDMessageModel *)messageModel
             updateViewCompletion:(void (^)(HDMessageModel *prevAudioModel, HDMessageModel *currentAudioModel))updateCompletion;

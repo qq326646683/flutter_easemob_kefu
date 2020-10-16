@@ -58,13 +58,11 @@
 - (void)loginUser:(FlutterMethodCall *)call result:(FlutterResult)result {
     NSDictionary *arguments = call.arguments;
     HDClient *client = [HDClient sharedClient];
-    if (client.isLoggedInBefore != YES) {
-        HDError *error = [client loginWithUsername:arguments[@"username"] password:arguments[@"password"]];
-        if (!error) { //登录成功
-            result([NSNumber numberWithBool:YES]);
-        } else { //登录失败
-            result([NSNumber numberWithBool:YES]);
-        }
+    HDError *error = [client loginWithUsername:arguments[@"username"] password:arguments[@"password"]];
+    if (!error) { //登录成功
+        result([NSNumber numberWithBool:YES]);
+    } else { //登录失败
+        result([NSNumber numberWithBool:YES]);
     }
 
 }
@@ -74,9 +72,8 @@
     // 进入会话页面
     HDMessageViewController *chatVC = [[HDMessageViewController alloc] initWithConversationChatter:arguments[@"imNumber"]]; // 获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
     UINavigationController *NAV = [[UINavigationController alloc] initWithRootViewController:chatVC];
-     UIWindow * window = [UIApplication sharedApplication].keyWindow;
-
-    window.rootViewController = NAV;
+    UIViewController *rootViewController = [[UIApplication sharedApplication].delegate window].rootViewController;
+    [rootViewController presentViewController:NAV animated:YES completion:nil];
 }
  
 - (UIViewController *)visibleViewController {
