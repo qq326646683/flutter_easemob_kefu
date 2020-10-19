@@ -6,146 +6,185 @@
     android:paddingBottom="2dip"
     android:paddingTop="2dip" >
 
+<!--
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/gray_normal" />
+-->
+<!--
+        android:layout_height="56dp"
 
+-->
+    <!--语音输入-->
     <LinearLayout
         android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#aaffffff"
-        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:minHeight="56dp"
+        android:background="@color/chat_bg"
+        android:gravity="bottom"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_set_mode_voice"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:padding="2dp"
-            android:cropToPadding="true"
             android:layout_marginLeft="18dp"
             android:background="@drawable/hd_chatting_setmode_voice_btn_normal"
-            android:visibility="visible" />
+            android:cropToPadding="true"
+            android:padding="2dp"
+            android:visibility="gone" />
+
 
         <Button
             android:id="@+id/btn_set_mode_keyboard"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:padding="2dp"
-            android:cropToPadding="true"
             android:layout_marginLeft="18dp"
             android:background="@drawable/hd_chatting_setmode_keyboard_btn_normal"
+            android:cropToPadding="true"
+            android:padding="2dp"
             android:visibility="gone" />
+
+        <FrameLayout
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="12dp">
+
+            <Button
+                android:id="@+id/btn_more"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/hd_type_select_btn_nor"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btn_less"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/hd_type_less_btn_nor"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/hd_chatfrom_bg">
+            <EditText
+                android:id="@+id/et_sendmessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="0dip"
+                android:background="@null"
+                android:hint="@string/chat_primary_text_hint"
+                android:inputType="text"
+                android:scrollbars="vertical"
+                android:textColor="@color/new_leave_text_color"
+                android:textColorHint="#BBBBBB"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
 
         <RelativeLayout
             android:id="@+id/edittext_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="0dp"
             android:layout_weight="1"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical"
+            android:visibility="gone">
 
-            <EditText
-                android:id="@+id/et_sendmessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="35dip"
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:inputType="text"
-                android:maxLines="3"
-                android:hint="@string/chat_primary_text_hint"
-                android:textColorHint="#BBBBBB"
-                android:textColor="@color/new_leave_text_color"
-                android:minHeight="20dp"
-                android:textSize="16sp"/>
-
-            <RelativeLayout 
+            <RelativeLayout
                 android:id="@+id/rl_face"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                >
-            <ImageView
-                android:id="@+id/iv_face"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:padding="2dp"
-                android:cropToPadding="true"
-                android:scaleType="fitCenter"
-                android:layout_centerVertical="true"
-                android:src="@drawable/hd_chatting_biaoqing_btn_normal"
-                android:visibility="visible" />
+                android:layout_centerVertical="true">
 
-            <ImageView
-                android:id="@+id/iv_face_keyboard"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:padding="2dp"
-                android:cropToPadding="true"
-                android:scaleType="fitCenter"
-                android:layout_centerVertical="true"
-                android:src="@drawable/hd_chatting_setmode_keyboard_btn_normal"
-                android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/iv_face"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    android:cropToPadding="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/hd_chatting_biaoqing_btn_normal"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_face_keyboard"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    android:cropToPadding="true"
+                    android:padding="2dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/hd_chatting_setmode_keyboard_btn_normal"
+                    android:visibility="gone" />
 
             </RelativeLayout>
         </RelativeLayout>
+        <FrameLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="20dp">
+
+            <Button
+                android:id="@+id/btn_send_gray"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_send_gray"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btn_send_red"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_send_red"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
         <RelativeLayout
             android:layout_width="59dp"
             android:layout_height="30dp"
             android:gravity="center"
-            >
-            <FrameLayout
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="20dp"
-                >
-                <Button
-                    android:id="@+id/btn_more"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:padding="2dp"
-                    android:cropToPadding="true"
-                    android:background="@drawable/hd_type_select_btn_nor"
-                    android:visibility="visible"/>
+            android:visibility="gone">
 
-                <Button
-                    android:id="@+id/btn_less"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:padding="2dp"
-                    android:cropToPadding="true"
-                    android:background="@drawable/hd_type_less_btn_nor"
-                    android:visibility="gone"/>
-
-            </FrameLayout>
             <Button
                 android:id="@+id/btn_send"
                 android:layout_width="49dp"
                 android:layout_height="30dp"
-                android:cropToPadding="true"
-                android:background="@color/emoji_send_btn_enable_bg_color"
-                android:gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="@string/button_send"
+                android:background="@color/emoji_send_btn_enable_bg_color"
+                android:cropToPadding="true"
+                android:gravity="center"
                 android:singleLine="true"
+                android:text="@string/button_send"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
         </RelativeLayout>
 
 
-
-
     </LinearLayout>
 
-    <!--语音输入-->
     <com.hyphenate.helpdesk.easeui.widget.RecorderMenu
         android:id="@+id/record_menu"
         android:layout_width="match_parent"
