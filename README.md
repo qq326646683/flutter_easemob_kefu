@@ -25,7 +25,8 @@ flutter_easemob_kefu:
 // 自定义ui(根据自己的ui，去修改原生两端的ui代码)
 flutter_easemob_kefu:
     git:
-      url: https://github.com/qq326646683/flutter_easemob_kefu.git#custom-ui
+      url: https://github.com/qq326646683/flutter_easemob_kefu.git
+      ref: custom-ui
 
 ```
 
