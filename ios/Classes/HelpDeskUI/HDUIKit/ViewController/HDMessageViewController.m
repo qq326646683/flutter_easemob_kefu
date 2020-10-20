@@ -33,7 +33,6 @@
 #import "UIViewController+HDHUD.h"
 #import "UIViewController+AlertController.h"
 #import "HRobotUnsolveItemView.h"
-#import "FlutterEasemobKefuPlugin.h"
 
 typedef enum : NSUInteger {
     HDRequestRecord,
@@ -92,8 +91,6 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self setNeedsStatusBarAppearanceUpdate];
-    self.view.backgroundColor = THEMECOLOR;
     // Do any additional setup after loading the view.
     
     if (_conversation.officialAccount.name) {
@@ -101,6 +98,7 @@ typedef enum : NSUInteger {
     }
     self.title = _title;
     [[HDClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    self.view.backgroundColor = UIColor.whiteColor;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatToolbarState) name:@"chatToolbarState" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeRecording) name:@"closeRecording" object:nil];
     
@@ -118,7 +116,6 @@ typedef enum : NSUInteger {
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 0.5;
-    self.tableView.backgroundColor = THEMECOLOR;
     [self.tableView addGestureRecognizer:lpgr];
     
     _messageQueue = dispatch_queue_create("com.helpdesk.message.queue", NULL);
@@ -146,7 +143,7 @@ typedef enum : NSUInteger {
 
 - (void)setupCell {
     
-//    [[HDBaseMessageCell appearance] setSendBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_bg"] stretchableImageWithLeftCapWidth:5 topCapHeight:35]];
+    [[HDBaseMessageCell appearance] setSendBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_bg"] stretchableImageWithLeftCapWidth:5 topCapHeight:35]];
     [[HDBaseMessageCell appearance] setRecvBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_bg"] stretchableImageWithLeftCapWidth:35 topCapHeight:35]];
     [[HDBaseMessageCell appearance] setSendMessageVoiceAnimationImages:@[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_full"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_000"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_001"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_002"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_003"]]];
     [[HDBaseMessageCell appearance] setRecvMessageVoiceAnimationImages:@[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing_full"],[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing000"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing001"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing002"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing003"]]];
@@ -163,10 +160,15 @@ typedef enum : NSUInteger {
 
 - (void)setLeftBarBtnItem {
     CustomButton * backButton = [CustomButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_arrowright.png"] forState:UIControlStateNormal];
-    backButton.imageRect = CGRectMake(0, 7, 26, 16);
+    [backButton setImage:[UIImage imageNamed:@"Shape"] forState:UIControlStateNormal];
+    [backButton setTitle:@"返回" forState:UIControlStateNormal];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backButton setTitleColor:RGBACOLOR(184, 22, 22, 1) forState:UIControlStateHighlighted];
+    backButton.imageRect = CGRectMake(-10, 6.5, 16, 16);
+    backButton.titleRect = CGRectMake(10, 0, 60, 29);
     [self.view addSubview:backButton];
-    backButton.frame = CGRectMake(0, 0, 60, 30);
+    backButton.frame = CGRectMake(0, 0, 60, 29);
     
     [backButton addTarget:self action:@selector(backItemClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
@@ -180,19 +182,11 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[HDClient sharedClient].chatManager removeDelegate:self];
     [self backItemDidClicked];
-
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)backItemDidClicked {
-    [self dismissViewControllerAnimated:YES completion:nil];
-//    FlutterEngine *flutterEngine = [(AppDelegate *)[[UIApplication sharedApplication] delegate] flutterEngine];
-//    FlutterViewController *flutterViewController = [[FlutterViewController alloc] initWithEngine:flutterEngine nibName:nil bundle:nil];
-//    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-//    FlutterViewController *ctl = [[FlutterViewController alloc] init];
-//    [ctl setInitialRoute:@"myApp"];
-//    [self.navigationController popToViewController:ctl animated:YES];
-////    window.rootViewController = ctl;
-//    [FlutterEasemobKefuPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterEasemobKefuPlugin"]];
+    
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -274,25 +268,14 @@ typedef enum : NSUInteger {
     NSLog(@"dealloc :%s",__func__);
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-//    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-//    [super viewWillDisappear:animated];
-//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:nil];
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-//    [UIApplication sharedApplication].statusBarStyle = UIControlStateNormal;
-//    self.navigationController.navigationBar.backgroundColor = THEMECOLOR;
-//    [self setStatusBarBackgroundColor:THEMECOLOR];
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-}
-- (void)setStatusBarBackgroundColor:(UIColor *)color {
-    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-        statusBar.backgroundColor = color;
-    }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - getter

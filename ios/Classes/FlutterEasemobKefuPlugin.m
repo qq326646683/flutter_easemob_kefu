@@ -59,10 +59,10 @@
     NSDictionary *arguments = call.arguments;
     HDClient *client = [HDClient sharedClient];
     HDError *error = [client loginWithUsername:arguments[@"username"] password:arguments[@"password"]];
-    if (!error) { //登录成功
+    if(error.code == HDErrorUserAlreadyLogin || !error){
         result([NSNumber numberWithBool:YES]);
-    } else { //登录失败
-        result([NSNumber numberWithBool:YES]);
+    }else{
+        result([NSNumber numberWithBool:NO]);
     }
 
 }
@@ -117,5 +117,6 @@
         result([NSNumber numberWithBool:YES]);
     }
 }
+
 
 @end

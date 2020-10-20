@@ -18,7 +18,7 @@ import java.util.*
 
 
 public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
-
+    val TAG = "FlutterEasemobKefuPlugin-->"
     private lateinit var channel: MethodChannel
     private val uiThreadHandler: Handler = Handler(Looper.getMainLooper())
 
@@ -61,6 +61,7 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
             }
 
             override fun onError(code: Int, error: String?) {
+                println("$TAG register username:$username code:$code, error: $error")
                 backDataToFlutter(result, code == Error.USER_ALREADY_EXIST)
             }
 
@@ -77,7 +78,8 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
             }
 
             override fun onError(code: Int, error: String?) {
-                backDataToFlutter(result, false)
+                println("$TAG login username:$username code:$code, error: $error")
+                backDataToFlutter(result, code == Error.USER_ALREADY_LOGIN)
             }
 
             override fun onProgress(progress: Int, status: String?) {
@@ -93,6 +95,7 @@ public class FlutterEasemobKefuPlugin : FlutterPlugin, MethodCallHandler {
             }
 
             override fun onError(code: Int, error: String?) {
+                println("$TAG logout code:$code, error: $error")
                 backDataToFlutter(result, false)
             }
 
