@@ -126,15 +126,18 @@
             
             CGFloat margin = [HDMessageCell appearance].leftBubbleMargin.left + [HDMessageCell appearance].leftBubbleMargin.right;
             
+//            CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+//            gradientLayer.colors = @[(__bridge id)RGBACOLOR(247, 104, 23, 0.1).CGColor, (__bridge id)RGBACOLOR(206, 84, 49, 0.4).CGColor];
+//            gradientLayer.startPoint = CGPointMake(0, 0);
+//            gradientLayer.endPoint = CGPointMake(1.0, 0);
+//            gradientLayer.frame = CGRectMake(0, 0, retSize.width + margin, retSize.height+ margin);
+//            [_bubbleView.layer insertSublayer:gradientLayer atIndex:0];
+            
+            
             [self.bubbleView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.width.equalTo(retSize.width + margin);
             }];
-            CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-            gradientLayer.colors = @[(__bridge id)RGBACOLOR(247, 104, 23, 1).CGColor, (__bridge id)RGBACOLOR(206, 84, 49, 1).CGColor];
-            gradientLayer.startPoint = CGPointMake(0, 0);
-            gradientLayer.endPoint = CGPointMake(1.0, 0);
-            gradientLayer.frame = _bubbleView.frame;
-            [_bubbleView.layer addSublayer:gradientLayer];
+           
             
             NSLog(@"这里是HDBaseMessageCell3333的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
         }
@@ -267,12 +270,11 @@
     
     if (model.avatarURLPath) {
         [self.avatarView sd_setImageWithURL:[NSURL URLWithString:model.avatarURLPath]  placeholderImage:model.avatarImage];
-//        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
     } else {
         self.avatarView.image = model.avatarImage;
     }
 
-    _nameLabel.text = model.nickname;
+//    _nameLabel.text = model.nickname;
     
     if (self.model.isSender) {
         _hasRead.hidden = YES;

@@ -35,7 +35,7 @@
 #define kImageHeight 70
 #define kTitleHeight 20
 
-CGFloat const HDMessageCellPadding = 10;
+CGFloat const HDMessageCellPadding = 8;
 
 NSString *const HDMessageCellIdentifierRecvText = @"HDMessageCellRecvText";
 NSString *const HDMessageCellIdentifierRecvTrack = @"HDMessageCellRecvTrack";
@@ -90,12 +90,14 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     cell.statusSize = 20;
     cell.activitySize = 20;
     cell.bubbleMaxWidth = 200.0;
-    cell.leftBubbleMargin = UIEdgeInsetsMake(8, 15, 8, 10);
-    cell.rightBubbleMargin = UIEdgeInsetsMake(8, 10, 8, 15);
+    cell.leftBubbleMargin = UIEdgeInsetsMake(0, 10, 0, 10);
+    cell.rightBubbleMargin = UIEdgeInsetsMake(0, 10, 0, 10);
     cell.bubbleMargin = UIEdgeInsetsMake(8, 0, 8, 0);
     
     cell.messageTextFont = [UIFont systemFontOfSize:15];
-    cell.messageTextColor = [UIColor blackColor];
+    
+    cell.messageSenderTextColor = [UIColor blackColor];
+    cell.messageReceiverTextColor = [UIColor blackColor];
     
     cell.messageLocationFont = [UIFont systemFontOfSize:10];
     cell.messageLocationColor = [UIColor whiteColor];
@@ -122,7 +124,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                             isSender:model.isSender
                                model:model];
     }
-    
+    NSLog(@"这个是HDMessageCell里面的");
     return self;
 }
 
@@ -137,6 +139,9 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                       isSender:(BOOL)isSender
                          model:(id<HDIMessageModel>)model
 {
+    NSLog(@"这里是model=%@",model.text);
+    NSLog(@"这里是model的message=%@",model.message);
+    NSLog(@"这里是cell的高度width=%f，height=%f",self.frame.size.width,self.frame.size.height);
     _statusButton = [[UIButton alloc] init];
     _statusButton.translatesAutoresizingMaskIntoConstraints = NO;
     _statusButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -149,11 +154,24 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     if ([HDMessageHelper getMessageExtType:model.message] == HDExtArticleMsg) {
         edge = UIEdgeInsetsMake(0, 0, 0, 0);
     }
-    
+    NSLog(@"%f",[HDBaseMessageCell cellHeightWithModel:model]);
     _bubbleView = [[HDBubbleView alloc] initWithMargin:edge isSender:model.isSender];
     _bubbleView.translatesAutoresizingMaskIntoConstraints = NO;
-//    _bubbleView.backgroundColor = [UIColor redColor];
+    _bubbleView.layer.cornerRadius = (self.frame.size.height-10)/2+1;
+    _bubbleView.layer.masksToBounds = YES;
+    _bubbleView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:_bubbleView];
+    
+    if(isSender){
+        CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+        gradientLayer.colors = @[(__bridge id)RGBACOLOR(247, 104, 63, 1).CGColor, (__bridge id)RGBACOLOR(206, 84, 49, 1).CGColor];
+        gradientLayer.startPoint = CGPointMake(0, 0);
+        gradientLayer.endPoint = CGPointMake(1.0, 0);
+        gradientLayer.frame = CGRectMake(0, 0, self.frame.size.width,[HDBaseMessageCell cellHeightWithModel:model]-10);
+        [_bubbleView.layer insertSublayer:gradientLayer atIndex:0];
+    }
+
+    
     if ([HDMessageHelper getMessageExtType:model.message] != HDExtArticleMsg) {
         _avatarView = [[UIImageView alloc] init];
         _avatarView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -199,7 +217,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                         if (model.isSender) {
                             [_bubbleView setupTextBubbleView];
                             _bubbleView.textLabel.font = _messageTextFont;
-                            _bubbleView.textLabel.textColor = _messageTextColor;
+                            _bubbleView.textLabel.textColor = isSender ? [UIColor whiteColor]:[UIColor blackColor];
                         } else {
                             [_bubbleView setupRobotMenuBubbleView];
                         }
@@ -225,7 +243,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                     default:
                         [_bubbleView setupTextBubbleView];
                         _bubbleView.textLabel.font = _messageTextFont;
-                        _bubbleView.textLabel.textColor = _messageTextColor;
+                        _bubbleView.textLabel.textColor = isSender ? [UIColor whiteColor]:[UIColor blackColor];
                         break;
                 }
             }
@@ -534,6 +552,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                     {
                         NSString *content = model.text;
                         _urlMatches = [_detector matchesInString:content options:0 range:NSMakeRange(0, content.length)];
+                        
                         _bubbleView.textLabel.attributedText = [self highlightLinksWithIndex:0 attributedString:[[HDEmotionEscape sharedInstance] attStringFromTextForChatting:content textFont:self.messageTextFont]];
                     }
                         break;
@@ -759,12 +778,20 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     }
 }
 
-- (void)setMessageTextColor:(UIColor *)messageTextColor
+- (void)setMessageSenderTextColor:(UIColor *)messageTextColor
 {
-    _messageTextColor = messageTextColor;
-    if (_bubbleView.textLabel) {
-        _bubbleView.textLabel.textColor = _messageTextColor;
-    }
+//    _messageSenderTextColor = messageTextColor;
+//    if (_bubbleView.textLabel) {
+//        _bubbleView.textLabel.textColor = _messageSenderTextColor;
+//    }
+}
+
+- (void)setMessageReceiverTextColor:(UIColor *)messageTextColor
+{
+//    _messageReceiverTextColor = messageTextColor;
+//    if (_bubbleView.textLabel) {
+//        _bubbleView.textLabel.textColor = _messageReceiverTextColor;
+//    }
 }
 
 - (void)setMessageLocationColor:(UIColor *)messageLocationColor
@@ -1178,7 +1205,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
             break;
         case EMMessageBodyTypeVoice:
         {
-            height += kEMMessageVoiceHeight;
+            height = height + 10 + kEMMessageVoiceHeight;
         }
             break;
         case EMMessageBodyTypeFile:

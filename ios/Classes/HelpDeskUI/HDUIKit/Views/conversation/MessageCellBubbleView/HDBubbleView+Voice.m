@@ -13,7 +13,7 @@
 #import "HDBubbleView+Voice.h"
 #import "HelpDeskUI.h"
 
-#define ISREAD_VIEW_SIZE 10.f
+#define ISREAD_VIEW_SIZE 8.f
 
 @implementation HDBubbleView (Voice)
 
@@ -25,8 +25,8 @@
         self.isReadView.hidden = YES;
     }
     [self.voiceImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.backgroundImageView.mas_top).offset(self.margin.top);
-        make.bottom.equalTo(self.backgroundImageView.mas_bottom).offset(-self.margin.bottom);
+        make.top.equalTo(self.backgroundImageView.mas_top).offset(self.margin.top+5);
+        make.bottom.equalTo(self.backgroundImageView.mas_bottom).offset(-self.margin.bottom-5);
     }];
     
     [self.voiceDurationLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -41,7 +41,7 @@
         
         [self.voiceDurationLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.voiceImageView.mas_left).offset(-HDMessageCellPadding);
-            make.left.equalTo(self.backgroundImageView.mas_left).offset(self.margin.left);
+            make.left.equalTo(self.backgroundImageView.mas_left).offset(5);
         }];
     }
     else{
@@ -51,14 +51,14 @@
         
         [self.voiceDurationLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.voiceImageView.mas_right).offset(HDMessageCellPadding);
-            make.right.equalTo(self.backgroundImageView.mas_right).offset(-self.margin.right);
+            make.right.equalTo(self.backgroundImageView.mas_right).offset(-self.margin.right-5);
         }];
         
         [self.isReadView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.backgroundImageView.mas_top).offset(0);
-            make.left.equalTo(self.backgroundImageView.mas_right).offset(-ISREAD_VIEW_SIZE/2);
-            make.bottom.equalTo(self.backgroundImageView.mas_top).offset(ISREAD_VIEW_SIZE);
-            make.right.equalTo(self.backgroundImageView.mas_right).offset(ISREAD_VIEW_SIZE/2);
+            make.top.equalTo(self.backgroundImageView.mas_top).offset(5);
+            make.left.equalTo(self.backgroundImageView.mas_right).offset(-ISREAD_VIEW_SIZE-5);
+            make.bottom.equalTo(self.backgroundImageView.mas_top).offset(ISREAD_VIEW_SIZE+5);
+            make.right.equalTo(self.backgroundImageView.mas_right).offset(-5);
         }];
     }
 }
