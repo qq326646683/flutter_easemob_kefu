@@ -17,22 +17,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_chat_activity" >
 
-        <ImageView
-            android:id="@+id/iv_userhead"
-            android:layout_width="@dimen/size_avatar"
-            android:layout_height="@dimen/size_avatar"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="@dimen/margin_chat_activity"
-            android:scaleType="fitXY" />
-
         <RelativeLayout
             android:id="@+id/bubble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_userid"
             android:layout_marginLeft="@dimen/margin_chat_activity"
-            android:layout_toRightOf="@id/iv_userhead"
             android:background="@drawable/hd_chatfrom_bg"
              >
 
@@ -43,13 +33,10 @@
                 android:autoLink="web"
                 android:layout_centerInParent="true"
                 android:gravity="center|left"
-                android:paddingLeft="6dp"
-                android:paddingRight="1dp"
                 android:lineSpacingExtra="2dp"
-                android:minHeight="38dp"
                 android:maxWidth="225.0dip"
                 android:textColor="#ff000000"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <TextView
@@ -59,7 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/chat_nick_margin_left"
             android:textSize="@dimen/chat_nick_text_size"
-            android:layout_toRightOf="@id/iv_userhead"
             android:visibility="gone" />
     </RelativeLayout>
 

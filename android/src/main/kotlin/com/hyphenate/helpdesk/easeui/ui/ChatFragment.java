@@ -116,11 +116,11 @@ public class ChatFragment extends BaseFragment implements ChatManager.MessageLis
     protected static final int ITEM_VIDEO = 3;
     protected static final int ITEM_FILE = 4;
 
-    protected int[] itemStrings = {R.string.attach_take_pic, R.string.attach_picture, R.string.attach_video, R.string.attach_file};
-    protected int[] itemdrawables = {R.drawable.hd_chat_takepic_selector, R.drawable.hd_chat_image_selector, R.drawable.hd_chat_video_selector, R.drawable.hd_chat_file_selector};
+    protected int[] itemStrings = {R.string.attach_picture, R.string.attach_take_pic, };
+    protected int[] itemdrawables = {R.drawable.chat_bottom_screenshot, R.drawable.chat_bottom_camera};
 
-    protected int[] itemIds = {ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_VIDEO, ITEM_FILE};
-    protected int[] itemResIds = {R.id.chat_menu_take_pic, R.id.chat_menu_pic, R.id.chat_menu_video, R.id.chat_menu_file};
+    protected int[] itemIds = {ITEM_PICTURE, ITEM_TAKE_PICTURE,};
+    protected int[] itemResIds = {R.id.chat_menu_pic, R.id.chat_menu_take_pic};
     private boolean isMessageListInited;
     protected MyMenuItemClickListener extendMenuItemClickListener;
     private VisitorInfo visitorInfo;

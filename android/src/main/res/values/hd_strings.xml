@@ -5,8 +5,8 @@
     <string name="text_delivered_msg">Delivered</string>
     <string name="button_pushtotalk">Hold to talk</string>
     <string name="button_send">Send</string>
-    <string name="attach_picture">Image</string>
-    <string name="attach_take_pic">Capture</string>
+    <string name="attach_picture">Screenshot</string>
+    <string name="attach_take_pic">Camera</string>
     <string name="attach_video">Video</string>
     <string name="attach_location">Location</string>
     <string name="attach_file">File</string>
