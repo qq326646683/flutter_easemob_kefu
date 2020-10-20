@@ -18,15 +18,6 @@
         android:layout_marginTop="@dimen/margin_chat_activity"
         android:paddingRight="20dp" >
 
-        <ImageView
-            android:id="@+id/iv_userhead"
-            android:layout_width="@dimen/size_avatar"
-            android:layout_height="@dimen/size_avatar"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="@dimen/margin_chat_activity"
-            android:scaleType="fitXY" />
-
         <TextView
             android:id="@+id/tv_userid"
             style="@style/chat_text_name_style"
@@ -34,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/chat_nick_margin_left"
             android:textSize="@dimen/chat_nick_text_size"
-            android:layout_toRightOf="@id/iv_userhead"
             android:visibility="gone" />
 
         <LinearLayout
@@ -43,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_chat_activity"
             android:layout_toLeftOf="@+id/progress_bar"
-            android:layout_toRightOf="@id/iv_userhead"
             android:layout_below="@+id/tv_userid"
             android:background="@drawable/hd_chatfrom_bg" >
 
