@@ -23,13 +23,13 @@
         android:id="@+id/extend_menu_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="@color/chat_bg"
         android:visibility="gone" >
 
         <com.hyphenate.helpdesk.easeui.widget.ExtendMenu
             android:id="@+id/extend_menu"
             android:layout_width="match_parent"
-            android:layout_height="132dp"
+            android:layout_height="127dp"
             android:layout_marginBottom="7dp"
             android:layout_marginTop="9dp"
             hyphenate:numColumns="4" />
