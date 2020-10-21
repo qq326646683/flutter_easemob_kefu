@@ -25,8 +25,7 @@
 #import "HDBubbleView+Form.h"
 #import "HDBubbleView+Article.h"
 #import "HDBubbleView+Gif.h"
-//#import "UIImageView+HDWebCache.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+HDWebCache.h"
 #import "HDEmotionEscape.h"
 #import "HDLocalDefine.h"
 #import "NSString+HDValid.h"
@@ -423,7 +422,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                     {
                         NSDictionary * itemDic = [[model.message.ext objectForKey:@"msgtype"] objectForKey:@"order"];
                         NSString *url = [itemDic objectForKey:@"img_url"];
-                        [_bubbleView.orderImageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"imageDownloadFail.png"]];
+                        [_bubbleView.orderImageView hdSD_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"imageDownloadFail.png"]];
                         _bubbleView.orderTitleLabel.text = [itemDic objectForKey:@"title"];
                         _bubbleView.orderNoLabel.text = [itemDic objectForKey:@"order_title"];
                         _bubbleView.orderDescLabel.text = [itemDic objectForKey:@"desc"];
@@ -440,7 +439,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                             _bubbleView.cusImageView.image = [UIImage imageNamed:@"imageDownloadFail.png"];
                         }
                         NSString *url = [itemDic objectForKey:@"img_url"];
-                        [_bubbleView.cusImageView sd_setImageWithURL:[NSURL URLWithString:url]  placeholderImage:[UIImage imageNamed:@"imageDownloadFail.png"]];
+                        [_bubbleView.cusImageView hdSD_setImageWithURL:[NSURL URLWithString:url]  placeholderImage:[UIImage imageNamed:@"imageDownloadFail.png"]];
                         _bubbleView.trackTitleLabel.text = [itemDic objectForKey:@"title"];
                         _bubbleView.cusDescLabel.text = [itemDic objectForKey:@"desc"];
                         _bubbleView.cusPriceLabel.text = [itemDic objectForKey:@"price"];
@@ -524,7 +523,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                         if (emojiDic) {
                             emojiUrl = [emojiDic objectForKey:@"url"];
                         }
-                        [_bubbleView.imageView sd_setImageWithURL:[NSURL URLWithString:emojiUrl] placeholderImage:[UIImage imageNamed:_model.failImageName]];
+                        [_bubbleView.imageView hdSD_setImageWithURL:[NSURL URLWithString:emojiUrl] placeholderImage:[UIImage imageNamed:_model.failImageName]];
                         break;
                     }
                     default:
@@ -544,7 +543,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                 if (!image) {
                     image = _model.image;
                     if (!image) {
-                        [_bubbleView.imageView sd_setImageWithURL:[NSURL URLWithString:_model.fileURLPath] placeholderImage:[UIImage imageNamed:_model.failImageName]];
+                        [_bubbleView.imageView hdSD_setImageWithURL:[NSURL URLWithString:_model.fileURLPath] placeholderImage:[UIImage imageNamed:_model.failImageName]];
                     } else {
                         _bubbleView.imageView.image = image;
                     }
