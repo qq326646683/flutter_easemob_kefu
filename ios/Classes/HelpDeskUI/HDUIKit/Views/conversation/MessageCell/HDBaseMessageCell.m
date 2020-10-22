@@ -11,7 +11,7 @@
  */
 
 #import "HDBaseMessageCell.h"
-#import "UIImageView+HighlightedWebCache.h"
+#import "UIImageView+HDHighlightedWebCache.h"
 #import "HDBubbleView+Transform.h"
 #import "HDBubbleView+Evaluate.h"
 #import "HelpDeskUI.h"
@@ -75,7 +75,6 @@
             _bubbleView.backgroundImageView.layer.masksToBounds = YES;
             _bubbleView.backgroundImageView.layer.cornerRadius = 5;
             _bubbleView.backgroundImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            NSLog(@"这里是HDBaseMessageCell1111的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
             break;
         }
         case HDExtBigExpressionMsg: {
@@ -126,20 +125,9 @@
             
             CGFloat margin = [HDMessageCell appearance].leftBubbleMargin.left + [HDMessageCell appearance].leftBubbleMargin.right;
             
-//            CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-//            gradientLayer.colors = @[(__bridge id)RGBACOLOR(247, 104, 23, 0.1).CGColor, (__bridge id)RGBACOLOR(206, 84, 49, 0.4).CGColor];
-//            gradientLayer.startPoint = CGPointMake(0, 0);
-//            gradientLayer.endPoint = CGPointMake(1.0, 0);
-//            gradientLayer.frame = CGRectMake(0, 0, retSize.width + margin, retSize.height+ margin);
-//            [_bubbleView.layer insertSublayer:gradientLayer atIndex:0];
-            
-            
             [self.bubbleView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.width.equalTo(retSize.width + margin);
             }];
-           
-            
-            NSLog(@"这里是HDBaseMessageCell3333的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
         }
             break;
         case EMMessageBodyTypeLocation:
@@ -184,7 +172,6 @@
         make.centerX.equalTo(self.contentView.mas_centerX).offset(0);
         make.width.equalTo(kScreenWidth - 20);
     }];
-    NSLog(@"这里是444444的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 - (void)configureSendLayoutConstraints
@@ -218,7 +205,6 @@
     [self.hasRead mas_updateConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bubbleView.mas_left).offset(-HDMessageCellPadding);
     }];
-    NSLog(@"这里是HDBaseMessageCell的_bubbleView222222的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 - (void)configureRecvLayoutConstraints
@@ -226,8 +212,8 @@
     [self.avatarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(HDMessageCellPadding);
         make.left.equalTo(self.contentView.mas_left).offset(HDMessageCellPadding);
-        make.width.equalTo(@0);
-        make.height.equalTo(@0);
+        make.width.equalTo(self.avatarSize);
+        make.height.equalTo(self.avatarView.mas_width);
     }];
     
     [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -239,7 +225,6 @@
         make.left.equalTo(self.avatarView.mas_right).offset(HDMessageCellPadding);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(0);
     }];
-    NSLog(@"这里是555555的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 #pragma mark - Update Constraint
@@ -248,7 +233,7 @@
 {
     if (self.avatarView) {
         [self.avatarView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@0);
+            make.width.equalTo(self.avatarSize);
         }];
     }
 }
@@ -269,12 +254,13 @@
     [super setModel:model];
     
     if (model.avatarURLPath) {
-        [self.avatarView sd_setImageWithURL:[NSURL URLWithString:model.avatarURLPath]  placeholderImage:model.avatarImage];
+        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath]  placeholderImage:model.avatarImage];
+//        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
     } else {
         self.avatarView.image = model.avatarImage;
     }
 
-//    _nameLabel.text = model.nickname;
+    _nameLabel.text = model.nickname;
     
     if (self.model.isSender) {
         _hasRead.hidden = YES;
