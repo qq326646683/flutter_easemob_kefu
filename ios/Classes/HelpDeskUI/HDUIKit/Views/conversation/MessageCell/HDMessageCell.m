@@ -91,7 +91,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     cell.bubbleMaxWidth = 200.0;
     cell.leftBubbleMargin = UIEdgeInsetsMake(0, 10, 0, 10);
     cell.rightBubbleMargin = UIEdgeInsetsMake(0, 10, 0, 10);
-    cell.bubbleMargin = UIEdgeInsetsMake(8, 0, 8, 0);
+    cell.bubbleMargin = UIEdgeInsetsMake(10, 0, 10, 0);
     
     cell.messageTextFont = [UIFont systemFontOfSize:15];
     
@@ -138,9 +138,6 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                       isSender:(BOOL)isSender
                          model:(id<HDIMessageModel>)model
 {
-    NSLog(@"这里是model=%@",model.text);
-    NSLog(@"这里是model的message=%@",model.message);
-    NSLog(@"这里是cell的高度width=%f，height=%f",self.frame.size.width,self.frame.size.height);
     _statusButton = [[UIButton alloc] init];
     _statusButton.translatesAutoresizingMaskIntoConstraints = NO;
     _statusButton.imageView.contentMode = UIViewContentModeScaleAspectFit;

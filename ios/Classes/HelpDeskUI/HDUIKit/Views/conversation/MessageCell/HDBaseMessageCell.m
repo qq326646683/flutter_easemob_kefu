@@ -179,8 +179,8 @@
     [self.avatarView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(HDMessageCellPadding);
         make.right.equalTo(self.contentView.mas_right).offset(-HDMessageCellPadding);
-        make.width.equalTo(self.avatarSize);
-        make.height.equalTo(self.avatarView.mas_width);
+        make.width.equalTo(@0);
+        make.height.equalTo(@0);
     }];
 
     [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -233,7 +233,7 @@
 {
     if (self.avatarView) {
         [self.avatarView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(self.avatarSize);
+            make.width.equalTo(@0);
         }];
     }
 }
@@ -260,7 +260,7 @@
         self.avatarView.image = model.avatarImage;
     }
 
-    _nameLabel.text = model.nickname;
+//    _nameLabel.text = model.nickname;
     
     if (self.model.isSender) {
         _hasRead.hidden = YES;

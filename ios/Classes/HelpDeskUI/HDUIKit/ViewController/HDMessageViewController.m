@@ -276,7 +276,6 @@ typedef enum : NSUInteger {
         [_imagePicker dismissViewControllerAnimated:NO completion:nil];
         _imagePicker = nil;
     }
-    NSLog(@"dealloc :%s",__func__);
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -301,10 +300,38 @@ typedef enum : NSUInteger {
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
 - (void)setStatusBarBackgroundColor:(UIColor *)color {
-    //UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    //if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-     //   statusBar.backgroundColor = color;
-    //}
+    if (@available(iOS 13.0, *)) {
+        UIView *_customStatusBar = nil;
+        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        for (UIView *subView in keyWindow.subviews) {
+            if (subView.tag == 109090909) {
+                _customStatusBar = subView;
+            }
+        }
+        
+        if (color) {//有颜色
+            if (_customStatusBar) {//已经有自定义的StatusBar，那就直接设置颜色
+                _customStatusBar.backgroundColor = color;
+            } else {//没有那就添加一个，并且设置颜色
+                UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.windowScene.statusBarManager.statusBarFrame] ;
+                statusBar.backgroundColor = color;
+                statusBar.tag = 109090909;
+                [[UIApplication sharedApplication].keyWindow addSubview:statusBar];
+            }
+        } else {//没有颜色
+            if (_customStatusBar) {//已经有自定义的StatusBar，那就设置成透明色
+                _customStatusBar.backgroundColor = [UIColor clearColor];
+            } else {//没有就不用管了
+                
+            }
+        }
+    }else{
+        UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+        if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+            statusBar.backgroundColor = color;
+        }
+    }
+
 }
 
 #pragma mark - getter
@@ -1006,7 +1033,6 @@ typedef enum : NSUInteger {
                 return [HDCustomMessageCell cellHeightWithModel:model];
             }
         }
-        NSLog(@"heightForRowAtIndexPath = %f",[HDBaseMessageCell cellHeightWithModel:model]);
         return [HDBaseMessageCell cellHeightWithModel:model]-10;
     }
 }

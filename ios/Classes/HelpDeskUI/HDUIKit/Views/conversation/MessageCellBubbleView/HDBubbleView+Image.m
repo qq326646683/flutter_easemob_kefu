@@ -23,7 +23,7 @@
     [self.imageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.backgroundImageView.mas_top).offset(HDMessageCellPadding);
         make.left.equalTo(self.backgroundImageView.mas_left).offset(self.margin.left);
-        make.bottom.equalTo(self.backgroundImageView.mas_bottom).offset(-self.margin.bottom);
+        make.bottom.equalTo(self.backgroundImageView.mas_bottom).offset(-self.margin.bottom-8);
         make.right.equalTo(self.backgroundImageView.mas_right).offset(-self.margin.right);
     }];
 }
