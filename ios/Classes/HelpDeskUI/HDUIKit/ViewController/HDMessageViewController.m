@@ -175,7 +175,7 @@ typedef enum : NSUInteger {
 
 - (void)setLeftBarBtnItem {
     CustomButton * backButton = [CustomButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:ImageBundle(@"icon_arrowright", @"png") forState:UIControlStateNormal];
+    [backButton setImage:ImageBundle(@"icon_arrowright", @"png") forState:UIControlStateNormal];
     backButton.imageRect = CGRectMake(0, 7, 23, 16);
     [self.view addSubview:backButton];
     backButton.frame = CGRectMake(0, 0, 60, 30);
