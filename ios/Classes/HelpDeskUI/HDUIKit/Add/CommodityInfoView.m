@@ -7,6 +7,7 @@
 //
 
 #import "CommodityInfoView.h"
+#import "HelpDeskUI.h"
 
 
 @interface CommodityInfoView ()
@@ -31,7 +32,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"commodityInfo.plist" ofType:nil];
+        NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];
+        NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];
+        NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];
+         NSString *path = [myBundle pathForResource:@"commodityInfo" ofType:@"plist"];
         _comDataSource = [NSArray arrayWithContentsOfFile:path];
         [self setUIWidth:frame.size.width height:frame.size.height tagNum:tag];
     }
@@ -42,7 +46,7 @@
 {
     CGFloat space = 5;
     self.name = [[UILabel alloc] initWithFrame:CGRectMake(space, 0, width*0.6, height*0.8)];
-    self.name.text = NSLocalizedString([_comDataSource[tag] objectForKey:@"name"], @"em_example1_text");
+    self.name.text = LocalStringBundle([_comDataSource[tag] objectForKey:@"name"], @"em_example1_text");
     self.name.textColor = UIColor.blackColor;
     self.name.numberOfLines = 2;
     self.name.lineBreakMode = NSLineBreakByCharWrapping;
@@ -62,7 +66,7 @@
     [self addSubview:self.money];
     
     self.novemberSales = [[UILabel alloc] initWithFrame:CGRectMake(space, CGRectGetMaxY(self.name.frame), width*0.7, height*0.2)];
-    self.novemberSales.text = NSLocalizedString([_comDataSource[tag] objectForKey:@"novemberSales"], @"em_example1_text_description");
+    self.novemberSales.text = LocalStringBundle([_comDataSource[tag] objectForKey:@"novemberSales"], @"em_example1_text_description");
     self.novemberSales.font = [UIFont systemFontOfSize:8];
     self.novemberSales.textColor = UIColor.blackColor;
     self.name.textAlignment = NSTextAlignmentLeft;

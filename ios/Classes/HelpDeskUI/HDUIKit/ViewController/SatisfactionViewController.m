@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"title.satisfaction", @"satisfaction evaluation");
+    self.title = LocalStringBundle(@"title.satisfaction", @"satisfaction evaluation");
     
     [self setupBarButtonItem];
     self.view.backgroundColor = [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1.0];
@@ -111,7 +111,7 @@
 {
     if (_nickLabel == nil) {
         _nickLabel = [[UILabel alloc] init];
-        _nickLabel.text = NSLocalizedString(@"satisfaction.nickname", @"Nickname");
+        _nickLabel.text = LocalStringBundle(@"satisfaction.nickname", @"Nickname");
         _nickLabel.textAlignment = NSTextAlignmentCenter;
         _nickLabel.textColor = [UIColor lightGrayColor];
         _nickLabel.frame = CGRectMake(0, CGRectGetMaxY(_headImage.frame) + kViewSpace, kHDScreenWidth, 15.f);
@@ -124,7 +124,7 @@
 {
     if (_textLabel == nil) {
         _textLabel = [[UILabel alloc] init];
-        _textLabel.text = NSLocalizedString(@"satisfaction.message", @"please evaluate my service");
+        _textLabel.text = LocalStringBundle(@"satisfaction.message", @"please evaluate my service");
         _textLabel.textAlignment = NSTextAlignmentCenter;
         _textLabel.textColor = [UIColor lightGrayColor];
         _textLabel.frame = CGRectMake(0, CGRectGetMaxY(_nickLabel.frame) + kViewSpace, kHDScreenWidth, 15.f);
@@ -186,7 +186,7 @@
 {
     if (_commitBtn == nil) {
         _commitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_commitBtn setTitle:NSLocalizedString(@"satisfaction.commit", @"commit") forState:UIControlStateNormal];
+        [_commitBtn setTitle:LocalStringBundle(@"satisfaction.commit", @"commit") forState:UIControlStateNormal];
         [_commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _commitBtn.frame = CGRectMake(20, CGRectGetMaxY(_textView.frame) + 5, kHDScreenWidth - 40, 40);
         _commitBtn.layer.cornerRadius = 5.f;
@@ -251,7 +251,7 @@
 - (void)commit
 {
     if (!_starRateView.isTap && _starRateView.scorePercent != 1) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"satisfaction.alert", @"please evaluate first") delegate:self cancelButtonTitle:NSLocalizedString(@"cancela", @"Cancel") otherButtonTitles:NSLocalizedString(@"ok", @"Ok"), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:LocalStringBundle(@"satisfaction.alert", @"please evaluate first") delegate:self cancelButtonTitle:LocalStringBundle(@"cancela", @"Cancel") otherButtonTitles:LocalStringBundle(@"ok", @"Ok"), nil];
         [alert show];
         return;
     }
@@ -273,7 +273,7 @@
                 arguments.detail = self.textView.text;
                 arguments.summary = [NSString stringWithFormat:@"%d",(int)(_starRateView.scorePercent * 5)];
                 if (self.evaluationTagsArray.count == 0 && self.evaluationTagView.evaluationDegreeModel.appraiseTags.count>0) {
-                    [self showHint:NSLocalizedString(@"select_at_least_one_tag", @"Select at least one tag!")];
+                    [self showHint:LocalStringBundle(@"select_at_least_one_tag", @"Select at least one tag!")];
                 } else {
                     [self.delegate commitSatisfactionWithControlArguments:arguments
                                                                      type:type

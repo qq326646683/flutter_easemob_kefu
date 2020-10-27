@@ -160,7 +160,7 @@
     _photoImageView.image = nil;
     if (!_loadingError) {
         _loadingError = [UIImageView new];
-        _loadingError.image = [UIImage imageNamed:@"MWPhotoBrowser.bundle/images/ImageError.png"];
+        _loadingError.image = MWPhotoBrowserImageBundle(@"ImageError", @"png");
         _loadingError.userInteractionEnabled = NO;
 		_loadingError.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin |
         UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;

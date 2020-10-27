@@ -69,7 +69,7 @@
 }
 
 -(void)showToast:(NSString *)toast{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:toast delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:toast delegate:nil cancelButtonTitle:LocalStringBundle(@"ok", @"OK") otherButtonTitles:nil];
     [alert show];
 }
 

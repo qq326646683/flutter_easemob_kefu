@@ -101,7 +101,7 @@
     
     _photoButton = [self btnWithImage:ImageBundle(@"hd_chat_image_normal", @"png")
                     highlightedImage:ImageBundle(@"hd_chat_image_pressed", @"png")
-                               title:NSLocalizedString(@"attach_picture", @"Picture")];
+                               title:LocalStringBundle(@"attach_picture", @"Picture")];
     [_photoButton setFrame:CGRectMake(insets, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     
     [_photoButton addTarget:self action:@selector(photoAction) forControlEvents:UIControlEventTouchUpInside];
@@ -110,7 +110,7 @@
     
     _takePicButton = [self btnWithImage:ImageBundle(@"hd_chat_takepic_normal", @"png")
                        highlightedImage:ImageBundle(@"hd_chat_takepic_pressed", @"png")
-                                  title:NSLocalizedString(@"attach_take_pic", @"Image")];
+                                  title:LocalStringBundle(@"attach_take_pic", @"Image")];
     [_takePicButton setFrame:CGRectMake(insets * 2 + CHAT_BUTTON_SIZE.width, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     
     [_takePicButton addTarget:self action:@selector(takePicAction) forControlEvents:UIControlEventTouchUpInside];
@@ -130,7 +130,7 @@
 //    
     _videoCallButton = [self btnWithImage:ImageBundle(@"em_chat_video_normal", @"png")
                          highlightedImage:ImageBundle(@"em_chat_video_pressed", @"png")
-                                    title:NSLocalizedString(@"attach_call_video", @"Call Video")];
+                                    title:LocalStringBundle(@"attach_call_video", @"Call Video")];
     
     [_videoCallButton setFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE.width * 2, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     [_videoCallButton addTarget:self action:@selector(takeVideoCallAction) forControlEvents:UIControlEventTouchUpInside];
@@ -140,7 +140,7 @@
     
     _locationButton = [self btnWithImage:ImageBundle(@"hd_chat_location_normal", @"png")
                         highlightedImage:ImageBundle(@"hd_chat_location_pressed", @"png")
-                                   title:NSLocalizedString(@"attach_location", @"Location")];
+                                   title:LocalStringBundle(@"attach_location", @"Location")];
     [_locationButton setFrame:CGRectMake(insets * 4 + CHAT_BUTTON_SIZE.width * 3, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     
     [_locationButton addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
@@ -149,7 +149,7 @@
     
     _leaveMessageButton = [self btnWithImage:ImageBundle(@"em_chat_phrase_normal", @"png")
                             highlightedImage:ImageBundle(@"em_chat_phrase_pressed", @"png")
-                                       title:NSLocalizedString(@"leave_title", @"Note")];
+                                       title:LocalStringBundle(@"leave_title", @"Note")];
     [_leaveMessageButton setFrame:CGRectMake(insets, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
 
     [_leaveMessageButton addTarget:self action:@selector(leaveMessageAction) forControlEvents:UIControlEventTouchUpInside];
@@ -160,7 +160,7 @@
     
     _evaluationButton = [self btnWithImage:ImageBundle(@"em_chat_evaluation_normal", @"png")
                           highlightedImage:ImageBundle(@"em_chat_evaluation_pressed", @"png")
-                                     title:NSLocalizedString(@"evaluation", @"Evaluation")];
+                                     title:LocalStringBundle(@"evaluation", @"Evaluation")];
     
     [_evaluationButton setFrame:CGRectMake(insets * 2 + CHAT_BUTTON_SIZE.width, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     

@@ -10,11 +10,11 @@
 #import "HelpDeskUI.h"
 #define RecordViewHeight 140
 #define RecordButtonHeight 56
-#define PinRecord NSLocalizedString(@"message.toolBar.record.touch", @"hold down to talk")
-#define EndOrSlide NSLocalizedString(@"recording_description", @"Release to end, finger up to cancel sending")
-#define CancelRecord NSLocalizedString(@"message.toolBar.record.loosenCancel", @" loosen the fingers, to cancel sending ")
-#define TimeIsTooShort NSLocalizedString(@"media.timeShort", @"record time too short")
-#define NotStartedRecording NSLocalizedString(@"not_start_recording", @"Didn't start the recording")
+#define PinRecord LocalStringBundle(@"message.toolBar.record.touch", @"hold down to talk")
+#define EndOrSlide LocalStringBundle(@"recording_description", @"Release to end, finger up to cancel sending")
+#define CancelRecord LocalStringBundle(@"message.toolBar.record.loosenCancel", @" loosen the fingers, to cancel sending ")
+#define TimeIsTooShort LocalStringBundle(@"media.timeShort", @"record time too short")
+#define NotStartedRecording LocalStringBundle(@"not_start_recording", @"Didn't start the recording")
 
 @interface HDRecordView ()
 {

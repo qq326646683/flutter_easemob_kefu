@@ -491,7 +491,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                         break;
                     case HDExtEvaluationMsg:
                     {
-                        _bubbleView.evaluateTitle.attributedText = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"satisfaction.message", @"please evaluate my service")];
+                        _bubbleView.evaluateTitle.attributedText = [[NSAttributedString alloc] initWithString:LocalStringBundle(@"satisfaction.message", @"please evaluate my service")];
                     }
                         break;
                     case HDExtToCustomServiceMsg: {
@@ -1128,7 +1128,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                 }
                 case HDExtEvaluationMsg:
                 {
-                    NSAttributedString *text = [[NSAttributedString alloc] initWithString: NSLocalizedString(@"satisfaction.message", @"please evaluate my service")];
+                    NSAttributedString *text = [[NSAttributedString alloc] initWithString: LocalStringBundle(@"satisfaction.message", @"please evaluate my service")];
                     CGRect rect = [text boundingRectWithSize:CGSizeMake(bubbleMaxWidth - 25, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading  context:nil];
                     height += (rect.size.height > 20 ? rect.size.height : 20) + 21;
                     height += 50;

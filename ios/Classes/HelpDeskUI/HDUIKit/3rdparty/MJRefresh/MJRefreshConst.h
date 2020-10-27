@@ -18,8 +18,18 @@
 
 #define MJRefreshLabelTextColor MJRefreshColor(90, 90, 90)
 #define MJRefreshLabelFont [UIFont boldSystemFontOfSize:14]
-#define MJRefreshSrcName(file) [@"MJRefresh.bundle" stringByAppendingPathComponent:file]
-#define MJRefreshFrameworkSrcName(file) [@"Frameworks/MJRefresh.framework/MJRefresh.bundle" stringByAppendingPathComponent:file]
+//#define MJRefreshSrcName(file) [@"MJRefresh.bundle" stringByAppendingPathComponent:file]
+//#define MJRefreshFrameworkSrcName(file) [@"Frameworks/MJRefresh.framework/MJRefresh.bundle" stringByAppendingPathComponent:file]
+
+#define MJRefreshImageBundle(name,type) \
+({\
+NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];\
+NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];\
+NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];\
+NSString *imagePath = [myBundle pathForResource:name ofType:type];\
+UIImage *image =[UIImage imageWithContentsOfFile:imagePath];\
+(image);\
+})\
 
 UIKIT_EXTERN const CGFloat MJRefreshHeaderHeight;
 UIKIT_EXTERN const CGFloat MJRefreshFooterHeight;

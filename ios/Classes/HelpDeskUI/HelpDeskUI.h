@@ -82,6 +82,15 @@ UIImage *image =[UIImage imageWithContentsOfFile:imagePath];\
 (image);\
 })\
 
+#define LocalStringBundle(key,content) \
+({\
+NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];\
+NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];\
+NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];\
+NSString *str = [myBundle localizedStringForKey:(key) value:@"" table:nil];\
+(str);\
+})\
+
 @interface HelpDeskUI : NSObject
 
 @end

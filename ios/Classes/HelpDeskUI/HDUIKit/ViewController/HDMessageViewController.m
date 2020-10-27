@@ -33,6 +33,7 @@
 #import "UIViewController+HDHUD.h"
 #import "UIViewController+AlertController.h"
 #import "HRobotUnsolveItemView.h"
+#import "HelpDeskUI.h"
 
 typedef enum : NSUInteger {
     HDRequestRecord,
@@ -91,22 +92,9 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Do any additional setup after loading the view.
-    NSLog(@"bunlde --- %@", [NSBundle bundleForClass:[self class]]);
-//    NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];
-//    NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];
-//    NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];
-//    NSString *imagePath = [ImageBundle pathForResource:@"chat_item_form@3x" ofType:@"png"];
-//    self.image = [UIImage imageWithContentsOfFile:imagePath];
-
-//    UIImageView *image = [[UIImageView alloc] initWithImage:ImageBundle(@"chat_item_form@3x", @"png")];
-//    image.frame = CGRectMake(100, 100, 100, 100);
-//    [self.view addSubview:image];
-    
     if (_conversation.officialAccount.name) {
         _title = _conversation.officialAccount.name;
-    }
+    } 
     self.title = _title;
     [[HDClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
     self.view.backgroundColor = UIColor.whiteColor;
@@ -1224,7 +1212,7 @@ typedef enum : NSUInteger {
                 break;
             case HDCanNotRecord:
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"message.failToPermission", @"No recording permission") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:LocalStringBundle(@"prompt", @"Prompt") message:LocalStringBundle(@"message.failToPermission", @"No recording permission") delegate:nil cancelButtonTitle:LocalStringBundle(@"ok", @"OK") otherButtonTitles:nil, nil];
                 [alertView show];
             }
                 break;
@@ -1444,7 +1432,7 @@ typedef enum : NSUInteger {
 -(void)visitorWaitCount:(int)count{
     if (count > 0) {
         if (_visitorWaitCountLabel) {
-            _visitorWaitCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"current_visitor_wait_count", @" The current queue number is ：%d"), count];
+            _visitorWaitCountLabel.text = [NSString stringWithFormat:LocalStringBundle(@"current_visitor_wait_count", @" The current queue number is ：%d"), count];
             _visitorWaitCountLabel.hidden = NO;
         }
     }else{
@@ -1752,7 +1740,7 @@ typedef enum : NSUInteger {
                         [weakSelf updateTransferMessageExt:message];
                     });
                 } else {
-                    [weakSelf showHint:NSLocalizedString(@"transferToKf.fail", @"Transfer to the artificial customer service request failed, please confirm the connection status!")];
+                    [weakSelf showHint:LocalStringBundle(@"transferToKf.fail", @"Transfer to the artificial customer service request failed, please confirm the connection status!")];
                 }
             }];
         }
@@ -1933,16 +1921,16 @@ typedef enum : NSUInteger {
     message.ext = [ext copy];
     
     __weak typeof(self) weakself = self;
-    [self showHudInView:self.view hint:NSLocalizedString(@"comment_submit", @"Comment Submit.")];
+    [self showHudInView:self.view hint:LocalStringBundle(@"comment_submit", @"Comment Submit.")];
     [[HDClient sharedClient].chatManager sendMessage:message
                                             progress:nil
                                           completion:^(HDMessage *aMessage, HDError *aError)
     {
         [self hideHud];
         if (!aError) {
-            [weakself showHint:NSLocalizedString(@"comment_suc", @"send comment successful.")];
+            [weakself showHint:LocalStringBundle(@"comment_suc", @"send comment successful.")];
         } else {
-            [weakself showHint:NSLocalizedString(@"comment_fail", @"send comment fail.")];
+            [weakself showHint:LocalStringBundle(@"comment_fail", @"send comment fail.")];
         }
     }];
 }
