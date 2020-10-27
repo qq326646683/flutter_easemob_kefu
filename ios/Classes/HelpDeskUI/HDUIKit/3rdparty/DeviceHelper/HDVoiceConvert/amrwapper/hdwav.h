@@ -15,7 +15,7 @@
  * and limitations under the License.
  * -------------------------------------------------------------------
  */
-//#if defined __cplusplus
+#if defined __cplusplus
 #ifndef HDWAV_H
 #define HDWAV_H
 
@@ -44,5 +44,5 @@ private:
 };
 
 #endif
-//#endif
+#endif
 
