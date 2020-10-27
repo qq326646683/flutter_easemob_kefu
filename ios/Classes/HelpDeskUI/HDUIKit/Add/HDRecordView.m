@@ -60,8 +60,8 @@
     // button
     _recordButton = [[UIButton alloc] initWithFrame:CGRectMake(152, 53, RecordButtonHeight, RecordButtonHeight)];
     _recordButton.centerX = _recordLabel.centerX;
-    [_recordButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_record_menu_mic_gray"] forState:UIControlStateNormal];
-    [_recordButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_record_menu_mic_recording"] forState:UIControlStateHighlighted];
+    [_recordButton setImage:ImageBundle(@"hd_record_menu_mic_gray", @"png") forState:UIControlStateNormal];
+    [_recordButton setImage:ImageBundle(@"hd_record_menu_mic_recording", @"png") forState:UIControlStateHighlighted];
     [_recordButton addTarget:self action:@selector(recordButtonTouchDown) forControlEvents:UIControlEventTouchDown];
     [_recordButton addTarget:self action:@selector(recordButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
     [_recordButton addTarget:self action:@selector(recordButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
@@ -81,7 +81,7 @@
 // 在控件之外触摸抬起事件
 - (void)recordButtonTouchUpOutside
 {
-    [self setButtonImage:@"HelpDeskUIResource.bundle/hd_record_menu_mic_gray" andLabelText:PinRecord];
+    [self setButtonImage:ImageBundle(@"hd_record_menu_mic_gray", @"png") andLabelText:PinRecord];
     if (_delegate && [_delegate respondsToSelector:@selector(didHDCancelRecordingVoiceAction:)])
     {
         [_delegate didHDCancelRecordingVoiceAction:self.micView];
@@ -100,7 +100,7 @@
 // 当一次触摸从控件窗口内部拖动到外部时
 - (void)recordDragOutside
 {
-    [self setButtonImage:@"HelpDeskUIResource.bundle/hd_record_menu_mic_cancel" andLabelText:CancelRecord];
+    [self setButtonImage:ImageBundle(@"hd_record_menu_mic_cancel", @"png") andLabelText:CancelRecord];
     if ([self.delegate respondsToSelector:@selector(didHDDragOutsideAction:)])
     {
         [self.delegate didHDDragOutsideAction:self.micView];
@@ -109,7 +109,7 @@
 // 当一次触摸从控件窗口之外拖动到内部时
 - (void)recordDragInside
 {
-    [self setButtonImage:@"HelpDeskUIResource.bundle/hd_record_menu_mic_gray" andLabelText:EndOrSlide];
+    [self setButtonImage:ImageBundle(@"hd_record_menu_mic_gray", @"png") andLabelText:EndOrSlide];
     if ([self.delegate respondsToSelector:@selector(didHDDragInsideAction:)])
     {
         [self.delegate didHDDragInsideAction:self.micView];
@@ -129,24 +129,17 @@
 - (void)ListenTime
 {
     _recordButton.enabled = NO;
-    [self setButtonImage:@"HelpDeskUIResource.bundle/hd_record_menu_too_short" andLabelText:TimeIsTooShort];
+    [self setButtonImage:ImageBundle(@"hd_record_menu_too_short", @"png") andLabelText:TimeIsTooShort];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self setButtonImage:@"HelpDeskUIResource.bundle/hd_record_menu_mic_gray" andLabelText:PinRecord];
+        [self setButtonImage:ImageBundle(@"hd_record_menu_mic_gray", @"png") andLabelText:PinRecord];
         _recordButton.enabled = YES;
     });
 }
 
-//- (void)ListenIsRecording
-//{
-//    [self setButtonImage:@"HelpDeskUIResource.bundle/hd_record_menu_too_short" andLabelText:NotStartedRecording];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self setButtonImage:@"HelpDeskUIResource.bundle/hd_record_menu_mic_gray" andLabelText:PinRecord];
-//    });
-//}
 
-- (void)setButtonImage:(NSString *)imageName andLabelText:(NSString *)text;
+- (void)setButtonImage:(UIImage *)imageName andLabelText:(NSString *)text;
 {
-    [_recordButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [_recordButton setImage:imageName forState:UIControlStateNormal];
     _recordLabel.text = text;
 }
 

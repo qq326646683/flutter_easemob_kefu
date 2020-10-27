@@ -89,7 +89,7 @@
     _backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
     _backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _backgroundImageView.backgroundColor = [UIColor clearColor];
-    _backgroundImageView.image = [[UIImage imageNamed:@"HelpDeskUIResource.bundle/messageToolbarBg"] stretchableImageWithLeftCapWidth:0.5 topCapHeight:10];
+    _backgroundImageView.image = [ImageBundle(@"messageToolbarBg", @"png") stretchableImageWithLeftCapWidth:0.5 topCapHeight:10];
     [self addSubview:_backgroundImageView];
     
     //toolbar
@@ -108,7 +108,7 @@
     _inputTextView.scrollEnabled = YES;
     _inputTextView.returnKeyType = UIReturnKeySend;
     _inputTextView.enablesReturnKeyAutomatically = YES; // UITextView内部判断send按钮是否可以用
-    _inputTextView.placeHolder = NSEaseLocalizedString(@"message.toolBar.inputPlaceHolder", @"input a new message");
+//    _inputTextView.placeHolder = NSEaseLocalizedString(@"message.toolBar.inputPlaceHolder", @"input a new message");
     _inputTextView.delegate = self;
     _inputTextView.backgroundColor = [UIColor clearColor];
     _previousTextViewContentHeight = [self _getTextViewContentH:_inputTextView];
@@ -117,8 +117,8 @@
     //change input type
     UIButton *styleChangeButton = [[UIButton alloc] init];
     styleChangeButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [styleChangeButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chatting_setmode_voice_btn_normal"] forState:UIControlStateNormal];
-    [styleChangeButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chatting_setmode_keyboard_btn_normal"] forState:UIControlStateSelected];
+    [styleChangeButton setImage:ImageBundle(@"hd_chatting_setmode_voice_btn_normal", @"png") forState:UIControlStateNormal];
+    [styleChangeButton setImage:ImageBundle(@"hd_chatting_setmode_keyboard_btn_normal", @"png") forState:UIControlStateSelected];
     [styleChangeButton addTarget:self action:@selector(styleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     // 把录音按钮和自定义的录音按钮所在的控件newRecordView传进去，从而显示自己的view
     HDChatToolbarItem *styleItem = [[HDChatToolbarItem alloc] initWithButton:styleChangeButton withView:self.recordView];
@@ -127,16 +127,16 @@
     //emoji
     self.faceButton = [[UIButton alloc] init];
     self.faceButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [self.faceButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chatting_biaoqing_btn_normal"] forState:UIControlStateNormal];
-    [self.faceButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chatting_setmode_keyboard_btn_normal"] forState:UIControlStateSelected];
+    [self.faceButton setImage:ImageBundle(@"hd_chatting_biaoqing_btn_normal", @"png") forState:UIControlStateNormal];
+    [self.faceButton setImage:ImageBundle(@"hd_chatting_setmode_keyboard_btn_normal", @"png") forState:UIControlStateSelected];
     [self.faceButton addTarget:self action:@selector(faceButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     HDChatToolbarItem *faceItem = [[HDChatToolbarItem alloc] initWithButton:self.faceButton withView:self.faceView];
     
     //more
     self.moreButton = [[UIButton alloc] init];
     self.moreButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [self.moreButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_type_select_btn_nor"] forState:UIControlStateNormal];
-    [self.moreButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_type_less_btn_nor"] forState:UIControlStateSelected];
+    [self.moreButton setImage:ImageBundle(@"hd_type_select_btn_nor", @"png") forState:UIControlStateNormal];
+    [self.moreButton setImage:ImageBundle(@"hd_type_less_btn_nor", @"png") forState:UIControlStateSelected];
     [self.moreButton addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     HDChatToolbarItem *moreItem = [[HDChatToolbarItem alloc] initWithButton:self.moreButton withView:self.moreView];
     

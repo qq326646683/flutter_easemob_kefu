@@ -11,6 +11,7 @@
  */
 
 #import "HDChatBarMoreView.h"
+#import "HelpDeskUI.h"
 
 //#define CHAT_BUTTON_SIZE CGSizeMake(50,60)
 #define CHAT_BUTTON_SIZE CGSizeMake(50,58)
@@ -98,8 +99,8 @@
     
     CGFloat insets = (self.frame.size.width - 4 * CHAT_BUTTON_SIZE.width) / 5;
     
-    _photoButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_image_normal"]
-                    highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_image_pressed"]
+    _photoButton = [self btnWithImage:ImageBundle(@"hd_chat_image_normal", @"png")
+                    highlightedImage:ImageBundle(@"hd_chat_image_pressed", @"png")
                                title:NSLocalizedString(@"attach_picture", @"Picture")];
     [_photoButton setFrame:CGRectMake(insets, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     
@@ -107,8 +108,8 @@
     _photoButton.tag = MOREVIEW_BUTTON_TAG;
     [_scrollview addSubview:_photoButton];
     
-    _takePicButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_takepic_normal"]
-                       highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_takepic_pressed"]
+    _takePicButton = [self btnWithImage:ImageBundle(@"hd_chat_takepic_normal", @"png")
+                       highlightedImage:ImageBundle(@"hd_chat_takepic_pressed", @"png")
                                   title:NSLocalizedString(@"attach_take_pic", @"Image")];
     [_takePicButton setFrame:CGRectMake(insets * 2 + CHAT_BUTTON_SIZE.width, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     
@@ -127,8 +128,8 @@
 //    _audioCallButton.tag = MOREVIEW_BUTTON_TAG + 3;
 //    [_scrollview addSubview:_audioCallButton];
 //    
-    _videoCallButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_video_normal"]
-                         highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_video_pressed"]
+    _videoCallButton = [self btnWithImage:ImageBundle(@"em_chat_video_normal", @"png")
+                         highlightedImage:ImageBundle(@"em_chat_video_pressed", @"png")
                                     title:NSLocalizedString(@"attach_call_video", @"Call Video")];
     
     [_videoCallButton setFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE.width * 2, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
@@ -137,8 +138,8 @@
     _maxIndex = 2;
     [_scrollview addSubview:_videoCallButton];
     
-    _locationButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_location_normal"]
-                        highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_location_pressed"]
+    _locationButton = [self btnWithImage:ImageBundle(@"hd_chat_location_normal", @"png")
+                        highlightedImage:ImageBundle(@"hd_chat_location_pressed", @"png")
                                    title:NSLocalizedString(@"attach_location", @"Location")];
     [_locationButton setFrame:CGRectMake(insets * 4 + CHAT_BUTTON_SIZE.width * 3, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     
@@ -146,8 +147,8 @@
     _locationButton.tag = MOREVIEW_BUTTON_TAG + 3;
     [_scrollview addSubview:_locationButton];
     
-    _leaveMessageButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_phrase_normal"]
-                            highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_phrase_pressed"]
+    _leaveMessageButton = [self btnWithImage:ImageBundle(@"em_chat_phrase_normal", @"png")
+                            highlightedImage:ImageBundle(@"em_chat_phrase_pressed", @"png")
                                        title:NSLocalizedString(@"leave_title", @"Note")];
     [_leaveMessageButton setFrame:CGRectMake(insets, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
 
@@ -157,8 +158,8 @@
     [_scrollview addSubview:_leaveMessageButton];
 
     
-    _evaluationButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_evaluation_normal"]
-                          highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_evaluation_pressed"]
+    _evaluationButton = [self btnWithImage:ImageBundle(@"em_chat_evaluation_normal", @"png")
+                          highlightedImage:ImageBundle(@"em_chat_evaluation_pressed", @"png")
                                      title:NSLocalizedString(@"evaluation", @"Evaluation")];
     
     [_evaluationButton setFrame:CGRectMake(insets * 2 + CHAT_BUTTON_SIZE.width, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];

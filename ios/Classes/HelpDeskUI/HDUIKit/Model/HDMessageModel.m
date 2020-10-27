@@ -15,6 +15,7 @@
 #import "HDEmotionEscape.h"
 #import "HDConvertToCommonEmoticonsHelper.h"
 #import "HDEmotionEscape.h"
+#import "HelpDeskUI.h"
 
 @implementation HDMessageModel
 @synthesize body;
@@ -47,7 +48,7 @@
                 self.avatarURLPath = agentAvatarUrl;
                 self.nickname = agentNickname;
             }
-            self.avatarImage = [UIImage imageNamed:@"HelpDeskUIResource.bundle/user"];
+            self.avatarImage = ImageBundle(@"user", @"png");
         } else {
             if (message.ext) {
                 NSDictionary *weichat = [message.ext objectForKey:@"weichat"];

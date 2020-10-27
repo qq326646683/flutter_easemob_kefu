@@ -139,7 +139,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     _statusButton = [[UIButton alloc] init];
     _statusButton.translatesAutoresizingMaskIntoConstraints = NO;
     _statusButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [_statusButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/messageSendFail"] forState:UIControlStateNormal];
+    [_statusButton setImage:ImageBundle(@"messageSendFail@", @"png") forState:UIControlStateNormal];
     [_statusButton addTarget:self action:@selector(statusAction) forControlEvents:UIControlEventTouchUpInside];
     _statusButton.hidden = YES;
     [self.contentView addSubview:_statusButton];
@@ -232,14 +232,14 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
             case EMMessageBodyTypeImage:
             {
                 [_bubbleView setupImageBubbleView];
-                _bubbleView.imageView.image = [UIImage imageNamed:@"HelpDeskUIResource.bundle/imageDownloadFail"];
+                _bubbleView.imageView.image = ImageBundle(@"imageDownloadFail", @"png");
             }
                 break;
             case EMMessageBodyTypeLocation:
             {
                 [_bubbleView setupLocationBubbleView];
                 
-                _bubbleView.locationImageView.image = [[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_location_preview"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+                _bubbleView.locationImageView.image = [ImageBundle(@"chat_location_preview", @"png") stretchableImageWithLeftCapWidth:10 topCapHeight:10];
                 _bubbleView.locationLabel.font = _messageLocationFont;
                 _bubbleView.locationLabel.textColor = _messageLocationColor;
             }
@@ -255,7 +255,6 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
             case EMMessageBodyTypeVideo:
             {
                 [_bubbleView setupVideoBubbleView];
-//                _bubbleView.videoTagView.image = [UIImage imageNamed:@"HelpDeskUIResource.bundle/messageVideo"];
             }
                 break;
             case EMMessageBodyTypeFile:
@@ -506,7 +505,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                     case HDExtFormMsg:
                     {
                         NSDictionary *msgTypeDic = [model.message.ext objectForKey:@"msgtype"];
-                        _bubbleView.formIconView.image = [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_item_form"];
+                        _bubbleView.formIconView.image = ImageBundle(@"chat_item_form", @"png");
                         @try {
                             _bubbleView.formDescLabel.text = [[msgTypeDic objectForKey:@"html"] objectForKey:@"desc"];
                             _bubbleView.formTitleLabel.text = [[msgTypeDic objectForKey:@"html"] objectForKey:@"topic"];
@@ -564,7 +563,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                         self.bubbleView.voiceImageView.image = self.model.isSender ?[self.sendMessageVoiceAnimationImages objectAtIndex:0] : [self.recvMessageVoiceAnimationImages objectAtIndex:0];
                         _bubbleView.voiceImageView.animationImages = self.model.isSender ? self.sendMessageVoiceAnimationImages:self.recvMessageVoiceAnimationImages;
                     } else {
-                        self.bubbleView.voiceImageView.image = self.model.isSender ?[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_full"]: [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing_full"];
+                        self.bubbleView.voiceImageView.image = self.model.isSender ?ImageBundle(@"chat_sender_audio_playing_full", @"png"): ImageBundle(@"chat_receiver_audio_playing_full", @"png");
                     }
                 }
                 if (!self.model.isSender) {
@@ -587,14 +586,14 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                 break;
             case EMMessageBodyTypeVideo:
             {
-                _bubbleView.fileIconView.image = [UIImage imageNamed:[NSString stringWithFormat:@"HelpDeskUIResource.bundle/%@",_model.fileIconName]];
+                _bubbleView.fileIconView.image = ImageBundle(_model.fileIconName, @"png");
                 _bubbleView.fileNameLabel.text = _model.fileName;
                 _bubbleView.fileSizeLabel.text = _model.fileSizeDes;
             }
                 break;
             case EMMessageBodyTypeFile:
             {
-                _bubbleView.fileIconView.image = [UIImage imageNamed:[NSString stringWithFormat:@"HelpDeskUIResource.bundle/%@",_model.fileIconName]];
+                _bubbleView.fileIconView.image = ImageBundle(_model.fileIconName, @"png");
                 _bubbleView.fileNameLabel.text = _model.fileName;
                 _bubbleView.fileSizeLabel.text = _model.fileSizeDes;
             }

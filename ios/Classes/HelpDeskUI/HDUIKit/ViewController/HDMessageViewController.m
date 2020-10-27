@@ -91,7 +91,18 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
+    NSLog(@"bunlde --- %@", [NSBundle bundleForClass:[self class]]);
+//    NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];
+//    NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];
+//    NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];
+//    NSString *imagePath = [ImageBundle pathForResource:@"chat_item_form@3x" ofType:@"png"];
+//    self.image = [UIImage imageWithContentsOfFile:imagePath];
+
+//    UIImageView *image = [[UIImageView alloc] initWithImage:ImageBundle(@"chat_item_form@3x", @"png")];
+//    image.frame = CGRectMake(100, 100, 100, 100);
+//    [self.view addSubview:image];
     
     if (_conversation.officialAccount.name) {
         _title = _conversation.officialAccount.name;
@@ -101,52 +112,51 @@ typedef enum : NSUInteger {
     self.view.backgroundColor = UIColor.whiteColor;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatToolbarState) name:@"chatToolbarState" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeRecording) name:@"closeRecording" object:nil];
-    
+
     //Initialization
     CGFloat chatbarHeight = [HDChatToolbar defaultHeight];
-    
+
     self.chatToolbar = [[HDChatToolbar alloc] initWithFrame:CGRectMake(0, self.view.height - chatbarHeight - iPhoneXBottomHeight, self.view.width, chatbarHeight)];
     self.chatToolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    
+
     //Initializa the gesture recognizer
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(keyBoardHidden:)];
     tap.delegate = self;
     [self.view addGestureRecognizer:tap];
-    
+
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 0.5;
     [self.tableView addGestureRecognizer:lpgr];
-    
+
     _messageQueue = dispatch_queue_create("com.helpdesk.message.queue", NULL);
-    
+
     //Register the delegate
     [HDCDDeviceManager sharedInstance].delegate = self;
-    
+
     [self setLeftBarBtnItem];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didBecomeActive)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
-    
+
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appDidEnterBackground)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
- 
+
     [self setupCell];
     [self setupEmotion];
-//    [self tableViewDidTriggerHeaderRefresh]; // 父类不再调用，由子类调用
 }
 
 - (void)setupCell {
     
-    [[HDBaseMessageCell appearance] setSendBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_bg"] stretchableImageWithLeftCapWidth:5 topCapHeight:35]];
-    [[HDBaseMessageCell appearance] setRecvBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_bg"] stretchableImageWithLeftCapWidth:35 topCapHeight:35]];
-    [[HDBaseMessageCell appearance] setSendMessageVoiceAnimationImages:@[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_full"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_000"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_001"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_002"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_003"]]];
-    [[HDBaseMessageCell appearance] setRecvMessageVoiceAnimationImages:@[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing_full"],[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing000"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing001"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing002"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing003"]]];
+    [[HDBaseMessageCell appearance] setSendBubbleBackgroundImage:[ImageBundle(@"chat_sender_bg", @"png") stretchableImageWithLeftCapWidth:5 topCapHeight:35]];
+    [[HDBaseMessageCell appearance] setRecvBubbleBackgroundImage:[ImageBundle(@"chat_receiver_bg", @"png") stretchableImageWithLeftCapWidth:35 topCapHeight:35]];
+    [[HDBaseMessageCell appearance] setSendMessageVoiceAnimationImages:@[ImageBundle(@"chat_sender_audio_playing_full", @"png"), ImageBundle(@"chat_sender_audio_playing_000", @"png"), ImageBundle(@"chat_sender_audio_playing_001", @"png"), ImageBundle(@"chat_sender_audio_playing_002", @"png"), ImageBundle(@"chat_sender_audio_playing_003", @"png")]];
+    [[HDBaseMessageCell appearance] setRecvMessageVoiceAnimationImages:@[ImageBundle(@"chat_receiver_audio_playing_full", @"png"),ImageBundle(@"chat_receiver_audio_playing000", @"png"), ImageBundle(@"chat_receiver_audio_playing001", @"png"), ImageBundle(@"chat_receiver_audio_playing002", @"png"), ImageBundle(@"chat_receiver_audio_playing003", @"png")]];
     
     [[HDBaseMessageCell appearance] setAvatarSize:40.f];
     [[HDBaseMessageCell appearance] setAvatarCornerRadius:20.f];
@@ -160,7 +170,7 @@ typedef enum : NSUInteger {
 
 - (void)setLeftBarBtnItem {
     CustomButton * backButton = [CustomButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"Shape"] forState:UIControlStateNormal];
+    [backButton setImage:ImageBundle(@"back", @"png") forState:UIControlStateNormal];
     [backButton setTitle:@"返回" forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont systemFontOfSize:18];
     [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -227,10 +237,15 @@ typedef enum : NSUInteger {
         NSMutableArray *customEmotions = [NSMutableArray array];
         NSMutableArray *customNameArr = [NSMutableArray arrayWithCapacity:0];
         NSString *customName = nil;
+        NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];
+        NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];\
+        NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];
+    
         for (int i=1; i<=35; i++) {
+            customName = [@"e_e_" stringByAppendingString:[NSString stringWithFormat:@"%d",i]];
+            NSString *imagePath = [myBundle pathForResource:customName ofType:@"png"];
             // 把自定义表情图片加到数组中
-            customName = [@"HelpDeskUIResource.bundle/e_e_" stringByAppendingString:[NSString stringWithFormat:@"%d",i]];
-            [customNameArr addObject:customName];
+            [customNameArr addObject:imagePath];
         }
         int i = 0;
         // 取出表情字符

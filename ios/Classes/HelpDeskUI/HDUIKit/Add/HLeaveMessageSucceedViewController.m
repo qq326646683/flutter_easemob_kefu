@@ -77,7 +77,7 @@ typedef NS_ENUM(NSUInteger, NSTextFieldTag) {
 //    });
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 30, kScreenHeight/7 - 60, 60, 60)];
-    [button setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_icon_leave_suc"] forState:UIControlStateNormal];
+    [button setImage:ImageBundle(@"hd_icon_leave_suc", @"png") forState:UIControlStateNormal];
     [self.view addSubview:button];
     
     UILabel *commitLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(button.frame) + 20, kScreenWidth, 30)];

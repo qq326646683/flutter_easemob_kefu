@@ -16,6 +16,7 @@
 #import "HDFaceView.h"
 #import "HDEmotionManager.h"
 #import "UIButton+HDWebCache.h"
+#import "HelpDeskUI.h"
 
 
 @interface EmojiButton :UIButton
@@ -157,8 +158,8 @@
         [_hdImageButton setTitle:nil forState:UIControlStateNormal];
         [_hdImageButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         [_hdImageButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-        [_hdImageButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/faceDelete"] forState:UIControlStateNormal];
-        [_hdImageButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/faceDelete_select"] forState:UIControlStateHighlighted];
+        [_hdImageButton setImage:ImageBundle(@"faceDelete", @"png") forState:UIControlStateNormal];
+        [_hdImageButton setImage:ImageBundle(@"faceDelete_select", @"png") forState:UIControlStateHighlighted];
         [_hdImageButton addTarget:self action:@selector(sendEmotion:) forControlEvents:UIControlEventTouchUpInside];
     }
 }

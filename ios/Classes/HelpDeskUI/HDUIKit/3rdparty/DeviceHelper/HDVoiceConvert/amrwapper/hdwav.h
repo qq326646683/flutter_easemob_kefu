@@ -20,6 +20,8 @@
 #define HDWAV_H
 
 #include <stdio.h>
+#import <Foundation/Foundation.h>
+//#include <iostream>
 
 class HDWavWriter {
 public:

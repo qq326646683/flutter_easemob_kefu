@@ -30,7 +30,7 @@ inline UIImage *HDSDScaledImageForKey(NSString *key, UIImage *image) {
         if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
             CGFloat scale = 1;
             if (key.length >= 8) {
-                NSRange range = [key rangeOfString:@"@2x."];
+                NSRange range = [key rangeOfString:@"."];
                 if (range.location != NSNotFound) {
                     scale = 2.0;
                 }

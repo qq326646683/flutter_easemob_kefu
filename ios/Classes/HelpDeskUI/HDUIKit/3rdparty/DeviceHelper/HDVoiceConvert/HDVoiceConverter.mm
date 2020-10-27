@@ -7,7 +7,7 @@
 //
 
 #import "HDVoiceConverter.h"
-#import "hdwav.h"
+//#import "hdwav.h"
 #import "hdinterf_dec.h"
 #import "hddec_if.h"
 #import "hdinterf_enc.h"

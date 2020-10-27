@@ -72,6 +72,16 @@
 #define fKeyWindow [UIApplication sharedApplication].keyWindow
 #define fUserDefaults [NSUserDefaults standardUserDefaults]
 
+#define ImageBundle(name,type) \
+({\
+NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];\
+NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];\
+NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];\
+NSString *imagePath = [myBundle pathForResource:name ofType:type];\
+UIImage *image =[UIImage imageWithContentsOfFile:imagePath];\
+(image);\
+})\
+
 @interface HelpDeskUI : NSObject
 
 @end
