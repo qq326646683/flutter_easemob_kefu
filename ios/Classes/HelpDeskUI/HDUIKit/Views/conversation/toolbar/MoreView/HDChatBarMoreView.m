@@ -102,19 +102,19 @@
     CGFloat insets = 20;
     CGFloat leftBorder = 40;
     
-    _photoButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_screenshot"]
-                    highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_screenshot"]
-                               title:NSLocalizedString(@"Screenshot", @"Screenshot")];
-    [_photoButton setFrame:CGRectMake(leftBorder+insets, 15, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
+    _photoButton = [self btnWithImage:ImageBundle(@"icon_screenshot", @"png")
+                    highlightedImage:ImageBundle(@"icon_screenshot", @"png")
+                               title:LocalStringBundle(@"Screenshot", @"Screenshot")];
+    [_photoButton setFrame:CGRectMake(insets, 15, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     
     [_photoButton addTarget:self action:@selector(photoAction) forControlEvents:UIControlEventTouchUpInside];
     _photoButton.tag = MOREVIEW_BUTTON_TAG;
     [_scrollview addSubview:_photoButton];
     
-    _takePicButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_camera"]
-                       highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_camera"]
-                                  title:NSLocalizedString(@"Camera", @"Camera")];
-    [_takePicButton setFrame:CGRectMake(insets *2 + leftBorder + CHAT_BUTTON_SIZE.width, 15, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
+    _takePicButton = [self btnWithImage:ImageBundle(@"icon_camera", @"png")
+                       highlightedImage:ImageBundle(@"icon_camera", @"png")
+                                  title:LocalStringBundle(@"Camera", @"Camera")];
+    [_takePicButton setFrame:CGRectMake(insets * 2 + CHAT_BUTTON_SIZE.width, 15, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
     
     [_takePicButton addTarget:self action:@selector(takePicAction) forControlEvents:UIControlEventTouchUpInside];
     _takePicButton.tag = MOREVIEW_BUTTON_TAG + 1;
@@ -123,47 +123,6 @@
 
     CGRect frame = self.frame;
     frame.size.height = 160;
-//    _videoCallButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_video_normal"]
-//                         highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_video_pressed"]
-//                                    title:NSLocalizedString(@"attach_call_video", @"Call Video")];
-//
-//    [_videoCallButton setFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE.width * 2, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
-//    [_videoCallButton addTarget:self action:@selector(takeVideoCallAction) forControlEvents:UIControlEventTouchUpInside];
-//    _videoCallButton.tag = MOREVIEW_BUTTON_TAG + 2;
-//    _maxIndex = 2;
-//    [_scrollview addSubview:_videoCallButton];
-//
-//    _locationButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_location_normal"]
-//                        highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_location_pressed"]
-//                                   title:NSLocalizedString(@"attach_location", @"Location")];
-//    [_locationButton setFrame:CGRectMake(insets * 4 + CHAT_BUTTON_SIZE.width * 3, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
-//
-//    [_locationButton addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
-//    _locationButton.tag = MOREVIEW_BUTTON_TAG + 3;
-//    [_scrollview addSubview:_locationButton];
-//
-//    _leaveMessageButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_phrase_normal"]
-//                            highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_phrase_pressed"]
-//                                       title:NSLocalizedString(@"leave_title", @"Note")];
-//    [_leaveMessageButton setFrame:CGRectMake(insets, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
-//
-//    [_leaveMessageButton addTarget:self action:@selector(leaveMessageAction) forControlEvents:UIControlEventTouchUpInside];
-//    _leaveMessageButton.tag = MOREVIEW_BUTTON_TAG + 4;
-//    _maxIndex = 4;
-//    [_scrollview addSubview:_leaveMessageButton];
-//
-//
-//    _evaluationButton = [self btnWithImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_evaluation_normal"]
-//                          highlightedImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_evaluation_pressed"]
-//                                     title:NSLocalizedString(@"evaluation", @"Evaluation")];
-//
-//    [_evaluationButton setFrame:CGRectMake(insets * 2 + CHAT_BUTTON_SIZE.width, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
-//
-//    [_evaluationButton addTarget:self action:@selector(evaluationAction) forControlEvents:UIControlEventTouchUpInside];
-//    _evaluationButton.tag = MOREVIEW_BUTTON_TAG + 5;
-//    _maxIndex = 5;
-//    [_scrollview addSubview:_evaluationButton];
-    
     self.frame = frame;
     _scrollview.frame = CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));
     _pageControl.frame = CGRectMake(0, CGRectGetHeight(frame) - 20, CGRectGetWidth(frame), 20);

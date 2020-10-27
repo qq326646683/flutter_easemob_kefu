@@ -34,6 +34,7 @@
 #import "UIViewController+AlertController.h"
 #import "HRobotUnsolveItemView.h"
 #import "FlutterEasemobKefuPlugin.h"
+#import "HelpDeskUI.h"
 
 typedef enum : NSUInteger {
     HDRequestRecord,
@@ -102,42 +103,42 @@ typedef enum : NSUInteger {
     [[HDClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatToolbarState) name:@"chatToolbarState" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeRecording) name:@"closeRecording" object:nil];
-    
+
     //Initialization
     CGFloat chatbarHeight = [HDChatToolbar defaultHeight];
-    
+
     self.chatToolbar = [[HDChatToolbar alloc] initWithFrame:CGRectMake(0, self.view.height - chatbarHeight - iPhoneXBottomHeight, self.view.width, chatbarHeight)];
     self.chatToolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    
+
     //Initializa the gesture recognizer
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(keyBoardHidden:)];
     tap.delegate = self;
     [self.view addGestureRecognizer:tap];
-    
+
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 0.5;
     self.tableView.backgroundColor = THEMECOLOR;
     [self.tableView addGestureRecognizer:lpgr];
-    
+
     _messageQueue = dispatch_queue_create("com.helpdesk.message.queue", NULL);
-    
+
     //Register the delegate
     [HDCDDeviceManager sharedInstance].delegate = self;
-    
+
     [self setLeftBarBtnItem];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didBecomeActive)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
-    
+
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appDidEnterBackground)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
- 
+
     [self setupCell];
     [self setupEmotion];
     [self setTopView];
@@ -159,10 +160,8 @@ typedef enum : NSUInteger {
 
 - (void)setupCell {
     
-//    [[HDBaseMessageCell appearance] setSendBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_bg"] stretchableImageWithLeftCapWidth:5 topCapHeight:35]];
-//    [[HDBaseMessageCell appearance] setRecvBubbleBackgroundImage:[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_bg"] stretchableImageWithLeftCapWidth:35 topCapHeight:35]];
-    [[HDBaseMessageCell appearance] setSendMessageVoiceAnimationImages:@[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_full"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_000"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_001"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_002"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_sender_audio_playing_003"]]];
-    [[HDBaseMessageCell appearance] setRecvMessageVoiceAnimationImages:@[[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing_full"],[UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing000"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing001"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing002"], [UIImage imageNamed:@"HelpDeskUIResource.bundle/chat_receiver_audio_playing003"]]];
+    [[HDBaseMessageCell appearance] setSendMessageVoiceAnimationImages:@[ImageBundle(@"chat_sender_audio_playing_full", @"png"), ImageBundle(@"chat_sender_audio_playing_000", @"png"), ImageBundle(@"chat_sender_audio_playing_001", @"png"), ImageBundle(@"chat_sender_audio_playing_002", @"png"), ImageBundle(@"chat_sender_audio_playing_003", @"png")]];
+    [[HDBaseMessageCell appearance] setRecvMessageVoiceAnimationImages:@[ImageBundle(@"chat_receiver_audio_playing_full", @"png"),ImageBundle(@"chat_receiver_audio_playing000", @"png"), ImageBundle(@"chat_receiver_audio_playing001", @"png"), ImageBundle(@"chat_receiver_audio_playing002", @"png"), ImageBundle(@"chat_receiver_audio_playing003", @"png")]];
     
     [[HDBaseMessageCell appearance] setAvatarSize:40.f];
     [[HDBaseMessageCell appearance] setAvatarCornerRadius:20.f];
@@ -176,7 +175,7 @@ typedef enum : NSUInteger {
 
 - (void)setLeftBarBtnItem {
     CustomButton * backButton = [CustomButton buttonWithType:UIButtonTypeCustom];
-    [backButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_arrowright.png"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:ImageBundle(@"icon_arrowright", @"png") forState:UIControlStateNormal];
     backButton.imageRect = CGRectMake(0, 7, 23, 16);
     [self.view addSubview:backButton];
     backButton.frame = CGRectMake(0, 0, 60, 30);
@@ -238,10 +237,15 @@ typedef enum : NSUInteger {
         NSMutableArray *customEmotions = [NSMutableArray array];
         NSMutableArray *customNameArr = [NSMutableArray arrayWithCapacity:0];
         NSString *customName = nil;
+        NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];
+        NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];\
+        NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];
+    
         for (int i=1; i<=35; i++) {
+            customName = [@"e_e_" stringByAppendingString:[NSString stringWithFormat:@"%d",i]];
+            NSString *imagePath = [myBundle pathForResource:customName ofType:@"png"];
             // 把自定义表情图片加到数组中
-            customName = [@"HelpDeskUIResource.bundle/e_e_" stringByAppendingString:[NSString stringWithFormat:@"%d",i]];
-            [customNameArr addObject:customName];
+            [customNameArr addObject:imagePath];
         }
         int i = 0;
         // 取出表情字符
@@ -1263,7 +1267,7 @@ typedef enum : NSUInteger {
                 break;
             case HDCanNotRecord:
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"message.failToPermission", @"No recording permission") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:LocalStringBundle(@"prompt", @"Prompt") message:LocalStringBundle(@"message.failToPermission", @"No recording permission") delegate:nil cancelButtonTitle:LocalStringBundle(@"ok", @"OK") otherButtonTitles:nil, nil];
                 [alertView show];
             }
                 break;
@@ -1483,7 +1487,7 @@ typedef enum : NSUInteger {
 -(void)visitorWaitCount:(int)count{
     if (count > 0) {
         if (_visitorWaitCountLabel) {
-            _visitorWaitCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"current_visitor_wait_count", @" The current queue number is ：%d"), count];
+            _visitorWaitCountLabel.text = [NSString stringWithFormat:LocalStringBundle(@"current_visitor_wait_count", @" The current queue number is ：%d"), count];
             _visitorWaitCountLabel.hidden = NO;
         }
     }else{
@@ -1791,7 +1795,7 @@ typedef enum : NSUInteger {
                         [weakSelf updateTransferMessageExt:message];
                     });
                 } else {
-                    [weakSelf showHint:NSLocalizedString(@"transferToKf.fail", @"Transfer to the artificial customer service request failed, please confirm the connection status!")];
+                    [weakSelf showHint:LocalStringBundle(@"transferToKf.fail", @"Transfer to the artificial customer service request failed, please confirm the connection status!")];
                 }
             }];
         }
@@ -1972,16 +1976,16 @@ typedef enum : NSUInteger {
     message.ext = [ext copy];
     
     __weak typeof(self) weakself = self;
-    [self showHudInView:self.view hint:NSLocalizedString(@"comment_submit", @"Comment Submit.")];
+    [self showHudInView:self.view hint:LocalStringBundle(@"comment_submit", @"Comment Submit.")];
     [[HDClient sharedClient].chatManager sendMessage:message
                                             progress:nil
                                           completion:^(HDMessage *aMessage, HDError *aError)
     {
         [self hideHud];
         if (!aError) {
-            [weakself showHint:NSLocalizedString(@"comment_suc", @"send comment successful.")];
+            [weakself showHint:LocalStringBundle(@"comment_suc", @"send comment successful.")];
         } else {
-            [weakself showHint:NSLocalizedString(@"comment_fail", @"send comment fail.")];
+            [weakself showHint:LocalStringBundle(@"comment_fail", @"send comment fail.")];
         }
     }];
 }

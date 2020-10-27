@@ -41,7 +41,7 @@
     self.transformButton.titleLabel.font = [UIFont systemFontOfSize:13.0];
     [self.transformButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     self.transformButton.layer.cornerRadius = 5.f;
-    [self.transformButton setTitle:NSLocalizedString(@"transfertocs", @"Transfer Kefu") forState:UIControlStateNormal];
+    [self.transformButton setTitle:LocalStringBundle(@"transfertocs", @"Transfer Kefu") forState:UIControlStateNormal];
     [self.transformButton addTarget:self action:@selector(transformAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.backgroundImageView addSubview:self.transformButton];
     

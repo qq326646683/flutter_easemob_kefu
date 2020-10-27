@@ -13,6 +13,16 @@
 #define DEFALUT_STAR_NUMBER 5
 #define ANIMATION_TIME_INTERVAL 0.2
 
+#define StartImageBundle(name,type) \
+({\
+NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];\
+NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];\
+NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];\
+NSString *imagePath = [myBundle pathForResource:name ofType:type];\
+UIImage *image =[UIImage imageWithContentsOfFile:imagePath];\
+(image);\
+})\
+
 @interface CWStarRateView ()
 
 @property (nonatomic, strong) UIView *foregroundStarView;
@@ -127,7 +137,7 @@
     view.backgroundColor = [UIColor clearColor];
     for (NSInteger i = 0; i < self.numberOfStars; i ++)
     {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:StartImageBundle(imageName, @"png")];
         imageView.frame = CGRectMake(i * self.bounds.size.width / self.numberOfStars, 0, self.bounds.size.width / self.numberOfStars, self.bounds.size.height);
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         [view addSubview:imageView];

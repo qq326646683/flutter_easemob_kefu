@@ -13,7 +13,14 @@
 #ifndef HDLocalDefine_h
 #define HDLocalDefine_h
 
-#define NSEaseLocalizedString(key, comment) [[NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"HelpDeskUIResource" withExtension:@"bundle"]] localizedStringForKey:(key) value:@"" table:nil]
+#define NSEaseLocalizedString(key, comment) \
+({\
+NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];\
+NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];\
+NSBundle *myBundle = [NSBundle bundleWithPath:myBundlePath];\
+NSString *str = [myBundle localizedStringForKey:(key) value:@"" table:nil];\
+(str);\
+})\
 
 
 #define hd_dispatch_main_sync_safe(block)\

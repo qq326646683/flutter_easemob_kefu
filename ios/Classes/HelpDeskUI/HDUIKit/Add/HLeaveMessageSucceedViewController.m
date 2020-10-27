@@ -56,7 +56,7 @@ typedef NS_ENUM(NSUInteger, NSTextFieldTag) {
 {
     CustomButton * backButton = [CustomButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"Shape"] forState:UIControlStateNormal];
-    [backButton setTitle:NSLocalizedString(@"leave_title", @"Note") forState:UIControlStateNormal];
+    [backButton setTitle:LocalStringBundle(@"leave_title", @"Note") forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont systemFontOfSize:19];
     [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [backButton setTitleColor:RGBACOLOR(184, 22, 22, 1) forState:UIControlStateHighlighted];
@@ -77,31 +77,31 @@ typedef NS_ENUM(NSUInteger, NSTextFieldTag) {
 //    });
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 30, kScreenHeight/7 - 60, 60, 60)];
-    [button setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_icon_leave_suc"] forState:UIControlStateNormal];
+    [button setImage:ImageBundle(@"hd_icon_leave_suc", @"png") forState:UIControlStateNormal];
     [self.view addSubview:button];
     
     UILabel *commitLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(button.frame) + 20, kScreenWidth, 30)];
-    commitLabel.text = NSLocalizedString(@"new_leave_send_success", @"Submit successful");
+    commitLabel.text = LocalStringBundle(@"new_leave_send_success", @"Submit successful");
     commitLabel.font = [UIFont systemFontOfSize:20];
     commitLabel.textAlignment = NSTextAlignmentCenter;
     commitLabel.textColor = UIColor.grayColor;
     [self.view addSubview:commitLabel];
     
     UILabel *thankLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(commitLabel.frame) + 10, kScreenWidth, 20)];
-    thankLabel.text = NSLocalizedString(@"new_leave_send_descriptionOne", @"Thank you for your leave message.");
+    thankLabel.text = LocalStringBundle(@"new_leave_send_descriptionOne", @"Thank you for your leave message.");
     thankLabel.font = [UIFont systemFontOfSize:15];
     thankLabel.textAlignment = NSTextAlignmentCenter;
     thankLabel.textColor = UIColor.grayColor;
     [self.view addSubview:thankLabel];
     
     UILabel *thankLabelOther = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(thankLabel.frame) + 5, kScreenWidth, 20)];
-    thankLabelOther.text = NSLocalizedString(@"new_leave_send_descriptionTwo", @"We will give you a response at the first time.");
+    thankLabelOther.text = LocalStringBundle(@"new_leave_send_descriptionTwo", @"We will give you a response at the first time.");
     thankLabelOther.font = [UIFont systemFontOfSize:15];
     thankLabelOther.textAlignment = NSTextAlignmentCenter;
     thankLabelOther.textColor = UIColor.grayColor;
     [self.view addSubview:thankLabelOther];
     
-    NSArray *placeholders = @[NSLocalizedString(@"ticket_name", @"Name"),NSLocalizedString(@"ticket_phone", @"Phone"),NSLocalizedString(@"ticket_email", @"Email"),NSLocalizedString(@"ticket_theme", @"Theme"),NSLocalizedString(@"ticket_detail", @"Detail")];
+    NSArray *placeholders = @[LocalStringBundle(@"ticket_name", @"Name"),LocalStringBundle(@"ticket_phone", @"Phone"),LocalStringBundle(@"ticket_email", @"Email"),LocalStringBundle(@"ticket_theme", @"Theme"),LocalStringBundle(@"ticket_detail", @"Detail")];
     for (int i=0; i<5; i++) {
         [self createTextfieldWithY:CGRectGetMaxY(thankLabelOther.frame) + 10 +50*i placeholder:placeholders[i] tag:i+NSTextFieldTagName number:i];
     }

@@ -178,12 +178,12 @@
     if (self.displayNavArrows) {
         NSString *arrowPathFormat;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) {
-            arrowPathFormat = @"MWPhotoBrowser.bundle/images/UIBarButtonItemArrowOutline%@.png";
+            arrowPathFormat = @"UIBarButtonItemArrowOutline%@.png";
         } else {
-            arrowPathFormat = @"MWPhotoBrowser.bundle/images/UIBarButtonItemArrow%@.png";
+            arrowPathFormat = @"UIBarButtonItemArrowLeft.png";
         }
-        _previousButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:arrowPathFormat, @"Left"]] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPreviousPage)];
-        _nextButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:arrowPathFormat, @"Right"]] style:UIBarButtonItemStylePlain target:self action:@selector(gotoNextPage)];
+        _previousButton = [[UIBarButtonItem alloc] initWithImage:MWPhotoBrowserImageBundle(@"UIBarButtonItemArrowLeft",@"png") style:UIBarButtonItemStylePlain target:self action:@selector(gotoPreviousPage)];
+        _nextButton = [[UIBarButtonItem alloc] initWithImage:MWPhotoBrowserImageBundle(@"UIBarButtonItemArrowRight",@"png") style:UIBarButtonItemStylePlain target:self action:@selector(gotoNextPage)];
     }
     if (self.displayActionButton) {
         _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
@@ -258,7 +258,7 @@
         hasItems = YES;
         NSString *buttonName = @"UIBarButtonItemGrid";
         if (SYSTEM_VERSION_LESS_THAN(@"7")) buttonName = @"UIBarButtonItemGridiOS6";
-        [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"MWPhotoBrowser.bundle/images/%@.png", buttonName]] style:UIBarButtonItemStylePlain target:self action:@selector(showGridAnimated)]];
+        [items addObject:[[UIBarButtonItem alloc] initWithImage:MWPhotoBrowserImageBundle(buttonName, @"png") style:UIBarButtonItemStylePlain target:self action:@selector(showGridAnimated)]];
     } else {
         [items addObject:fixedSpace];
     }
@@ -834,8 +834,8 @@
             // Add selected button
             if (self.displaySelectionButtons) {
                 UIButton *selectedButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                [selectedButton setImage:[UIImage imageNamed:@"MWPhotoBrowser.bundle/images/ImageSelectedOff.png"] forState:UIControlStateNormal];
-                [selectedButton setImage:[UIImage imageNamed:@"MWPhotoBrowser.bundle/images/ImageSelectedOn.png"] forState:UIControlStateSelected];
+                [selectedButton setImage:MWPhotoBrowserImageBundle(@"ImageSelectedOff", @"png") forState:UIControlStateNormal];
+                [selectedButton setImage:MWPhotoBrowserImageBundle(@"ImageSelectedOn", @"png") forState:UIControlStateSelected];
                 [selectedButton sizeToFit];
                 selectedButton.adjustsImageWhenHighlighted = NO;
                 [selectedButton addTarget:self action:@selector(selectedButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -1063,7 +1063,7 @@
     NSUInteger numberOfPhotos = [self numberOfPhotos];
     if (_gridController) {
         if (_gridController.selectionMode) {
-            self.title = NSEaseLocalizedString(@"Select Photos", nil);
+            self.title = @"";
         } else {
             NSString *photosText;
             if (numberOfPhotos == 1) {
@@ -1563,7 +1563,7 @@
         // The sample image is based on the
         // work by: http://www.pixelpressicons.com
         // licence: http://creativecommons.org/licenses/by/2.5/ca/
-        self.progressHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MWPhotoBrowser.bundle/images/Checkmark.png"]];
+        self.progressHUD.customView = [[UIImageView alloc] initWithImage:MWPhotoBrowserImageBundle(@"Checkmark", @"png")];
         [self.view addSubview:_progressHUD];
     }
     return _progressHUD;

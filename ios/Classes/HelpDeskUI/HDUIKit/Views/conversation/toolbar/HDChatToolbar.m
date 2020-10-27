@@ -89,7 +89,6 @@
     _backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
     _backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _backgroundImageView.backgroundColor = THEMECOLOR;
-//    _backgroundImageView.image = [[UIImage imageNamed:@"HelpDeskUIResource.bundle/messageToolbarBg"] stretchableImageWithLeftCapWidth:0.5 topCapHeight:10];
     [self addSubview:_backgroundImageView];
     
     //toolbar
@@ -107,7 +106,6 @@
     _inputTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     _inputTextView.scrollEnabled = YES;
     _inputTextView.returnKeyType = UIReturnKeyDefault;
-//    _inputTextView.enablesReturnKeyAutomatically = YES; // UITextView内部判断send按钮是否可以用
     _inputTextView.placeHolder = NSEaseLocalizedString(@"message.toolBar.inputPlaceHolder", @"Type here...");
     _inputTextView.delegate = self;
     _inputTextView.layer.cornerRadius = self.frame.size.height/2 - self.verticalPadding*2;
@@ -120,8 +118,8 @@
     //change input type
     self.moreButton = [[UIButton alloc] init];
     self.moreButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [self.moreButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_moreNomal"] forState:UIControlStateNormal];
-    [self.moreButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_moreActive"] forState:UIControlStateSelected];
+    [self.moreButton setImage:ImageBundle(@"icon_moreNomal", @"png") forState:UIControlStateNormal];
+    [self.moreButton setImage:ImageBundle(@"icon_moreActive", @"png") forState:UIControlStateSelected];
     [self.moreButton addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     HDChatToolbarItem *moreItem = [[HDChatToolbarItem alloc] initWithButton:self.moreButton withView:self.moreView];
     [self setInputViewLeftItems:@[moreItem]];
@@ -129,7 +127,7 @@
     //发送按钮
     self.faceButton = [[UIButton alloc] init];
     self.faceButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [self.faceButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_sendNomal"] forState:UIControlStateNormal];
+    [self.faceButton setImage:ImageBundle(@"icon_sendNomal", @"png") forState:UIControlStateNormal];
     [self.faceButton addTarget:self action:@selector(sendMessageClick:) forControlEvents:UIControlEventTouchUpInside];
     HDChatToolbarItem *faceItem = [[HDChatToolbarItem alloc] initWithButton:self.faceButton withView:nil];
     
@@ -492,40 +490,14 @@
 - (void)checkSendBtnImage{
     NSLog(@"checkSendBtnImage%@---length = %lu",self.inputTextView.text,(unsigned long)self.inputTextView.text.length);
     if(self.inputTextView.text.length>0){
-        [self.faceButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_sendActive"] forState:UIControlStateNormal];
+        [self.faceButton setImage:ImageBundle(@"icon_sendActive", @"png") forState:UIControlStateNormal];
     }else{
-        [self.faceButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/icon_sendNomal"] forState:UIControlStateNormal];
+        [self.faceButton setImage:ImageBundle(@"icon_sendNomal", @"png") forState:UIControlStateNormal];
     }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    NSLog(@"shouldChangeTextInRange");
-    
-//    if ([text isEqualToString:@"\n"]) {
-//        if ([self.delegate respondsToSelector:@selector(didSendText:)]) {
-//#pragma mark smallpngface
-//            NSMutableString *attStr = [[NSMutableString alloc] initWithString:self.inputTextView.attributedText.string];
-//            [_inputTextView.attributedText enumerateAttribute:NSAttachmentAttributeName
-//                                                      inRange:NSMakeRange(0, self.inputTextView.attributedText.length)
-//                                                      options:NSAttributedStringEnumerationReverse
-//                                                   usingBlock:^(id value, NSRange range, BOOL *stop)
-//             {
-//                 if (value) {
-//                     HDTextAttachment *attachment = (HDTextAttachment*)value;
-//                     NSString *str = [NSString stringWithFormat:@"%@",attachment.imageName];
-//
-//                     [attStr replaceCharactersInRange:range withString:str];
-//                 }
-//             }];
-//
-//            [self.delegate didSendText:attStr];
-//            self.inputTextView.text = @"";
-//            [self _willShowInputTextViewToHeight:[self _getTextViewContentH:self.inputTextView]];
-//        }
-//
-//        return NO;
-//    }
     return YES;
 }
 
@@ -622,7 +594,6 @@
 
 - (void)chatKeyboardWillChangeFrame:(NSNotification *)notification
 {
-    NSLog(@"chatKeyboardWillChangeFrame");
     NSDictionary *userInfo = notification.userInfo;
     CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGRect beginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];

@@ -13,6 +13,7 @@
 #import "HDMicView.h"
 #import "HDCDDeviceManager.h"
 #import "HDLocalDefine.h"
+#import "HelpDeskUI.h"
 #define kCoverTag 32320
 @interface HDMicView ()
 {
@@ -33,7 +34,7 @@
 {
     // UIAppearance Proxy Defaults
     HDMicView *micView = [self appearance];
-    micView.voiceMessageAnimationImages = @[@"HelpDeskUIResource.bundle/hd_record_animate_1",@"HelpDeskUIResource.bundle/hd_record_animate_2",@"HelpDeskUIResource.bundle/hd_record_animate_3",@"HelpDeskUIResource.bundle/hd_record_animate_4",@"HelpDeskUIResource.bundle/hd_record_animate_5",@"HelpDeskUIResource.bundle/hd_record_animate_6",@"HelpDeskUIResource.bundle/hd_record_animate_7",@"HelpDeskUIResource.bundle/hd_record_animate_8",@"HelpDeskUIResource.bundle/hd_record_animate_9",@"HelpDeskUIResource.bundle/hd_record_animate_10",@"HelpDeskUIResource.bundle/hd_record_animate_11",@"HelpDeskUIResource.bundle/hd_record_animate_12",@"HelpDeskUIResource.bundle/hd_record_animate_13",@"HelpDeskUIResource.bundle/hd_record_animate_14"];
+    micView.voiceMessageAnimationImages = @[@"hd_record_animate_1",@"hd_record_animate_2",@"hd_record_animate_3",@"hd_record_animate_4",@"hd_record_animate_5",@"hd_record_animate_6",@"hd_record_animate_7",@"hd_record_animate_8",@"hd_record_animate_9",@"hd_record_animate_10",@"hd_record_animate_11",@"hd_record_animate_12",@"hd_record_animate_13",@"hd_record_animate_14"];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -49,7 +50,7 @@
         [self addSubview:bgView];
         
         _recordAnimationView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, self.bounds.size.width - 20, self.bounds.size.height - 30)];
-        _recordAnimationView.image = [UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_record_animate_1"];
+        _recordAnimationView.image = ImageBundle(@"hd_record_animate_1", @"png");
         _recordAnimationView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:_recordAnimationView];
         
@@ -143,14 +144,17 @@
 }
 
 -(void)setVoiceImage {
-    _recordAnimationView.image = [UIImage imageNamed:[_voiceMessageAnimationImages objectAtIndex:0]];
+    NSString *name =[_voiceMessageAnimationImages objectAtIndex:0];
+    _recordAnimationView.image = ImageBundle(name, @"png");
     double voiceSound = 0;
     voiceSound = [[HDCDDeviceManager sharedInstance] hdPeekRecorderVoiceMeter];
     int index = voiceSound*[_voiceMessageAnimationImages count];
     if (index >= [_voiceMessageAnimationImages count]) {
-        _recordAnimationView.image = [UIImage imageNamed:[_voiceMessageAnimationImages lastObject]];
+        NSString *name1 = [_voiceMessageAnimationImages lastObject];
+        _recordAnimationView.image = ImageBundle(name1, @"png");
     } else {
-        _recordAnimationView.image = [UIImage imageNamed:[_voiceMessageAnimationImages objectAtIndex:index]];
+        NSString *name2 = [_voiceMessageAnimationImages objectAtIndex:index];
+        _recordAnimationView.image = ImageBundle(name2, @"png");
     }
 }
 

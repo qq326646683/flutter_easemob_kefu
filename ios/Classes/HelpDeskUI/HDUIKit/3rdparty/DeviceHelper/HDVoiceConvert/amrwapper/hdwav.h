@@ -15,11 +15,13 @@
  * and limitations under the License.
  * -------------------------------------------------------------------
  */
-//#if defined __cplusplus
+#if defined __cplusplus
 #ifndef HDWAV_H
 #define HDWAV_H
 
 #include <stdio.h>
+#import <Foundation/Foundation.h>
+//#include <iostream>
 
 class HDWavWriter {
 public:
@@ -44,5 +46,5 @@ private:
 };
 
 #endif
-//#endif
+#endif
 

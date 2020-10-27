@@ -19,6 +19,7 @@ A new Flutter plugin.
   s.dependency 'HelpDesk', '= 1.0.1'
   s.dependency 'Hyphenate', '= 3.7.1'
   s.ios.resource = 'Frameworks/resource/HelpDeskUIResource.bundle'
+  s.static_framework = true
   
   s.platform = :ios, '9.0'
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
