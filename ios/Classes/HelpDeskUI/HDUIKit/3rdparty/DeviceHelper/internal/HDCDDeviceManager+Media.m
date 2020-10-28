@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, HDAudioSession){
             BOOL covertRet = [self convertAMR:aFilePath toWAV:wavFilePath];
             if (!covertRet) {
                 if (completon) {
-                    completon([NSError errorWithDomain:NSEaseLocalizedString(@"error.initRecorderFail", @"File format conversion failed")
+                    completon([NSError errorWithDomain:LocalStringBundle(@"error.initRecorderFail", @"File format conversion failed")
                                                   code:HDErrorFileTypeConvertionFailure
                                               userInfo:nil]);
                 }
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, HDAudioSession){
     
     if ([self isRecording]) {
         if (completion) {
-            error = [NSError errorWithDomain:NSEaseLocalizedString(@"error.recordStoping", @"Record voice is not over yet")
+            error = [NSError errorWithDomain:LocalStringBundle(@"error.recordStoping", @"Record voice is not over yet")
                                         code:HDErrorAudioRecordStoping
                                     userInfo:nil];
             completion(error);
@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, HDAudioSession){
     }
     
     if (!fileName || [fileName length] == 0) {
-        error = [NSError errorWithDomain:NSEaseLocalizedString(@"error.notFound", @"File path not exist")
+        error = [NSError errorWithDomain:LocalStringBundle(@"error.notFound", @"File path not exist")
                                     code:-1
                                 userInfo:nil];
         completion(error);
@@ -190,7 +190,7 @@ typedef NS_ENUM(NSInteger, HDAudioSession){
                     [fm removeItemAtPath:recordPath error:nil];
                 }
                 else {
-                    error = [NSError errorWithDomain:NSEaseLocalizedString(@"error.initRecorderFail", @"File format conversion failed")
+                    error = [NSError errorWithDomain:LocalStringBundle(@"error.initRecorderFail", @"File format conversion failed")
                                                 code:HDErrorFileTypeConvertionFailure
                                             userInfo:nil];
                 }
@@ -242,7 +242,7 @@ typedef NS_ENUM(NSInteger, HDAudioSession){
                                    withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
                                          error:&error];
         if(!success || error){
-            error = [NSError errorWithDomain:NSEaseLocalizedString(@"error.initPlayerFail", @"Failed to initialize AVAudioPlayer")
+            error = [NSError errorWithDomain:LocalStringBundle(@"error.initPlayerFail", @"Failed to initialize AVAudioPlayer")
                                         code:-1
                                     userInfo:nil];
             return error;

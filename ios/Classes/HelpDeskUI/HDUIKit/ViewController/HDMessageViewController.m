@@ -92,6 +92,7 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.showRefreshHeader = YES;
     if (_conversation.officialAccount.name) {
         _title = _conversation.officialAccount.name;
     } 
@@ -137,8 +138,8 @@ typedef enum : NSUInteger {
 
     [self setupCell];
     [self setupEmotion];
+    [self tableViewDidTriggerHeaderRefresh]; // 父类不再调用，由子类调用
 }
-
 - (void)setupCell {
     
     [[HDBaseMessageCell appearance] setSendBubbleBackgroundImage:[ImageBundle(@"chat_sender_bg", @"png") stretchableImageWithLeftCapWidth:5 topCapHeight:35]];
@@ -176,11 +177,13 @@ typedef enum : NSUInteger {
 }
 
 - (void)backItemClicked {
+    NSLog(@"backItemClicked");
     [[HDCDDeviceManager sharedInstance] disableProximitySensor];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[HDClient sharedClient].chatManager removeDelegate:self];
     [self backItemDidClicked];
     [self dismissViewControllerAnimated:YES completion:nil];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)backItemDidClicked {
@@ -378,11 +381,11 @@ typedef enum : NSUInteger {
     }
     
     if (_deleteMenuItem == nil) {
-        _deleteMenuItem = [[UIMenuItem alloc] initWithTitle:NSEaseLocalizedString(@"delete", @"Delete") action:@selector(deleteMenuAction:)];
+        _deleteMenuItem = [[UIMenuItem alloc] initWithTitle:LocalStringBundle(@"delete", @"Delete") action:@selector(deleteMenuAction:)];
     }
     
     if (_copyMenuItem == nil) {
-        _copyMenuItem = [[UIMenuItem alloc] initWithTitle:NSEaseLocalizedString(@"copy", @"Copy") action:@selector(copyMenuAction:)];
+        _copyMenuItem = [[UIMenuItem alloc] initWithTitle:LocalStringBundle(@"copy", @"Copy") action:@selector(copyMenuAction:)];
     }
     
     if (messageType == EMMessageBodyTypeText) {
@@ -473,7 +476,7 @@ typedef enum : NSUInteger {
         }
         else
         {
-            [weakSelf showHint:NSEaseLocalizedString(@"message.thumImageFail", @"thumbnail for failure!")];
+            [weakSelf showHint:LocalStringBundle(@"message.thumImageFail", @"thumbnail for failure!")];
         }
     };
     
@@ -502,7 +505,7 @@ typedef enum : NSUInteger {
                     [weakSelf _reloadTableViewDataWithMessage:message];
                 }
                 else {
-                    [weakSelf showHint:NSEaseLocalizedString(@"message.voiceFail", @"voice for failure!")];
+                    [weakSelf showHint:LocalStringBundle(@"message.voiceFail", @"voice for failure!")];
                 }
             }];
         }
@@ -527,7 +530,7 @@ typedef enum : NSUInteger {
     EMVideoMessageBody *videoBody = (EMVideoMessageBody*)model.message.body;
     NSString *localPath = [model.fileLocalPath length] > 0 ? model.fileLocalPath : videoBody.localPath;
     if ([localPath length] == 0) {
-        [self showHint:NSEaseLocalizedString(@"message.videoFail", @"video for failure!")];
+        [self showHint:LocalStringBundle(@"message.videoFail", @"video for failure!")];
         return;
     }
     
@@ -548,13 +551,13 @@ typedef enum : NSUInteger {
    
     __weak typeof(self) weakSelf = self;
    
-    [self showHudInView:self.view hint:NSEaseLocalizedString(@"message.downloadingVideo", @"downloading video...")];
+    [self showHudInView:self.view hint:LocalStringBundle(@"message.downloadingVideo", @"downloading video...")];
     [[HDClient sharedClient].chatManager downloadAttachment:model.message progress:nil completion:^(HDMessage *message, HDError *error) {
         [weakSelf hideHud];
         if (!error) {
             block();
         }else{
-            [weakSelf showHint:NSEaseLocalizedString(@"message.videoFail", @"video for failure!")];
+            [weakSelf showHint:LocalStringBundle(@"message.videoFail", @"video for failure!")];
         }
     }];
 }
@@ -593,7 +596,7 @@ typedef enum : NSUInteger {
                     return;
                 }
             }
-            [weakSelf showHudInView:weakSelf.view hint:NSEaseLocalizedString(@"message.downloadingImage", @"downloading a image...")];
+            [weakSelf showHudInView:weakSelf.view hint:LocalStringBundle(@"message.downloadingImage", @"downloading a image...")];
             [[HDClient sharedClient].chatManager downloadAttachment:model.message progress:nil completion:^(HDMessage *message, HDError *error) {
                 [weakSelf hideHud];
                 if (!error) {
@@ -613,7 +616,7 @@ typedef enum : NSUInteger {
                         return ;
                     }
                 }
-                [weakSelf showHint:NSEaseLocalizedString(@"message.imageFail", @"image for failure!")];
+                [weakSelf showHint:LocalStringBundle(@"message.imageFail", @"image for failure!")];
             }];
         }else{
             //get the message thumbnail
@@ -621,7 +624,7 @@ typedef enum : NSUInteger {
                 if (!error) {
                     [weakSelf _reloadTableViewDataWithMessage:model.message];
                 }else{
-                    [weakSelf showHint:NSEaseLocalizedString(@"message.thumImageFail", @"thumbnail for failure!")];
+                    [weakSelf showHint:LocalStringBundle(@"message.thumImageFail", @"thumbnail for failure!")];
                 }
             }];
             
@@ -629,7 +632,7 @@ typedef enum : NSUInteger {
                 if (!error) {
                     [weakSelf _reloadTableViewDataWithMessage:model.message];
                 }else{
-                    [weakSelf showHint:NSEaseLocalizedString(@"message.thumImageFail", @"thumbnail for failure!")];
+                    [weakSelf showHint:LocalStringBundle(@"message.thumImageFail", @"thumbnail for failure!")];
                 }
             }];
         }
@@ -641,12 +644,12 @@ typedef enum : NSUInteger {
     EMVoiceMessageBody *body = (EMVoiceMessageBody*)model.message.body;
     EMDownloadStatus downloadStatus = [body downloadStatus];
     if (downloadStatus == EMDownloadStatusDownloading) {
-        [self showHint:NSEaseLocalizedString(@"message.downloadingAudio", @"downloading voice, click later")];
+        [self showHint:LocalStringBundle(@"message.downloadingAudio", @"downloading voice, click later")];
         return;
     }
     else if (downloadStatus == EMDownloadStatusFailed)
     {
-        [self showHint:NSEaseLocalizedString(@"message.downloadingAudio", @"downloading voice, click later")];
+        [self showHint:LocalStringBundle(@"message.downloadingAudio", @"downloading voice, click later")];
         [[HDClient sharedClient].chatManager downloadAttachment:model.message progress:nil completion:nil];
         return;
     }
@@ -695,6 +698,7 @@ typedef enum : NSUInteger {
                       count:(NSInteger)count
                      append:(BOOL)isAppend
 {
+    NSLog(@"_loadMessagesBefore");
     __weak typeof(self) weakSelf = self;
     void (^refresh)(NSArray *messages) = ^(NSArray *messages) {
         dispatch_async(_messageQueue, ^{
@@ -1020,13 +1024,13 @@ typedef enum : NSUInteger {
                     if (asset) {
                         [[PHImageManager defaultManager] requestImageDataForAsset:asset options:nil resultHandler:^(NSData *data, NSString *uti, UIImageOrientation orientation, NSDictionary *dic){
                             if (data.length > 10 * 1000 * 1000) {
-                                [self showHint:NSEaseLocalizedString(@"message.smallerImage", @"The image size is too large, please choose another one")];
+                                [self showHint:LocalStringBundle(@"message.smallerImage", @"The image size is too large, please choose another one")];
                                 return;
                             }
                             if (data != nil) {
                                 [self sendImageMessageWithData:data];
                             } else {
-                                [self showHint:NSEaseLocalizedString(@"message.smallerImage", @"The image size is too large, please choose another one")];
+                                [self showHint:LocalStringBundle(@"message.smallerImage", @"The image size is too large, please choose another one")];
                             }
                         }];
                     }
@@ -1040,7 +1044,7 @@ typedef enum : NSUInteger {
                         NSUInteger bufferSize = [assetRepresentation getBytes:buffer fromOffset:0.0 length:(NSUInteger)[assetRepresentation size] error:nil];
                         NSData* fileData = [NSData dataWithBytesNoCopy:buffer length:bufferSize freeWhenDone:YES];
                         if (fileData.length > 10 * 1000 * 1000) {
-                            [self showHint:NSEaseLocalizedString(@"message.smallerImage", @"The image size is too large, please choose another one")];
+                            [self showHint:LocalStringBundle(@"message.smallerImage", @"The image size is too large, please choose another one")];
                             return;
                         }
                         [self sendImageMessageWithData:fileData];
@@ -1205,7 +1209,7 @@ typedef enum : NSUInteger {
                 [[HDCDDeviceManager sharedInstance] asyncStartRecordingWithFileName:fileName completion:^(NSError *error)
                  {
                      if (error) {
-                         NSLog(@"%@",NSEaseLocalizedString(@"message.startRecordFail", @"failure to start recording"));
+                         NSLog(@"%@",LocalStringBundle(@"message.startRecordFail", @"failure to start recording"));
                      }
                  }];
             }
@@ -1317,7 +1321,7 @@ typedef enum : NSUInteger {
     [self _stopAudioPlayingWithChangeCategory:YES];
     
 #if TARGET_IPHONE_SIMULATOR
-    [self showHint:NSEaseLocalizedString(@"message.simulatorNotSupportCamera", @"simulator does not support taking picture")];
+    [self showHint:LocalStringBundle(@"message.simulatorNotSupportCamera", @"simulator does not support taking picture")];
 #elif TARGET_OS_IPHONE
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     self.imagePicker.mediaTypes = @[(NSString *)kUTTypeImage, (NSString *)kUTTypeMovie];
@@ -2053,6 +2057,7 @@ typedef enum : NSUInteger {
 {
     self.messageTimeIntervalTag = -1;
     self.dataArray = [[self formatMessages:self.messsagesSource] mutableCopy];
+    NSLog(@"didBecomeActive=%@",self.dataArray);
     [self.tableView reloadData];
 }
 

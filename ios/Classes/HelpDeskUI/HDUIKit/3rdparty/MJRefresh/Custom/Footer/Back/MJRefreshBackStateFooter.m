@@ -53,10 +53,10 @@
 {
     [super prepare];
     
-    [self setTitle:NSEaseLocalizedString(@"ui.pullUpToRefresh", @"Pull up to download more") forState:MJRefreshStateIdle];
-    [self setTitle:NSEaseLocalizedString(@"ui.releaseToDownload", @"Release to download") forState:MJRefreshStatePulling];
-    [self setTitle:NSEaseLocalizedString(@"ui.downloading", @"Downloading more...") forState:MJRefreshStateRefreshing];
-    [self setTitle:NSEaseLocalizedString(@"ui.downloadComplete", @"Download complete") forState:MJRefreshStateNoMoreData];
+    [self setTitle:LocalStringBundle(@"ui.pullUpToRefresh", @"Pull up to download more") forState:MJRefreshStateIdle];
+    [self setTitle:LocalStringBundle(@"ui.releaseToDownload", @"Release to download") forState:MJRefreshStatePulling];
+    [self setTitle:LocalStringBundle(@"ui.downloading", @"Downloading more...") forState:MJRefreshStateRefreshing];
+    [self setTitle:LocalStringBundle(@"ui.downloadComplete", @"Download complete") forState:MJRefreshStateNoMoreData];
 }
 
 - (void)placeSubviews

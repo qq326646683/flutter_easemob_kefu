@@ -73,7 +73,9 @@
     HDMessageViewController *chatVC = [[HDMessageViewController alloc] initWithConversationChatter:arguments[@"imNumber"]]; // 获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
     UINavigationController *NAV = [[UINavigationController alloc] initWithRootViewController:chatVC];
     UIViewController *rootViewController = [[UIApplication sharedApplication].delegate window].rootViewController;
+    NAV.modalPresentationStyle = 0;
     [rootViewController presentViewController:NAV animated:YES completion:nil];
+
 }
  
 - (UIViewController *)visibleViewController {
