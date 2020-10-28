@@ -280,59 +280,16 @@ typedef enum : NSUInteger {
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-     [[[self navigationController] navigationBar] setBarStyle:UIBarStyleDefault];
-    [self setNeedsStatusBarAppearanceUpdate];
-    [self setStatusBarBackgroundColor:[UIColor clearColor]];
+     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [UIApplication sharedApplication].statusBarStyle = UIControlStateNormal;
-    [self setNeedsStatusBarAppearanceUpdate];
     self.navigationController.navigationBar.backgroundColor = THEMECOLOR;
     [self.navigationController.navigationBar setBarTintColor:THEMECOLOR];
-    [self setStatusBarBackgroundColor:THEMECOLOR];
-    [[[self navigationController] navigationBar] setBarStyle:UIBarStyleBlack];
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-}
-- (void)setStatusBarBackgroundColor:(UIColor *)color {
-    if (@available(iOS 13.0, *)) {
-        UIView *_customStatusBar = nil;
-        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-        for (UIView *subView in keyWindow.subviews) {
-            if (subView.tag == 109090909) {
-                _customStatusBar = subView;
-            }
-        }
-        
-        if (color) {//有颜色
-            if (_customStatusBar) {//已经有自定义的StatusBar，那就直接设置颜色
-                _customStatusBar.backgroundColor = color;
-            } else {//没有那就添加一个，并且设置颜色
-                UIView *statusBar = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.windowScene.statusBarManager.statusBarFrame] ;
-                statusBar.backgroundColor = color;
-                statusBar.tag = 109090909;
-                [[UIApplication sharedApplication].keyWindow addSubview:statusBar];
-            }
-        } else {//没有颜色
-            if (_customStatusBar) {//已经有自定义的StatusBar，那就设置成透明色
-                _customStatusBar.backgroundColor = [UIColor clearColor];
-            } else {//没有就不用管了
-                
-            }
-        }
-    }else{
-        UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-        if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-            statusBar.backgroundColor = color;
-        }
-    }
-
 }
 
 #pragma mark - getter
