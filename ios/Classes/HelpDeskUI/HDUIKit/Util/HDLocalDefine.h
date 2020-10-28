@@ -13,7 +13,7 @@
 #ifndef HDLocalDefine_h
 #define HDLocalDefine_h
 
-#define NSEaseLocalizedString(key, comment) \
+#define LocalStringBundle(key, comment) \
 ({\
 NSBundle *mainbundle = [NSBundle bundleForClass:[self class]];\
 NSString *myBundlePath = [mainbundle pathForResource:@"HelpDeskUIResource" ofType:@"bundle"];\

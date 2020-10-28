@@ -56,9 +56,9 @@
 {
     [super prepare];
     
-    [self setTitle:NSEaseLocalizedString(@"ui.clickOrPull", @"Click or pull up to download") forState:MJRefreshStateIdle];
-    [self setTitle:NSEaseLocalizedString(@"ui.downloading", @"Downloading...") forState:MJRefreshStateRefreshing];
-    [self setTitle:NSEaseLocalizedString(@"ui.downloadComplete", @"Download complete") forState:MJRefreshStateNoMoreData];
+    [self setTitle:LocalStringBundle(@"ui.clickOrPull", @"Click or pull up to download") forState:MJRefreshStateIdle];
+    [self setTitle:LocalStringBundle(@"ui.downloading", @"Downloading...") forState:MJRefreshStateRefreshing];
+    [self setTitle:LocalStringBundle(@"ui.downloadComplete", @"Download complete") forState:MJRefreshStateNoMoreData];
     
     self.stateLabel.userInteractionEnabled = YES;
     [self.stateLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stateLabelClick)]];

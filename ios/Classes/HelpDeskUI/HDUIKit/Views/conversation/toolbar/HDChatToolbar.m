@@ -106,7 +106,7 @@
     _inputTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     _inputTextView.scrollEnabled = YES;
     _inputTextView.returnKeyType = UIReturnKeyDefault;
-    _inputTextView.placeHolder = NSEaseLocalizedString(@"message.toolBar.inputPlaceHolder", @"Type here...");
+    _inputTextView.placeHolder = LocalStringBundle(@"message.toolBar.inputPlaceHolder", @"Type here...");
     _inputTextView.delegate = self;
     _inputTextView.layer.cornerRadius = self.frame.size.height/2 - self.verticalPadding*2;
     _inputTextView.layer.masksToBounds = YES;

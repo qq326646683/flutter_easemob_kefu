@@ -18,8 +18,8 @@
 #import "HDChatBarMoreView.h"
 #import "HDChatToolbarItem.h"
 
-#define kTouchToRecord NSEaseLocalizedString(@"message.toolBar.record.touch", @"hold down to talk")
-#define kTouchToFinish NSEaseLocalizedString(@"message.toolBar.record.send", @"loosen to send")
+#define kTouchToRecord LocalStringBundle(@"message.toolBar.record.touch", @"hold down to talk")
+#define kTouchToFinish LocalStringBundle(@"message.toolBar.record.send", @"loosen to send")
 
 
 @protocol HDChatToolbarDelegate;

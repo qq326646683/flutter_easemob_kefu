@@ -182,7 +182,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     
     _hasRead = [[UILabel alloc] init];
     _hasRead.translatesAutoresizingMaskIntoConstraints = NO;
-    _hasRead.text = NSEaseLocalizedString(@"hasRead", @"Read");
+    _hasRead.text = LocalStringBundle(@"hasRead", @"Read");
     _hasRead.textAlignment = NSTextAlignmentCenter;
     _hasRead.font = [UIFont systemFontOfSize:12];
     _hasRead.hidden = YES;
