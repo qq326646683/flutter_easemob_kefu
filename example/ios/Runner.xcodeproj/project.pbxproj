@@ -26,8 +26,6 @@
 		6C1C646D253457690090F302 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C646C253457690090F302 /* AddressBook.framework */; };
 		6C1C646F253457720090F302 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C646E253457720090F302 /* CFNetwork.framework */; };
 		6C1C647125345AF90090F302 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C647025345AF80090F302 /* CoreGraphics.framework */; };
-		6C1C6D8F2537FFC60090F302 /* hdlibopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C6D8E2537FFC60090F302 /* hdlibopencore-amrnb.a */; };
-		6C1C6D912537FFDF0090F302 /* hdlibopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C6D902537FFDF0090F302 /* hdlibopencore-amrwb.a */; };
 		978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */; };
 		97C146F31CF9000F007C117D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C146F21CF9000F007C117D /* main.m */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
@@ -92,8 +90,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C1C6D912537FFDF0090F302 /* hdlibopencore-amrwb.a in Frameworks */,
-				6C1C6D8F2537FFC60090F302 /* hdlibopencore-amrnb.a in Frameworks */,
 				6C1C647125345AF90090F302 /* CoreGraphics.framework in Frameworks */,
 				6C1C646F253457720090F302 /* CFNetwork.framework in Frameworks */,
 				6C1C646D253457690090F302 /* AddressBook.framework in Frameworks */,

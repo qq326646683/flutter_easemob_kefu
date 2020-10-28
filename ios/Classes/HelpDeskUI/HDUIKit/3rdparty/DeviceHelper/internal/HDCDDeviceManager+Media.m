@@ -13,7 +13,7 @@
 #import "HDCDDeviceManager+Media.h"
 #import "HDAudioPlayerUtil.h"
 #import "HDAudioRecorderUtil.h"
-#import "HDVoiceConverter.h"
+//#import "HDVoiceConverter.h"
 #import "HDDemoErrorCode.h"
 #import "HDLocalDefine.h"
 
@@ -57,21 +57,21 @@ typedef NS_ENUM(NSInteger, HDAudioSession){
     NSString *wavFilePath = [[aFilePath stringByDeletingPathExtension] stringByAppendingPathExtension:@"wav"];
      //判断文件格式是否为AMR, 如果是需要转换为wav
     //[备注:收到的]
-    if ([HDVoiceConverter isAMRFile:aFilePath]) {
-        if (![fileManager fileExistsAtPath:wavFilePath]) {
-            BOOL covertRet = [self convertAMR:aFilePath toWAV:wavFilePath];
-            if (!covertRet) {
-                if (completon) {
-                    completon([NSError errorWithDomain:LocalStringBundle(@"error.initRecorderFail", @"File format conversion failed")
-                                                  code:HDErrorFileTypeConvertionFailure
-                                              userInfo:nil]);
-                }
-                return ;
-            }
-        }
-    } else {
+//    if ([HDVoiceConverter isAMRFile:aFilePath]) {
+//        if (![fileManager fileExistsAtPath:wavFilePath]) {
+//            BOOL covertRet = [self convertAMR:aFilePath toWAV:wavFilePath];
+//            if (!covertRet) {
+//                if (completon) {
+//                    completon([NSError errorWithDomain:LocalStringBundle(@"error.initRecorderFail", @"File format conversion failed")
+//                                                  code:HDErrorFileTypeConvertionFailure
+//                                              userInfo:nil]);
+//                }
+//                return ;
+//            }
+//        }
+//    } else {
         wavFilePath = aFilePath;
-    }
+//    }
 
     [HDAudioPlayerUtil asyncPlayingWithPath:wavFilePath
                                  completion:^(NSError *error)
@@ -261,7 +261,7 @@ typedef NS_ENUM(NSInteger, HDAudioSession){
     BOOL ret = NO;
     BOOL isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:amrFilePath];
     if (isFileExists) {
-        [HDVoiceConverter amrToWav:amrFilePath wavSavePath:wavFilePath];
+//        [HDVoiceConverter amrToWav:amrFilePath wavSavePath:wavFilePath];
         isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:wavFilePath];
         if (isFileExists) {
             ret = YES;
@@ -276,7 +276,7 @@ typedef NS_ENUM(NSInteger, HDAudioSession){
     BOOL ret = NO;
     BOOL isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:wavFilePath];
     if (isFileExists) {
-        [HDVoiceConverter wavToAmr:wavFilePath amrSavePath:amrFilePath];
+//        [HDVoiceConverter wavToAmr:wavFilePath amrSavePath:amrFilePath];
         isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:amrFilePath];
         if (!isFileExists) {
             
