@@ -255,7 +255,6 @@
     
     if (model.avatarURLPath) {
         [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath]  placeholderImage:model.avatarImage];
-//        [self.avatarView hdSD_setImageWithURL:[NSURL URLWithString:model.avatarURLPath] placeholderImage:model.avatarImage];
     } else {
         self.avatarView.image = model.avatarImage;
     }

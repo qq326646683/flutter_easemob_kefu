@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
             Text('当前状态: $state\n'),
             RaisedButton(
               onPressed: () async {
-                FlutterEasemobKefu.init("1439201009092337#kefuchannelapp86399", "86399");
+                FlutterEasemobKefu.init("1462201022025648#kefuchannelapp86836", "126461");
                 setState(() {
                   state = KefuState.Inited;
                 });
@@ -99,7 +99,7 @@ class _MyAppState extends State<MyApp> {
                 bool isLogin = await FlutterEasemobKefu.isLogin;
                 print(isLogin);
                 if (isLogin) {
-                  FlutterEasemobKefu.jumpToPage("kefuchannelimid_316626");
+                  FlutterEasemobKefu.jumpToPage("kefuchannelimid_907883");
                 }
               },
               child: Text('去会话'),

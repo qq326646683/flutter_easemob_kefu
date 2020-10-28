@@ -157,16 +157,19 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     _bubbleView.layer.masksToBounds = YES;
     _bubbleView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:_bubbleView];
-    
+    NSLog(@"渐变色高度height=%lf",[HDBaseMessageCell cellHeightWithModel:model]-10);
+    NSLog(@"气泡高度height=%f",self.frame.size.height);
     if(isSender){
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
         gradientLayer.colors = @[(__bridge id)RGBACOLOR(247, 104, 63, 1).CGColor, (__bridge id)RGBACOLOR(206, 84, 49, 1).CGColor];
         gradientLayer.startPoint = CGPointMake(0, 0);
         gradientLayer.endPoint = CGPointMake(1.0, 0);
-        gradientLayer.frame = CGRectMake(0, 0, self.frame.size.width,[HDBaseMessageCell cellHeightWithModel:model]-10);
+        gradientLayer.frame = CGRectMake(0, 0, self.frame.size.width,kScreenHeight);
         [_bubbleView.layer insertSublayer:gradientLayer atIndex:0];
     }
-
+    self.contentView.layer.shadowColor = RGBACOLOR(0, 0, 0, 0.05).CGColor;
+    self.contentView.layer.shadowOpacity = 1;
+    self.contentView.layer.shadowOffset = CGSizeMake(2, 2);
     
     if ([HDMessageHelper getMessageExtType:model.message] != HDExtArticleMsg) {
         _avatarView = [[UIImageView alloc] init];
@@ -843,7 +846,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
 {
     _messageFileNameColor = messageFileNameColor;
     if (_bubbleView.fileNameLabel) {
-        _bubbleView.fileNameLabel.textColor = _messageFileNameColor;
+        _bubbleView.fileNameLabel.textColor = _model.isSender?[UIColor whiteColor]:[UIColor blackColor];
     }
 }
 
@@ -859,7 +862,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
 {
     _messageFileSizeColor = messageFileSizeColor;
     if (_bubbleView.fileSizeLabel) {
-        _bubbleView.fileSizeLabel.textColor = _messageFileSizeColor;
+        _bubbleView.fileSizeLabel.textColor = _model.isSender?RGBACOLOR(210, 210, 210, 1):RGBACOLOR(110, 110, 110, 1);
     }
 }
 

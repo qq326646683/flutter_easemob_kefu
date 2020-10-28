@@ -21,14 +21,14 @@
 - (void)_setupVideoBubbleConstraints
 {
     [self.fileIconView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.backgroundImageView.mas_top).offset(self.margin.top);
-        make.bottom.equalTo(self.backgroundImageView.mas_bottom).offset(-self.margin.bottom);
-        make.left.equalTo(self.backgroundImageView.mas_left).offset(self.margin.left);
+        make.top.equalTo(self.backgroundImageView.mas_top).offset(self.margin.top+5);
+        make.bottom.equalTo(self.backgroundImageView.mas_bottom).offset(-self.margin.bottom-5);
+        make.left.equalTo(self.backgroundImageView.mas_left).offset(self.margin.left-5);
         make.height.equalTo(self.fileIconView.mas_width).offset(0);
     }];
     
     [self.fileNameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.backgroundImageView.mas_top).offset(self.margin.top);
+        make.top.equalTo(self.backgroundImageView.mas_top).offset(self.margin.top+5);
         make.right.equalTo(self.backgroundImageView.mas_right).offset(-self.margin.right);
         make.left.equalTo(self.fileIconView.mas_right).offset(HDMessageCellPadding);
     }];

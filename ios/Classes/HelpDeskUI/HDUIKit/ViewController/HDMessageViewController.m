@@ -322,7 +322,7 @@ typedef enum : NSUInteger {
         [_chatToolbar addSubview:_visitorWaitCountLabel];
     }
     CGRect tableFrame = self.tableView.frame;
-    tableFrame.size.height = self.view.frame.size.height - _chatToolbar.frame.size.height-iPhoneXBottomHeight-33;
+    tableFrame.size.height = self.view.frame.size.height - _chatToolbar.frame.size.height-iPhoneXBottomHeight;
     self.tableView.frame = tableFrame;
     if ([chatToolbar isKindOfClass:[HDChatToolbar class]]) {
         [(HDChatToolbar *)self.chatToolbar setDelegate:self];
@@ -1776,62 +1776,6 @@ typedef enum : NSUInteger {
     if (!msg) {
         return;
     }
-    if ([eventName isEqualToString:HRouterEventRebotSolveTapEventName]) {
-        [self showHudInView:self.view hint:@"提交中..."];
-        [self.view endEditing:YES];
-        
-        [HDClient.sharedClient.chatManager asyncPostRobotQuality:msg
-                                                           solve:YES
-                                                            tags:nil
-                                                      completion:^(NSDictionary *info, HDError *error)
-        {
-            
-            hd_dispatch_main_async_safe(^(){
-                [self hideHud];
-                if (!error) {
-                    HDMessage *needUpdateMsg = [_conversation loadMessageWithId:msg.messageId error:nil];
-                    needUpdateMsg.isNeedToScore = NO;
-                    [HDClient.sharedClient.chatManager updateMessage:needUpdateMsg
-                                                          completion:^(HDMessage *aMessage, HDError *aError)
-                    {
-                        [self _loadMessagesBefore:nil count:self.messageCountOfPage append:NO];
-                    }];
-                    [self showHint:@"感谢您的提交"];
-                }else {
-                    [self showHint:@"提交失败，请稍后再试"];
-                }
-            });
-        }];
-    }
-    
-    if ([eventName isEqualToString:HRouterEventRebotUnsolveTapEventName]) {
-        [self.view endEditing:YES];
-        [self showHudInView:self.view hint:@"获取标签中..."];
-        [HDClient.sharedClient.chatManager asyncFetchRobotQualityTags:msg
-                                                           completion:^(NSDictionary *tags, HDError *error)
-        {
-            hd_dispatch_main_async_safe(^(){
-                [self hideHud];
-                if (!error) {
-                    NSArray *ary = tags[@"entities"];
-                    NSMutableArray *tags = [NSMutableArray array];
-                    for (NSDictionary *dic in ary) {
-                        if (dic[@"name"] && [dic[@"name"] isKindOfClass:[NSString class]]) {
-                            [tags addObject:dic[@"name"]];
-                        }
-                    }
-                    if (tags.count == 0) {
-                        [self showHint:@"未设置标签"];
-                        return ;
-                    }
-                    [self showUnsolveTags:tags message:msg];
-                }else {
-                    [self showHint:@"标签获取失败，请稍后再试"];
-                }
-            });
-        }];
-    }
-    
 }
 
 - (void)showUnsolveTags:(NSArray *)aTags message:(HDMessage *)aMsg {
@@ -1843,31 +1787,6 @@ typedef enum : NSUInteger {
 
 #pragma mark - HRobotUnsolveItemViewDelegate
 - (void)submitView:(HRobotUnsolveItemView *)aView list:(NSArray *)tags message:(HDMessage *)aMsg {
-    [aView removeFromSuperview];
-    __block HDMessage *msg = aMsg;
-    [self showHudInView:self.view hint:@"提交中..."];
-    [self.view endEditing:YES];
-    [HDClient.sharedClient.chatManager asyncPostRobotQuality:aMsg
-                                                       solve:NO
-                                                        tags:tags
-                                                  completion:^(NSDictionary *info, HDError *error)
-    {
-        
-        hd_dispatch_main_async_safe(^(){
-            [self hideHud];
-            if (!error) {
-                HDMessage *needUpdateMessage = [_conversation loadMessageWithId:msg.messageId error:nil];
-                needUpdateMessage.isNeedToScore = NO;
-                [HDClient.sharedClient.chatManager updateMessage:needUpdateMessage
-                                                      completion:^(HDMessage *aMessage, HDError *aError)
-                {
-                    [self _loadMessagesBefore:nil count:self.messageCountOfPage append:NO];
-                }];                [self showHint:@"感谢您的提交"];
-            }else {
-                [self showHint:@"提交失败，请稍后再试"];
-            }
-        });
-    }];
 }
 
 - (void)dismissView:(HRobotUnsolveItemView *)aView {
