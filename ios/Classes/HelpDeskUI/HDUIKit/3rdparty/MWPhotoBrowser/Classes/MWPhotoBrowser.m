@@ -1520,7 +1520,7 @@
                     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
                         self.activityViewController.popoverPresentationController.barButtonItem = _actionButton;
                     }
-                    self.activityViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+                    self.activityViewController.modalPresentationStyle = 0;
                     [self presentViewController:self.activityViewController animated:YES completion:nil];
                     
                 }
@@ -1649,7 +1649,7 @@
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             emailer.modalPresentationStyle = UIModalPresentationPageSheet;
         }
-        emailer.modalPresentationStyle = UIModalPresentationFullScreen;
+        emailer.modalPresentationStyle = 0;
         [self presentViewController:emailer animated:YES completion:nil];
         [self hideProgressHUD:NO];
     }

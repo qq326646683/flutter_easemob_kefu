@@ -143,6 +143,7 @@ static HDMessageReadManager *detailInstance = nil;
         
         self.photos = photoArray;
     }
+    self.photoNavigationController.modalPresentationStyle = 0;
     [ctl presentViewController:self.photoNavigationController animated:YES completion:nil];
 }
 

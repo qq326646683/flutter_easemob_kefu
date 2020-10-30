@@ -548,6 +548,7 @@ typedef enum : NSUInteger {
         pVC.player = [AVPlayer playerWithURL:videoURL];
         [pVC.player play];
         pVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        pVC.modalPresentationStyle = 0;
         [self presentViewController:pVC animated:YES completion:nil];
     };
     
@@ -575,7 +576,7 @@ typedef enum : NSUInteger {
     NSDictionary *htmlDic = [[model.message.ext objectForKey:@"msgtype"] objectForKey:@"html"];
     NSString *strUrl = [htmlDic objectForKey:@"url"];
     formVC.url = strUrl;
-    formVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    formVC.modalPresentationStyle = 0;
     [self presentViewController:formVC animated:YES completion:nil];
 
 }
