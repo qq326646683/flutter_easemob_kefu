@@ -123,7 +123,6 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
                             isSender:model.isSender
                                model:model];
     }
-    NSLog(@"这个是HDMessageCell里面的");
     return self;
 }
 
@@ -141,7 +140,7 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     _statusButton = [[UIButton alloc] init];
     _statusButton.translatesAutoresizingMaskIntoConstraints = NO;
     _statusButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [_statusButton setImage:ImageBundle(@"messageSendFail@", @"png") forState:UIControlStateNormal];
+    [_statusButton setImage:ImageBundle(@"messageSendFail", @"png") forState:UIControlStateNormal];
     [_statusButton addTarget:self action:@selector(statusAction) forControlEvents:UIControlEventTouchUpInside];
     _statusButton.hidden = YES;
     [self.contentView addSubview:_statusButton];
@@ -150,15 +149,12 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     if ([HDMessageHelper getMessageExtType:model.message] == HDExtArticleMsg) {
         edge = UIEdgeInsetsMake(0, 0, 0, 0);
     }
-    NSLog(@"%f",[HDBaseMessageCell cellHeightWithModel:model]);
     _bubbleView = [[HDBubbleView alloc] initWithMargin:edge isSender:model.isSender];
     _bubbleView.translatesAutoresizingMaskIntoConstraints = NO;
     _bubbleView.layer.cornerRadius = (self.frame.size.height-10)/2+1;
     _bubbleView.layer.masksToBounds = YES;
     _bubbleView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:_bubbleView];
-    NSLog(@"渐变色高度height=%lf",[HDBaseMessageCell cellHeightWithModel:model]-10);
-    NSLog(@"气泡高度height=%f",self.frame.size.height);
     if(isSender){
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
         gradientLayer.colors = @[(__bridge id)RGBACOLOR(247, 104, 63, 1).CGColor, (__bridge id)RGBACOLOR(206, 84, 49, 1).CGColor];
@@ -296,7 +292,6 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
     
     UITapGestureRecognizer *tapRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarViewTapAction:)];
     [_avatarView addGestureRecognizer:tapRecognizer2];
-    NSLog(@"这里是HDMessageCell的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -352,7 +347,6 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
         make.centerY.equalTo(self.contentView.mas_centerY).offset(0);
         make.height.equalTo(self.statusButton.mas_width).offset(0);
     }];
-    NSLog(@"这里是666666的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 #pragma mark - Update Constraint
@@ -391,7 +385,6 @@ NSString *const HDMessageCellIdentifierSendFile = @"HDMessageCellSendFile";
             make.width.lessThanOrEqualTo(@(self.bubbleMaxWidth));
         }
     }];
-    NSLog(@"这里是777777的_bubbleView的width=%f,height=%f",_bubbleView.frame.size.width,_bubbleView.frame.size.height);
 }
 
 #pragma mark - setter

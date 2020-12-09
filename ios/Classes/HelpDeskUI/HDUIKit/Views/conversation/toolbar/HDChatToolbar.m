@@ -483,12 +483,10 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     [textView resignFirstResponder];
-    NSLog(@"textViewDidEndEditing%@",textView.text);
     [self checkSendBtnImage];
 }
 
 - (void)checkSendBtnImage{
-    NSLog(@"checkSendBtnImage%@---length = %lu",self.inputTextView.text,(unsigned long)self.inputTextView.text.length);
     if(self.inputTextView.text.length>0){
         [self.faceButton setImage:ImageBundle(@"icon_sendActive", @"png") forState:UIControlStateNormal];
     }else{
@@ -508,7 +506,6 @@
         [_delegate inputTextViewDidChange:self.inputTextView];
     }
     [self checkSendBtnImage];
-    NSLog(@"textViewDidChange%@",textView.text);
 }
 
 #pragma mark - DXFaceDelegate
