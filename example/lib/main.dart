@@ -62,30 +62,32 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             Text('Running on: $_platformVersion\n'),
             Text('当前状态: $state\n'),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () async {
-                FlutterEasemobKefu.init("1439201009092337#kefuchannelapp86399", "86399");
+                FlutterEasemobKefu.init(
+                    "1439201009092337#kefuchannelapp86399", "86399");
                 setState(() {
                   state = KefuState.Inited;
                 });
               },
               child: Text('初始化'),
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () async {
-                bool isSuccess = await FlutterEasemobKefu.register("nell", "123456");
+                bool isSuccess =
+                    await FlutterEasemobKefu.register("nell", "123456");
                 if (isSuccess) {
                   setState(() {
                     state = KefuState.Registered;
                   });
                 }
-
               },
               child: Text('注册'),
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () async {
-                bool isSuccess = await FlutterEasemobKefu.login("nell", "123456");
+                bool isSuccess =
+                    await FlutterEasemobKefu.login("nell", "123456");
                 if (isSuccess) {
                   setState(() {
                     state = KefuState.Logined;
@@ -94,7 +96,7 @@ class _MyAppState extends State<MyApp> {
               },
               child: Text('登录'),
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () async {
                 bool isLogin = await FlutterEasemobKefu.isLogin;
                 print(isLogin);
