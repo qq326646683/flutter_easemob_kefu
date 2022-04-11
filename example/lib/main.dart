@@ -19,6 +19,7 @@ enum KefuState {
   Inited,
   Registered,
   Logined,
+  Logout,
 }
 
 class _MyAppState extends State<MyApp> {
@@ -65,7 +66,7 @@ class _MyAppState extends State<MyApp> {
             ElevatedButton(
               onPressed: () async {
                 FlutterEasemobKefu.init(
-                    "1439201009092337#kefuchannelapp86399", "86399");
+                    "1430220411092008#kefuchannelapp101970", "147277");
                 setState(() {
                   state = KefuState.Inited;
                 });
@@ -75,7 +76,7 @@ class _MyAppState extends State<MyApp> {
             ElevatedButton(
               onPressed: () async {
                 bool isSuccess =
-                    await FlutterEasemobKefu.register("nell", "123456");
+                    await FlutterEasemobKefu.register("test2", "123456");
                 if (isSuccess) {
                   setState(() {
                     state = KefuState.Registered;
@@ -87,7 +88,7 @@ class _MyAppState extends State<MyApp> {
             ElevatedButton(
               onPressed: () async {
                 bool isSuccess =
-                    await FlutterEasemobKefu.login("nell", "123456");
+                    await FlutterEasemobKefu.login("test2", "123456");
                 if (isSuccess) {
                   setState(() {
                     state = KefuState.Logined;
@@ -98,10 +99,25 @@ class _MyAppState extends State<MyApp> {
             ),
             ElevatedButton(
               onPressed: () async {
+                bool isSuccess = await FlutterEasemobKefu.logout();
+                if (isSuccess) {
+                  setState(() {
+                    state = KefuState.Logout;
+                  });
+                }
+              },
+              child: Text('退出'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
                 bool isLogin = await FlutterEasemobKefu.isLogin;
                 print(isLogin);
                 if (isLogin) {
-                  FlutterEasemobKefu.jumpToPage("kefuchannelimid_316626");
+                  FlutterEasemobKefu.jumpToPage(
+                    "kefuchannelimid_063438",
+                    email: '2660038273@qq.com',
+                    titleName: '测试客服',
+                  );
                 }
               },
               child: Text('去会话'),

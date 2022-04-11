@@ -58,11 +58,23 @@ class FlutterEasemobKefu {
 
   /// 会话页面:
   /// imNumber: “管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
-  static void jumpToPage(String imNumber) {
+  /// email: 客服的邮箱地址
+  /// queueName: 技能组名称
+  static void jumpToPage(
+    String imNumber, {
+    bool showUserNick = true,
+    String email = '',
+    String queueName = '',
+    String titleName = '',
+  }) {
     _channel.invokeMethod(
       "jumpToPage",
       <String, dynamic>{
         "imNumber": imNumber,
+        'email': email,
+        'queueName': queueName,
+        'titleName': titleName,
+        'showUserNick': showUserNick,
       },
     );
   }
