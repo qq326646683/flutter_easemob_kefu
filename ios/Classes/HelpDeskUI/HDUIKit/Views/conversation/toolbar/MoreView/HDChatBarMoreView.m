@@ -46,12 +46,12 @@
 
 @property (nonatomic, strong) UIButton *photoButton;
 @property (nonatomic, strong) UIButton *takePicButton;
-@property (nonatomic, strong) UIButton *locationButton;
+//@property (nonatomic, strong) UIButton *locationButton;
 //@property (nonatomic, strong) UIButton *videoButton;
 //@property (nonatomic, strong) UIButton *audioCallButton;
-@property (nonatomic, strong) UIButton *videoCallButton;
-@property (nonatomic, strong) UIButton *leaveMessageButton;
-@property (nonatomic, strong) UIButton *evaluationButton;
+//@property (nonatomic, strong) UIButton *videoCallButton;
+//@property (nonatomic, strong) UIButton *leaveMessageButton;
+//@property (nonatomic, strong) UIButton *evaluationButton;
 
 @property (nonatomic, strong) UILabel *photoLabel;
 @property (nonatomic, strong) UILabel *takeLabel;
@@ -128,46 +128,46 @@
 //    _audioCallButton.tag = MOREVIEW_BUTTON_TAG + 3;
 //    [_scrollview addSubview:_audioCallButton];
 //    
-    _videoCallButton = [self btnWithImage:ImageBundle(@"em_chat_video_normal", @"png")
-                         highlightedImage:ImageBundle(@"em_chat_video_pressed", @"png")
-                                    title:LocalStringBundle(@"attach_call_video", @"Call Video")];
+//    _videoCallButton = [self btnWithImage:ImageBundle(@"em_chat_video_normal", @"png")
+//                         highlightedImage:ImageBundle(@"em_chat_video_pressed", @"png")
+//                                    title:LocalStringBundle(@"attach_call_video", @"Call Video")];
+//    
+//    [_videoCallButton setFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE.width * 2, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
+//    [_videoCallButton addTarget:self action:@selector(takeVideoCallAction) forControlEvents:UIControlEventTouchUpInside];
+//    _videoCallButton.tag = MOREVIEW_BUTTON_TAG + 2;
+//    _maxIndex = 2;
+//    [_scrollview addSubview:_videoCallButton];
     
-    [_videoCallButton setFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE.width * 2, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
-    [_videoCallButton addTarget:self action:@selector(takeVideoCallAction) forControlEvents:UIControlEventTouchUpInside];
-    _videoCallButton.tag = MOREVIEW_BUTTON_TAG + 2;
-    _maxIndex = 2;
-    [_scrollview addSubview:_videoCallButton];
+//    _locationButton = [self btnWithImage:ImageBundle(@"hd_chat_location_normal", @"png")
+//                        highlightedImage:ImageBundle(@"hd_chat_location_pressed", @"png")
+//                                   title:LocalStringBundle(@"attach_location", @"Location")];
+//    [_locationButton setFrame:CGRectMake(insets * 4 + CHAT_BUTTON_SIZE.width * 3, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
+//
+//    [_locationButton addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
+//    _locationButton.tag = MOREVIEW_BUTTON_TAG + 3;
+//    [_scrollview addSubview:_locationButton];
     
-    _locationButton = [self btnWithImage:ImageBundle(@"hd_chat_location_normal", @"png")
-                        highlightedImage:ImageBundle(@"hd_chat_location_pressed", @"png")
-                                   title:LocalStringBundle(@"attach_location", @"Location")];
-    [_locationButton setFrame:CGRectMake(insets * 4 + CHAT_BUTTON_SIZE.width * 3, 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
-    
-    [_locationButton addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
-    _locationButton.tag = MOREVIEW_BUTTON_TAG + 3;
-    [_scrollview addSubview:_locationButton];
-    
-    _leaveMessageButton = [self btnWithImage:ImageBundle(@"em_chat_phrase_normal", @"png")
-                            highlightedImage:ImageBundle(@"em_chat_phrase_pressed", @"png")
-                                       title:LocalStringBundle(@"leave_title", @"Note")];
-    [_leaveMessageButton setFrame:CGRectMake(insets, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
+//    _leaveMessageButton = [self btnWithImage:ImageBundle(@"em_chat_phrase_normal", @"png")
+//                            highlightedImage:ImageBundle(@"em_chat_phrase_pressed", @"png")
+//                                       title:LocalStringBundle(@"leave_title", @"Note")];
+//    [_leaveMessageButton setFrame:CGRectMake(insets, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
+//
+//    [_leaveMessageButton addTarget:self action:@selector(leaveMessageAction) forControlEvents:UIControlEventTouchUpInside];
+//    _leaveMessageButton.tag = MOREVIEW_BUTTON_TAG + 4;
+//    _maxIndex = 4;
+//    [_scrollview addSubview:_leaveMessageButton];
 
-    [_leaveMessageButton addTarget:self action:@selector(leaveMessageAction) forControlEvents:UIControlEventTouchUpInside];
-    _leaveMessageButton.tag = MOREVIEW_BUTTON_TAG + 4;
-    _maxIndex = 4;
-    [_scrollview addSubview:_leaveMessageButton];
-
     
-    _evaluationButton = [self btnWithImage:ImageBundle(@"em_chat_evaluation_normal", @"png")
-                          highlightedImage:ImageBundle(@"em_chat_evaluation_pressed", @"png")
-                                     title:LocalStringBundle(@"evaluation", @"Evaluation")];
-    
-    [_evaluationButton setFrame:CGRectMake(insets * 2 + CHAT_BUTTON_SIZE.width, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
-    
-    [_evaluationButton addTarget:self action:@selector(evaluationAction) forControlEvents:UIControlEventTouchUpInside];
-    _evaluationButton.tag = MOREVIEW_BUTTON_TAG + 5;
-    _maxIndex = 5;
-    [_scrollview addSubview:_evaluationButton];
+//    _evaluationButton = [self btnWithImage:ImageBundle(@"em_chat_evaluation_normal", @"png")
+//                          highlightedImage:ImageBundle(@"em_chat_evaluation_pressed", @"png")
+//                                     title:LocalStringBundle(@"evaluation", @"Evaluation")];
+//
+//    [_evaluationButton setFrame:CGRectMake(insets * 2 + CHAT_BUTTON_SIZE.width, 10 * 2 + CHAT_BUTTON_SIZE.height + 10, CHAT_BUTTON_SIZE.width , CHAT_BUTTON_SIZE.height)];
+//
+//    [_evaluationButton addTarget:self action:@selector(evaluationAction) forControlEvents:UIControlEventTouchUpInside];
+//    _evaluationButton.tag = MOREVIEW_BUTTON_TAG + 5;
+//    _maxIndex = 5;
+//    [_scrollview addSubview:_evaluationButton];
     
     self.frame = frame;
     _scrollview.frame = CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));

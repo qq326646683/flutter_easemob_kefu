@@ -124,6 +124,9 @@ typedef enum : NSUInteger {
     [HDCDDeviceManager sharedInstance].delegate = self;
 
     [self setLeftBarBtnItem];
+    
+    [UINavigationBar appearance].translucent = YES;
+    [UINavigationBar appearance].barTintColor = UIColor.blueColor;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didBecomeActive)
@@ -307,7 +310,7 @@ typedef enum : NSUInteger {
     if (_chatToolbar) {
         [self.view addSubview:_chatToolbar];
         _visitorWaitCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -20, kScreenWidth, 20)];
-        _visitorWaitCountLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+        _visitorWaitCountLabel.backgroundColor = UIColor.blueColor;
         _visitorWaitCountLabel.font = [UIFont systemFontOfSize:12];
         _visitorWaitCountLabel.textColor = [UIColor whiteColor];
         _visitorWaitCountLabel.hidden = YES;
