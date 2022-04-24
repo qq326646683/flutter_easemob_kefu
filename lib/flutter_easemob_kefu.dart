@@ -60,6 +60,8 @@ class FlutterEasemobKefu {
   /// imNumber: “管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
   /// email: 客服的邮箱地址
   /// queueName: 技能组名称
+  /// titleName: 页面标题
+  /// showUserNick: 是否展示用户头像
   static void jumpToPage(
     String imNumber, {
     bool showUserNick = true,
