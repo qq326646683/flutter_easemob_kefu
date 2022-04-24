@@ -155,7 +155,7 @@ typedef NS_ENUM(NSInteger, HDemoSaleType){
 @property (nonatomic, strong)UILabel *visitorWaitCountLabel;
 
 
-- (instancetype)initWithConversationChatter:(NSString *)conversationChatter;
+- (instancetype)initWithConversationChatter:(NSString *)conversationChatter titleName:(NSString *)titleName;
 
 - (void)tableViewDidTriggerHeaderRefresh;
 

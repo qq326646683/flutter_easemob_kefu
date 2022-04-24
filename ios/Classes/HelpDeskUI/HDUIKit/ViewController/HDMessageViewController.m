@@ -65,14 +65,18 @@ typedef enum : NSUInteger {
 @synthesize timeCellHeight = _timeCellHeight;
 @synthesize messageTimeIntervalTag = _messageTimeIntervalTag;
 
-- (instancetype)initWithConversationChatter:(NSString *)conversationChatter {
+- (instancetype)initWithConversationChatter:(NSString *)conversationChatter titleName:(NSString *)titleName{
     if ([conversationChatter length] == 0) {
         return nil;
+    }
+    NSString *_titleName = titleName;
+    if ([_titleName length] == 0) {
+        _titleName = conversationChatter;
     }
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         _conversation = [[HDClient sharedClient].chatManager getConversation:conversationChatter];
-        _title = conversationChatter;
+        _title = _titleName;
         _messageCountOfPage = 10;
         _timeCellHeight = 30;
         _messsagesSource = [NSMutableArray array];
