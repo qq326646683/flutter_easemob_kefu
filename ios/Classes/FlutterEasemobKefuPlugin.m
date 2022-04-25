@@ -69,8 +69,19 @@
 
 - (void)jumpToChat:(FlutterMethodCall *)call result:(FlutterResult)result{
     NSDictionary *arguments = call.arguments;
+    NSString *titleName = call.arguments[@"titleName"];
     // 进入会话页面
-    HDMessageViewController *chatVC = [[HDMessageViewController alloc] initWithConversationChatter:arguments[@"imNumber"]]; // 获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
+    HDMessageViewController *chatVC = [[HDMessageViewController alloc] initWithConversationChatter:arguments[@"imNumber"] titleName:titleName]; // 获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
+    NSString *email = call.arguments[@"email"];
+    if (email.length != 0) {
+        HDAgentIdentityInfo *agentInfo =[[HDAgentIdentityInfo alloc] initWithValue:email];
+        chatVC.agent = agentInfo;
+    }
+    NSString *queueName = call.arguments[@"queueName"];
+    if (queueName.length != 0) {
+        HDQueueIdentityInfo *queueInfo=[[HDQueueIdentityInfo alloc] initWithValue:queueName];
+        chatVC.queueInfo = queueInfo;
+    }
     UINavigationController *NAV = [[UINavigationController alloc] initWithRootViewController:chatVC];
     UIViewController *rootViewController = [[UIApplication sharedApplication].delegate window].rootViewController;
     NAV.modalPresentationStyle = 0;

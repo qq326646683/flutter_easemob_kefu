@@ -5,8 +5,8 @@ author: qq326646683<326646683@qq.com>, justyouzxy<1120540016@qq.com>
 homepage: https://github.com/qq326646683/flutter_easemob_kefu
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.10.0"
+  sdk: ">=2.16.1 <3.0.0"
+  flutter: ">=2.5.0"
 
 dependencies:
   flutter:

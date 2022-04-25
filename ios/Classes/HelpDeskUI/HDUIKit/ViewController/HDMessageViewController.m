@@ -65,14 +65,18 @@ typedef enum : NSUInteger {
 @synthesize timeCellHeight = _timeCellHeight;
 @synthesize messageTimeIntervalTag = _messageTimeIntervalTag;
 
-- (instancetype)initWithConversationChatter:(NSString *)conversationChatter {
+- (instancetype)initWithConversationChatter:(NSString *)conversationChatter titleName:(NSString *)titleName{
     if ([conversationChatter length] == 0) {
         return nil;
+    }
+    NSString *_titleName = titleName;
+    if ([_titleName length] == 0) {
+        _titleName = conversationChatter;
     }
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         _conversation = [[HDClient sharedClient].chatManager getConversation:conversationChatter];
-        _title = conversationChatter;
+        _title = _titleName;
         _messageCountOfPage = 10;
         _timeCellHeight = 30;
         _messsagesSource = [NSMutableArray array];
@@ -124,6 +128,10 @@ typedef enum : NSUInteger {
     [HDCDDeviceManager sharedInstance].delegate = self;
 
     [self setLeftBarBtnItem];
+    
+    [self preferredStatusBarStyle:FALSE];
+    self.navigationController.navigationBar.backgroundColor = UIColorFromRGB(0xFF00acff);
+    self.navigationController.navigationBar.barTintColor = UIColorFromRGB(0xFF00acff);
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didBecomeActive)
@@ -140,6 +148,29 @@ typedef enum : NSUInteger {
     [self setupEmotion];
     [self tableViewDidTriggerHeaderRefresh]; // 父类不再调用，由子类调用
 }
+
+//设置状态栏颜色
+-(UIStatusBarStyle)preferredStatusBarStyle:(BOOL)transparent {
+    static UIView *statusBar;
+    if (@available(iOS 13.0, *)) {
+        CGRect rect = [UIApplication sharedApplication].keyWindow.windowScene.statusBarManager.statusBarFrame;
+        statusBar = [[UIView alloc]initWithFrame:rect] ;
+        [[UIApplication sharedApplication].keyWindow addSubview:statusBar];
+    }else{
+        dispatch_async(dispatch_get_main_queue(),^{
+            statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+        });
+    }
+    NSLog(@"transparent :%@", transparent?@"YES":@"NO");
+    if (transparent) {
+        statusBar.backgroundColor = UIColor.clearColor;
+    }else{
+        statusBar.backgroundColor = UIColorFromRGB(0xFF00acff);
+    }
+    return UIStatusBarStyleLightContent;
+}
+
+
 - (void)setupCell {
     
     [[HDBaseMessageCell appearance] setSendBubbleBackgroundImage:[ImageBundle(@"chat_sender_bg", @"png") stretchableImageWithLeftCapWidth:5 topCapHeight:35]];
@@ -281,6 +312,7 @@ typedef enum : NSUInteger {
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self preferredStatusBarStyle:YES];
     [super viewWillDisappear:animated];
 }
 

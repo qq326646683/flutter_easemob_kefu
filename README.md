@@ -12,7 +12,7 @@ ios: 选照片、拍照片、拍视频、发定位、发语音、文字、表情
 3.语音、视频通话尝试均不可用
 
 ## 2.Setup
-```
+```dart
 // 环信自带的ui
 flutter_easemob_kefu: ${last_version}
 
@@ -36,7 +36,7 @@ flutter_easemob_kefu:
 
 ## 3.Usages
 
-```
+```dart
   /// 初始化
   /// appKey: “管理员模式 > 渠道管理 > 手机APP”页面的关联的“AppKey”
   /// tenantId: “管理员模式 > 设置 > 企业信息”页面的“租户ID”
@@ -75,15 +75,32 @@ flutter_easemob_kefu:
 
   /// 会话页面:
   /// imNumber: “管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
-  static void jumpToPage(String imNumber) {
-    _channel.invokeMethod("jumpToPage", <String, dynamic>{
-      "imNumber": imNumber,
-    });
+  /// email: 客服的邮箱地址
+  /// queueName: 技能组名称
+  /// titleName: 页面标题
+  /// showUserNick: 是否展示用户头像
+  static void jumpToPage(
+    String imNumber, {
+    bool showUserNick = true,
+    String email = '',
+    String queueName = '',
+    String titleName = '',
+  }) {
+    _channel.invokeMethod(
+      "jumpToPage",
+      <String, dynamic>{
+        "imNumber": imNumber,
+        'email': email,
+        'queueName': queueName,
+        'titleName': titleName,
+        'showUserNick': showUserNick,
+      },
+    );
   }
 ```
 
 ## 4.Example
-```
+```dart
 FlutterEasemobKefu.init("1439201009092337#kefuchannelapp86399", "86399");
 
 bool isSuccess = await FlutterEasemobKefu.register("nell", "123456");
